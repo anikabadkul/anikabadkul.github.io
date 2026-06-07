@@ -4,10 +4,22 @@
   ["nl","hl"].forEach(function(id){var e=document.getElementById(id);if(e)e.src=s;});
 })();
 
-// ── PETAL + BUTTERFLY CURSOR ──
-var C=document.getElementById("tc"),ctx=C.getContext("2d");
+// ── BUTTERFLY CURSOR (runs first — no dependencies) ──
+(function(){
+  var el=document.getElementById('bf-cursor');
+  if(!el)return;
+  document.addEventListener('mousemove',function(e){
+    el.style.left=e.clientX+'px';
+    el.style.top=e.clientY+'px';
+    el.style.display='block';
+  });
+  document.addEventListener('mouseleave',function(){el.style.display='none';});
+})();
+
+// ── PETAL CANVAS ──
+var C=document.getElementById("tc"),ctx=C?C.getContext("2d"):null;
 var W,H,mx=0,my=0,pmx=0,pmy=0,lt=0,t=0;
-function resize(){W=C.width=innerWidth;H=C.height=innerHeight;}
+function resize(){if(C){W=C.width=innerWidth;H=C.height=innerHeight;}}
 resize();addEventListener("resize",resize);
 
 function Petal(x,y,spd){
@@ -69,29 +81,28 @@ addEventListener("mousemove",function(e){
 })();
 
 // ── SCROLL ANIMATIONS ──
-// Generic reveal for .reveal elements
-var revealObs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e,i){
-    if(e.isIntersecting){
-      setTimeout(function(){e.target.classList.add("in");},i*60);
-      revealObs.unobserve(e.target);
-    }
-  });
-},{threshold:0,rootMargin:"0px"});
-document.querySelectorAll(".reveal").forEach(function(el){revealObs.observe(el);});
-
-// Immediately reveal elements already in the viewport (handles #anchor page loads)
+// ── REVEAL ANIMATIONS ──
 function revealVisible(){
-  document.querySelectorAll(".reveal:not(.in)").forEach(function(el,i){
+  document.querySelectorAll(".reveal:not(.in)").forEach(function(el){
     var r=el.getBoundingClientRect();
-    if(r.top < window.innerHeight && r.bottom >= 0){
-      setTimeout(function(){el.classList.add("in");},i*40);
+    if(r.top < window.innerHeight+40 && r.bottom >= -40){
+      el.classList.add("in");
     }
   });
 }
+// Run immediately, on scroll, and at multiple points after load
 revealVisible();
+window.addEventListener("scroll",revealVisible,{passive:true});
 window.addEventListener("load",revealVisible);
-setTimeout(revealVisible,200);
+setTimeout(revealVisible,100);
+setTimeout(revealVisible,500);
+
+var revealObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add("in");revealObs.unobserve(e.target);}
+  });
+},{threshold:0,rootMargin:"40px"});
+document.querySelectorAll(".reveal").forEach(function(el){revealObs.observe(el);});
 
 // Case study stagger — each .cs-project triggers its children when 30% in view
 var csObs=new IntersectionObserver(function(entries){
@@ -126,15 +137,4 @@ sections.forEach(function(id){
 var projects=document.querySelectorAll(".cs-project");
 
 
-// ── BUTTERFLY CURSOR ──
-(function(){
-  var el = document.getElementById('bf-cursor');
-  document.addEventListener('mousemove', function(e){
-    el.style.left = e.clientX + 'px';
-    el.style.top = e.clientY + 'px';
-    el.style.display = 'block';
-  });
-  document.addEventListener('mouseleave', function(){
-    el.style.display = 'none';
-  });
-})();
+// butterfly cursor set up at top of file

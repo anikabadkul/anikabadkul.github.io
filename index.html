@@ -17,7 +17,7 @@
   --ease:cubic-bezier(.25,.46,.45,.94);
 }
 html{scroll-behavior:smooth;background:var(--iv)}
-body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}*,*::before,*::after{cursor:none!important}
 
 
 /* ── NAV ── */
@@ -170,10 +170,13 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 .ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
 
 /* ── GLOBAL SCROLL ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0}
-.reveal.in{animation:fadeUp .7s var(--ease) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+/* Hard fallback: show everything after 800ms no matter what */
+@keyframes reveal-fallback{to{opacity:1;transform:none}}
+.reveal{animation:reveal-fallback 0.01s 0.8s forwards}
+.reveal.in{animation:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.26s}.d4{transition-delay:.36s}
 
 /* ── BELIEFS ── */
 .beliefs-sec{padding:64px max(56px, calc((100vw - 1100px) / 2 + 56px));border-top:1px solid rgba(196,125,110,.13);border-bottom:1px solid rgba(196,125,110,.13)}
