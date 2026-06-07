@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Anika Badkul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --iv:#FBF8F3;--iv2:#F4EDE3;
+  --bl:#E8BFB4;--bld:#C47D6E;--bll:#F7EBE7;--blm:#D49A8E;
+  --ink:#1A1512;--ink2:#5A4840;--ink3:#9E8A7E;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Instrument Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth;background:var(--iv)}
+body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+
+/* ── NAV ── */
+nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:flex;align-items:center;justify-content:space-between;
+  background:rgba(251,248,243,.93);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav-r a{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
+.nav-r a:hover,.nav-r a.active{color:var(--ink)}
+
+/* ── PAGE HEADER ── */
+.page-header{padding:80px max(56px, calc((100vw - 1100px) / 2 + 56px)) 56px;border-bottom:1px solid rgba(196,125,110,.13)}
+.ey{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px}
+.sh{font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);font-weight:300;letter-spacing:-.025em;line-height:1.08;color:var(--ink)}
+.sh em{font-style:italic;color:var(--bld)}
+.page-subtitle{font-size:15px;color:var(--ink2);line-height:1.82;font-weight:300;max-width:520px;margin-top:14px}
+
+/* ── CASE STUDY CARDS ── */
+.cs-section{border-bottom:1px solid rgba(196,125,110,.13)}
+
+.cs-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px)) 72px}
+.cs-cards-top{padding-top:56px}
+
+.cs-feat{display:grid;grid-template-columns:155px 1fr;min-height:230px;border-radius:20px;border:1px solid rgba(196,125,110,.18);overflow:hidden;transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease)}
+.cs-feat:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,21,18,.1);border-color:rgba(196,125,110,.35)}
+
+.cs-feat-img{position:relative;overflow:hidden;flex-shrink:0}
+.cs-feat-img-inner{width:100%;height:100%;position:absolute;inset:0;transition:transform .55s var(--ease)}
+.cs-feat:hover .cs-feat-img-inner{transform:scale(1.06)}
+
+.cs-feat-lbl{position:absolute;bottom:16px;left:16px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(90,50,40,.38);font-weight:400}
+
+.cs-feat-txt{display:flex;flex-direction:column;justify-content:center;padding:28px 32px;background:var(--iv2)}
+
+.cs-feat .cs-h{font-size:clamp(16px,1.7vw,22px);font-family:var(--serif);font-weight:300;margin-bottom:10px;transition:color .2s;color:var(--ink);line-height:1.2;letter-spacing:-.01em}
+.cs-feat:hover .cs-h{color:var(--bld)}
+
+.cs-ey{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:16px}
+
+.cs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.cs-pill{font-size:12px;color:var(--bld);background:var(--bll);border:1px solid var(--bl);padding:5px 14px;border-radius:20px;font-weight:500}
+
+.cs-p{font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:16px}
+
+.cs-cta{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;text-decoration:none;color:var(--ink2);border-bottom:1px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s;display:inline-block}
+.cs-cta:hover{color:var(--bld);border-color:var(--bld)}
+
+.cs-cta-wip{font-size:11px;color:var(--ink3);font-style:italic;opacity:.6}
+
+/* ── FOOTER ── */
+.footer{background:#3A2E2A;padding:80px max(56px, calc((100vw - 1100px) / 2 + 56px)) 0}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:72px;border-bottom:1px solid rgba(251,248,243,.08)}
+.ft-tagline{font-family:var(--serif);font-size:clamp(30px,4.5vw,56px);font-weight:300;font-style:italic;color:var(--iv);line-height:1.04;letter-spacing:-.025em;margin-bottom:18px}
+.ft-sub{font-size:14px;color:rgba(251,248,243,.45);font-weight:300;line-height:1.8;max-width:360px}
+.ft-lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,191,180,.5);margin-bottom:12px;font-weight:500}
+.ft-email{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:300;color:rgba(251,248,243,.72);text-decoration:none;display:block;margin-bottom:32px;transition:color .2s}
+.ft-email:hover{color:var(--bl)}
+.ft-links{display:flex;flex-direction:column}
+.ft-link{font-family:var(--serif);font-size:20px;font-style:italic;font-weight:300;color:rgba(251,248,243,.52);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(251,248,243,.07);display:flex;justify-content:space-between;align-items:center;transition:color .2s;gap:0}
+.ft-link:hover{color:var(--bl)}
+.ft-link:hover svg{transform:translate(2px,-2px)}
+.ft-link:last-child{border-bottom:none}
+.ft-link svg{transition:transform .2s;opacity:.5}
+.ft-link:hover svg{opacity:1}
+.footer-base{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
+.ft-logo{display:flex;align-items:center;gap:10px}
+.ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
+.ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
+
+/* ── SCROLL REVEAL ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0}
+.reveal.in{animation:fadeUp .7s var(--ease) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:0 24px !important}
+  .nav-r a:not(.nav-badge){display:none}
+  .page-header{padding:48px 24px 40px !important}
+  .cs-cards{grid-template-columns:1fr;padding:0 24px 56px !important;gap:12px}
+  .cs-feat{grid-template-columns:1fr}
+  .cs-feat-img{min-height:160px}
+  .cs-feat-txt{padding:24px}
+  .footer{padding:48px 24px 0 !important}
+  .footer-grid{grid-template-columns:1fr;gap:40px}
+}
+
+@media print{
+  *{opacity:1!important;animation:none!important;transform:none!important;transition:none!important}
+  #tc{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="bf-cursor" style="position:fixed;pointer-events:none;z-index:99999;width:80px;height:80px;transform:translate(-50%,-50%);display:none;top:0;left:0"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAKgElEQVR4nO2ZeWwU1x3Hf2+OPby7trFZMAZzBIiTrAMgRVyBxs5RCBUiIeyWFBm3IrFFRVTSpFITqcyO1CiJlLRpglolUCf4ij0GgoiBhEBMCEcQUA57Mb6NMT52be+u95hrZ379A1uKorTFeBtosh9pNNLM6L3f+833937v/R5AggQJEiRIkCBBggQJEowRQRBo5DjqdttxR4CI5Hbb8L2BAERwOmlPefnKCyUlC0eecz8GNYxI/tz27fc27dwZ6iwr89fv2PGX43v32r75/k5lzMZVOxwEAIAFSKIpRrWmpKZOm5q1ZUIkdPD8Rx9NJzyv38lOGLNhTqdTBwCIRCJdQJM+iqEhZmCjRqv1AhOJbG7ds+duwvP6jyIcWsrKdorHvlR6jxx5HQDAs23btEvFxVx9TU0GwJ05Mcblr6Ag0AAAkixf6vF6ZSka7UJBMDg2b76q69JuKhgsQETidrt/mA4YgaVpH0H4ODA4eOiy2TytqbQ0ee6zv6knLNvXsnvvav4ODIW4GFM9fCeEGYyGQpfmFhQ0ea3W9khqqu1STc04y5QpVZoqLeg+cMDudrsREcnIFY/+x0Jc/0ZMU2TGaJwJAJCXlxebt2rVdTPDWLMWL46xLPtFKBx+ihCC4HYTQggSQjCe/d8KcXGAc/iOiq4nGY0FzXt3b2g6cMAIADBr+fLua6dOTZi5du1hjMUmnReEyYTn9YvFxfc3VFfPB7i9C6a4dHzU4yEAALSBzQbUvUwMr+mqmnn588/TCSEa3d/vb29vNxEVT9gAfgYAkGQ2B+iY/mjnyZNmN88jwI0sgYJAf54OYeLRSK7DgQAAlJFapChq5cz162uR46iO3NzkpgMH7JNXrvT11ddbKQbOqbr+UK1trajQ5C9ZWVlCmtHYc5WS7P0We//8+fPVKx/s2AOEmWixWhqNNLNAVRRHfzBY/PXZ688XvucWAUaf5v4bY1YAuRH/1MwiV1CTFR8qWhlFUddnr1jd4nK5tMbK8pWqqK64bLa8LUYiiwZ6vS+kpad3D/h8QY8dTNO++LovORSaiIgEaMOLiNqXqo5vUBS1tccXWDSnsHBj0fv8LeX4myGu205VUazjzKYpjInJbi4pmdVYVvKyJqmPRNukV5wul64y1IsPb1j/iRaLZd6dnz9EB1hS7XAQBSDQfPq07Z4NG9oNFktqt8HQPX716j3zNxedRkSCAKNe498sY84CyHEUIUS/8lHZL2zGpJ/39vSW6Kg/rlPwaExWzzo2bnwdhlWygJBrV0pKZrAmgwEAIDUS0R+2280T8/LCLTWf/aTn4MGZYiAwLVVREAWBPurxEELImGf6/8SYHIAABHge6wXBwGqxreFQ6A/ZBQXbv+s7t9sNiEiaKitNABSFHEe1URRjisVSkOOi7UrEyhqNVQFFeSmnoCCMiCTP5fqfl8zGFAIEAAkAOpxOtdHrezC7oGD7yCkQIhJhuFxOANDtdt+oAbK6rCoSQ3heZ/1+pScYTCI8rzOoPTUwOPiPupq2dzmOo4B8P/XSuOwGh+NTRkSKEKJ/45n2zW8QkTS/8851ym7PaqmszEGjcdLsZNtrndVCbzQiWju83nxXNa9wHEfd6tJ21LbHq6Gb2YcjchQhvN5WWflTiiJvszSVAwhMMBR+paOj428reX7oVooa/1eMhEVzaWluW3l5/+lt21aMvLsd5wTxKYiMAqfHg8hxVJ0kDVosloaFmzd/ioJAg8eDI+Hzg2bkLzdXVDgaS0t33GlHZQkSJEiQIEGCBAkSJEiQIEGCHz7/AslEfzyg5he+AAAAAElFTkSuQmCC" style="width:80px;height:80px"></div>
+<canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
+
+<nav>
+  <a class="logo" href="index.html">
+    <span class="logo-name">Anika Badkul</span>
+  </a>
+  <div class="nav-r">
+    <a href="about.html">About</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <p class="ey reveal">Selected work</p>
+  <h1 class="sh reveal d1">Case studies</h1>
+  <p class="page-subtitle reveal d2">Research-driven projects from internships, coursework, and self-initiated work.</p>
+</header>
+
+<!-- CASE STUDIES GRID -->
+<section class="cs-section">
+  <div class="cs-cards cs-cards-top">
+
+    <!-- 1: Schedule Builder -->
+    <div class="cs-feat reveal">
+      <div class="cs-feat-img">
+        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0D8EA,#CBBEDD)"></div>
+        <span class="cs-feat-lbl">UX Research &middot; 2026</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">UX RESEARCH &amp; DESIGN &middot; COMPSCI 325</p>
+        <h2 class="cs-h">Rebuilding Schedule Builder</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">UX Research</span>
+          <span class="cs-pill">Interaction Design</span>
+          <span class="cs-pill">2026</span>
+        </div>
+        <p class="cs-p">30-person survey + 9 interviews → 3 friction points → paper prototypes → hi-fi.</p>
+        <a href="cs-schedule-builder.html" class="cs-cta">VIEW PROJECT ➞</a>
+      </div>
+    </div>
+
+    <!-- 2: Fintech -->
+    <div class="cs-feat reveal d1">
+      <div class="cs-feat-img">
+        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#EDD8D0,#E0C4BA)"></div>
+        <span class="cs-feat-lbl">Fintech Internship &middot; 2024</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">FINTECH PM INTERNSHIP</p>
+        <h2 class="cs-h">Reducing onboarding drop-off for first-time users</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">Internship</span>
+          <span class="cs-pill">Fintech</span>
+          <span class="cs-pill">2024</span>
+        </div>
+        <p class="cs-p">12 user interviews + funnel analysis → 3 friction points → flow cut from 7 steps to 4.</p>
+        <span class="cs-cta-wip">Coming soon</span>
+      </div>
+    </div>
+
+    <!-- 3: Apple Wallet -->
+    <div class="cs-feat reveal d2">
+      <div class="cs-feat-img">
+        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E8E0D4,#D8CCBC)"></div>
+        <span class="cs-feat-lbl">Product Teardown &middot; 2024</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">PRODUCT TEARDOWN</p>
+        <h2 class="cs-h">Apple Wallet for new immigrants</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">Teardown</span>
+          <span class="cs-pill">Apple</span>
+          <span class="cs-pill">2024</span>
+        </div>
+        <p class="cs-p">JTBD analysis + journey mapping for an underserved segment navigating a new financial system.</p>
+        <span class="cs-cta-wip">Coming soon</span>
+      </div>
+    </div>
+
+    <!-- 4: Habit Tracker -->
+    <div class="cs-feat reveal d3">
+      <div class="cs-feat-img">
+        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0EAD4,#CEDFBE)"></div>
+        <span class="cs-feat-lbl">Side Project &middot; 2024</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">SIDE PROJECT &middot; B2C</p>
+        <h2 class="cs-h">Habit tracker: zero to shipped</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">No-code</span>
+          <span class="cs-pill">B2C</span>
+          <span class="cs-pill">2024</span>
+        </div>
+        <p class="cs-p">5 interviews → Glide build → live product in 4 weeks.</p>
+        <span class="cs-cta-wip">Coming soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="reveal">
+      <div class="ft-tagline">The best products<br>start with a<br>conversation.</div>
+      <p class="ft-sub">Whether it's about a PM role, a product you're building, or just a chat — I'm always up to talk.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ft-lbl">Contact me</div>
+      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
+      <div class="ft-lbl">Let's connect</div>
+      <div class="ft-links">
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <div class="ft-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="52" height="30" style="display:block" viewBox="0 0 1200 700">
+        <defs>
+          <style>
+            .logo-color{fill:none;stroke:rgba(251,248,243,0.4);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+            .logo-text{fill:rgba(251,248,243,0.4);font-family:Didot,'Bodoni 72','Bodoni MT',Georgia,serif;font-size:300px;font-weight:400;letter-spacing:-32px}
+          </style>
+        </defs>
+        <g transform="translate(0,0)">
+          <path class="logo-color" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
+          <path class="logo-color" d="M 300 376 C 239 342, 194 302, 161 251"/>
+          <path class="logo-color" d="M 303 340 C 244 319, 200 290, 170 252"/>
+          <path class="logo-color" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
+          <path class="logo-color" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
+          <path class="logo-color" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
+        </g>
+        <text x="392" y="455" class="logo-text">AB</text>
+        <path class="logo-color" d="M 394 352 C 507 294, 646 328, 704 420 C 733 467, 704 536, 637 544 C 590 550, 553 520, 560 475"/>
+        <g transform="translate(1200,0) scale(-1,1)">
+          <path class="logo-color" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
+          <path class="logo-color" d="M 300 376 C 239 342, 194 302, 161 251"/>
+          <path class="logo-color" d="M 303 340 C 244 319, 200 290, 170 252"/>
+          <path class="logo-color" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
+          <path class="logo-color" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
+          <path class="logo-color" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
+        </g>
+      </svg>
+      <span class="ft-name">Anika Badkul</span>
+    </div>
+    <span class="ft-copy">© 2025 &nbsp;·&nbsp; built with curiosity · running shoes optional</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
