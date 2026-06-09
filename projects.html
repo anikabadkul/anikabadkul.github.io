@@ -21,8 +21,8 @@ body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-
 
 /* ── NAV ── */
 nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:flex;align-items:center;justify-content:space-between;
-  background:rgba(251,248,243,.93);backdrop-filter:blur(20px);
   position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
+nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93);backdrop-filter:blur(20px);z-index:-1}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{height:36px;mix-blend-mode:multiply}
 .logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
 .nav-r{display:flex;align-items:center;gap:28px}
@@ -182,7 +182,7 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 .ft-link svg{transition:transform .2s;opacity:.5}
 .ft-link:hover svg{opacity:1;transform:translate(2px,-2px)}
 .footer-base{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
-.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:32px;opacity:0.6;mix-blend-mode:screen}
+.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:32px;mix-blend-mode:lighten;opacity:0.85}
 .ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
 .ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
 
