@@ -433,9 +433,26 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   </div>
 </section>
 
-<!-- 04 WHAT WE BUILT -->
+<!-- 04 SYSTEM FLOW -->
 <section class="cs-section">
   <span class="section-num">04</span>
+  <h2 class="section-title reveal">How the System <em>Flows</em></h2>
+  <p class="body-p reveal">Before building any screens, I mapped the full incentive logic as a flow — from user roles through rule evaluation, compliance checks, and payout. This went through two iterations.</p>
+
+  <div class="callout reveal d1" style="margin-bottom:32px">
+    <div class="callout-label">What changed v1 → v2</div>
+    <p class="callout-text">The first version included Policy Version Logs as a separate node and an ESOP Eligibility check in the compliance path. Both added branching complexity without meaningfully changing what most users needed to do. I cut them — ESOP eligibility moved to a separate admin setting, and version history became a background audit trail rather than a flow step. The result was a compliance path that branch admins could actually follow.</p>
+  </div>
+
+  <div class="reveal d1" style="background:#F0F7FF;border-radius:12px;padding:32px;text-align:center">
+    <img src="kobl-workflow.png" alt="Kobl incentive system flow diagram — v1 and updated wireframe" style="max-width:100%;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
+    <p style="font-size:13px;color:#64748B;margin-top:16px;font-style:italic">Left: Updated wireframe &nbsp;·&nbsp; Right: 1st design &nbsp;·&nbsp; Bottom: refined final flow</p>
+  </div>
+</section>
+
+<!-- 05 WHAT WE BUILT -->
+<section class="cs-section">
+  <span class="section-num">05</span>
   <h2 class="section-title reveal">What We <em>Built</em></h2>
   <p class="body-p reveal">Three surfaces. Each targeting a different user — branch admin, RM, and compliance — but sharing one rule engine underneath.</p>
 
@@ -651,9 +668,9 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   </div>
 </section>
 
-<!-- 05 IMPACT -->
+<!-- 06 IMPACT -->
 <section class="cs-section">
-  <span class="section-num">05</span>
+  <span class="section-num">06</span>
   <h2 class="section-title reveal"><em>Impact</em></h2>
 
   <div class="two-col">
@@ -690,9 +707,9 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   </div>
 </section>
 
-<!-- 06 WHAT I LEARNED -->
+<!-- 07 WHAT I LEARNED -->
 <section class="cs-section">
-  <span class="section-num">06</span>
+  <span class="section-num">07</span>
   <h2 class="section-title reveal">What I <em>Learned</em></h2>
 
   <div class="lessons-grid">
