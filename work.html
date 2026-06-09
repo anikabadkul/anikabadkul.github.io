@@ -84,7 +84,7 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 .ft-link svg{transition:transform .2s;opacity:.5}
 .ft-link:hover svg{opacity:1}
 .footer-base{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
-.ft-logo{display:flex;align-items:center;gap:10px}
+.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:32px;opacity:0.55}
 .ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
 .ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
 
@@ -121,178 +121,14 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 <canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
 
 <nav>
-  <a class="logo" href="index.html">
-    <svg xmlns="http://www.w3.org/2000/svg" height="36" style="display:block" viewBox="0 0 1200 700">
-  <defs><style>
-    .nlc{fill:none;stroke:rgba(26,21,18,0.7);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
-    .nlt{fill:rgba(26,21,18,0.7);font-family:Didot,"Bodoni 72","Bodoni MT",Georgia,serif;font-size:300px;font-weight:400;letter-spacing:-32px}
-  </style></defs>
-  <g transform="translate(0,0)">
-    <path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
-    <path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/>
-    <path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/>
-    <path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
-    <path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
-    <path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
-  </g>
-  <text x="392" y="455" class="nlt">AB</text>
-  <path class="nlc" d="M 394 352 C 507 294, 646 328, 704 420 C 733 467, 704 536, 637 544 C 590 550, 553 520, 560 475"/>
-  <g transform="translate(1200,0) scale(-1,1)">
-    <path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
-    <path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/>
-    <path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/>
-    <path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
-    <path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
-    <path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
-  </g>
-</svg>
-    <span class="logo-name">Anika Badkul</span>
-  </a>
-  <div class="nav-r">
-    <a href="about.html">About</a>
-    <a href="work.html" class="active">Work</a>
-    <a href="projects.html">Projects</a>
-    <a href="resume.html">Resume</a>
-    <a href="whatelse.html">What Else</a>
-  </div>
-</nav>
-
-<!-- PAGE HEADER -->
-<header class="page-header">
-  <p class="ey reveal">Selected work</p>
-  <h1 class="sh reveal d1">Case studies</h1>
-  <p class="page-subtitle reveal d2">Research-driven projects from internships, coursework, and self-initiated work.</p>
-</header>
-
-<!-- CASE STUDIES GRID -->
-<section class="cs-section">
-  <div class="cs-cards cs-cards-top">
-
-    <!-- 1: Schedule Builder -->
-    <div class="cs-feat reveal">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0D8EA,#CBBEDD)"></div>
-        <span class="cs-feat-lbl">UX Research &middot; 2026</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">UX RESEARCH &amp; DESIGN &middot; COMPSCI 325</p>
-        <h2 class="cs-h">Rebuilding Schedule Builder</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">UX Research</span>
-          <span class="cs-pill">Interaction Design</span>
-          <span class="cs-pill">2026</span>
-        </div>
-        <p class="cs-p">30-person survey + 9 interviews → 3 friction points → paper prototypes → hi-fi.</p>
-        <a href="cs-schedule-builder.html" class="cs-cta">VIEW PROJECT ➞</a>
-      </div>
-    </div>
-
-    <!-- 2: Kobl Internship -->
-    <div class="cs-feat reveal d1">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#DBEAFE,#BFDBFE)"></div>
-        <span class="cs-feat-lbl">PM Internship &middot; Kobl</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">PRODUCT MANAGEMENT &middot; KOBL INTERNSHIP</p>
-        <h2 class="cs-h">Dynamic Incentive Management CRM for Banking</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">PM Internship</span>
-          <span class="cs-pill">B2B Fintech</span>
-          <span class="cs-pill">Rule Engine</span>
-        </div>
-        <p class="cs-p">Stakeholder research → no-code rule engine → real-time payouts → 60% fewer disputes.</p>
-        <a href="cs-kobl-incentives.html" class="cs-cta">VIEW PROJECT ➞</a>
-      </div>
-    </div>
-
-    <!-- 3: Apple Wallet -->
-    <div class="cs-feat reveal d2">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E8E0D4,#D8CCBC)"></div>
-        <span class="cs-feat-lbl">Product Teardown &middot; 2024</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">PRODUCT TEARDOWN</p>
-        <h2 class="cs-h">Apple Wallet for new immigrants</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">Teardown</span>
-          <span class="cs-pill">Apple</span>
-          <span class="cs-pill">2024</span>
-        </div>
-        <p class="cs-p">JTBD analysis + journey mapping for an underserved segment navigating a new financial system.</p>
-        <span class="cs-cta-wip">Coming soon</span>
-      </div>
-    </div>
-
-    <!-- 4: Habit Tracker -->
-    <div class="cs-feat reveal d3">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0EAD4,#CEDFBE)"></div>
-        <span class="cs-feat-lbl">Side Project &middot; 2024</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">SIDE PROJECT &middot; B2C</p>
-        <h2 class="cs-h">Habit tracker: zero to shipped</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">No-code</span>
-          <span class="cs-pill">B2C</span>
-          <span class="cs-pill">2024</span>
-        </div>
-        <p class="cs-p">5 interviews → Glide build → live product in 4 weeks.</p>
-        <span class="cs-cta-wip">Coming soon</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="reveal">
-      <div class="ft-tagline">The best products<br>start with a<br>conversation.</div>
-      <p class="ft-sub">Whether it's about a PM role, a product you're building, or just a chat — I'm always up to talk.</p>
-    </div>
-    <div class="reveal d1">
-      <div class="ft-lbl">Contact me</div>
-      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
-      <div class="ft-lbl">Let's connect</div>
-      <div class="ft-links">
-        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="logo" href="index.html"><img src="logo-light.png" alt="AB" style="height:36px;display:block"></a>
         <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </div>
   <div class="footer-base">
-    <div class="ft-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="52" height="30" style="display:block" viewBox="0 0 1200 700">
-        <defs>
-          <style>
-            .logo-color{fill:none;stroke:rgba(251,248,243,0.4);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
-            .logo-text{fill:rgba(251,248,243,0.4);font-family:Didot,'Bodoni 72','Bodoni MT',Georgia,serif;font-size:300px;font-weight:400;letter-spacing:-32px}
-          </style>
-        </defs>
-        <g transform="translate(0,0)">
-          <path class="logo-color" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
-          <path class="logo-color" d="M 300 376 C 239 342, 194 302, 161 251"/>
-          <path class="logo-color" d="M 303 340 C 244 319, 200 290, 170 252"/>
-          <path class="logo-color" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
-          <path class="logo-color" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
-          <path class="logo-color" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
-        </g>
-        <text x="392" y="455" class="logo-text">AB</text>
-        <path class="logo-color" d="M 394 352 C 507 294, 646 328, 704 420 C 733 467, 704 536, 637 544 C 590 550, 553 520, 560 475"/>
-        <g transform="translate(1200,0) scale(-1,1)">
-          <path class="logo-color" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
-          <path class="logo-color" d="M 300 376 C 239 342, 194 302, 161 251"/>
-          <path class="logo-color" d="M 303 340 C 244 319, 200 290, 170 252"/>
-          <path class="logo-color" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
-          <path class="logo-color" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
-          <path class="logo-color" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
-        </g>
-      </svg>
+    <div class="ft-logo"><img src="logo-dark.png" alt="AB">
       <span class="ft-name">Anika Badkul</span>
     </div>
     <span class="ft-copy">© 2025 &nbsp;·&nbsp; built with curiosity · running shoes optional</span>
