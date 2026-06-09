@@ -8,10 +8,15 @@
 (function(){
   var el=document.getElementById('bf-cursor');
   if(!el)return;
+  el.style.willChange='transform';
+  var raf=null,mx=0,my=0;
   document.addEventListener('mousemove',function(e){
-    el.style.left=e.clientX+'px';
-    el.style.top=e.clientY+'px';
-    el.style.display='block';
+    mx=e.clientX;my=e.clientY;
+    if(!raf)raf=requestAnimationFrame(function(){
+      el.style.transform='translate('+(mx-40)+'px,'+(my-40)+'px)';
+      el.style.display='block';
+      raf=null;
+    });
   });
   document.addEventListener('mouseleave',function(){el.style.display='none';});
 })();
