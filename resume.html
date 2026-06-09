@@ -79,7 +79,8 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 
 /* ── GLOBAL SCROLL ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0}
+@keyframes reveal-fallback{to{opacity:1;transform:none}}
+.reveal{opacity:0;animation:reveal-fallback 0.01s 0.8s forwards}
 .reveal.in{animation:fadeUp .7s var(--ease) forwards}
 .d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}
 
@@ -125,6 +126,30 @@ nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:f
 
 <nav>
   <a class="logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" height="36" style="display:block" viewBox="0 0 1200 700">
+  <defs><style>
+    .nlc{fill:none;stroke:rgba(26,21,18,0.7);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+    .nlt{fill:rgba(26,21,18,0.7);font-family:Didot,"Bodoni 72","Bodoni MT",Georgia,serif;font-size:300px;font-weight:400;letter-spacing:-32px}
+  </style></defs>
+  <g transform="translate(0,0)">
+    <path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
+    <path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/>
+    <path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/>
+    <path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
+    <path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
+    <path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
+  </g>
+  <text x="392" y="455" class="nlt">AB</text>
+  <path class="nlc" d="M 394 352 C 507 294, 646 328, 704 420 C 733 467, 704 536, 637 544 C 590 550, 553 520, 560 475"/>
+  <g transform="translate(1200,0) scale(-1,1)">
+    <path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/>
+    <path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/>
+    <path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/>
+    <path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/>
+    <path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/>
+    <path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/>
+  </g>
+</svg>
     <span class="logo-name">Anika Badkul</span>
   </a>
   <div class="nav-r">
