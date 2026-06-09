@@ -225,6 +225,13 @@ footer{background:#3A2E2A;padding:32px var(--pad);
 .footer-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22)}
 .footer-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
 
+/* USER QUOTE CARDS */
+.quote-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+.user-quote-card{background:var(--iv2);border:1px solid rgba(196,125,110,.18);border-radius:14px;padding:32px 32px 28px;position:relative;overflow:hidden}
+.user-quote-card::before{content:"\201C";font-family:var(--serif);font-size:96px;color:var(--bl);line-height:1;position:absolute;top:4px;left:20px;opacity:.5;pointer-events:none}
+.user-quote-text{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink);line-height:1.62;font-style:italic;padding-top:32px}
+.user-quote-attr{font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:16px;padding-top:14px;border-top:1px solid rgba(196,125,110,.12)}
+
 /* SCROLL ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0}
@@ -234,6 +241,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);
 /* MOBILE */
 @media(max-width:768px){
   :root{--pad:24px}
+  .quote-pair{grid-template-columns:1fr}
   .two-col,.two-col-3,.stat-grid,.lessons-grid{grid-template-columns:1fr}
   .stat-grid{background:none;gap:16px}
   .stat-item{border:1px solid rgba(196,125,110,.15);border-radius:12px}
@@ -368,6 +376,17 @@ footer{background:#3A2E2A;padding:32px var(--pad);
   <span class="section-num">02</span>
   <h2 class="section-title reveal">Research & <em>Discovery</em></h2>
   <p class="body-p reveal">Our team ran a 30-person survey and 9 semi-structured interviews. I helped write the research questions and analyzed the data — looking for patterns across experience levels, since I had a hunch that freshmen and seniors were failing for very different reasons.</p>
+
+  <div class="quote-pair reveal">
+    <div class="user-quote-card">
+      <p class="user-quote-text">"I wish it would tell me what classes I should take for my major or show my requirements somewhere."</p>
+      <div class="user-quote-attr">Freshman · Biology · Works part-time on campus</div>
+    </div>
+    <div class="user-quote-card">
+      <p class="user-quote-text">"I wish Schedule Builder would combine itself with the ARR so we know what courses we need."</p>
+      <div class="user-quote-attr">Senior · Computer Science · Works part-time off campus</div>
+    </div>
+  </div>
 
   <div class="two-col" style="margin-top:40px">
     <div class="reveal">
