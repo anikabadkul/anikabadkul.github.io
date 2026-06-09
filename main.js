@@ -13,7 +13,7 @@
   document.addEventListener('mousemove',function(e){
     mx=e.clientX;my=e.clientY;
     if(!raf)raf=requestAnimationFrame(function(){
-      el.style.transform='translate('+(mx-40)+'px,'+(my-40)+'px)';
+      el.style.transform='translate('+(mx-50)+'px,'+(my-50)+'px)';
       el.style.display='block';
       raf=null;
     });
