@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incentive Management CRM — Anika Badkul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --iv:#FBF8F3;--iv2:#F4EDE3;
+  --bl:#E8BFB4;--bld:#C47D6E;--bll:#F7EBE7;--blm:#D49A8E;
+  --ink:#1A1512;--ink2:#5A4840;--ink3:#9E8A7E;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Instrument Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --max:1100px;
+  --pad:max(56px, calc((100vw - var(--max)) / 2 + 56px));
+}
+html{scroll-behavior:smooth;background:var(--iv)}
+body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}*,*::before,*::after{cursor:none!important}
+
+/* NAV */
+nav{height:64px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;
+  background:rgba(251,248,243,.93);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav-r a{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
+.nav-r a:hover{color:var(--ink)}
+.nav-badge{font-size:11px;font-weight:500;color:var(--bld);background:var(--bll);
+  border:1px solid var(--bl);padding:5px 14px;border-radius:20px;letter-spacing:.04em}
+
+/* HERO */
+.cs-hero{padding:80px var(--pad) 72px;border-bottom:1px solid rgba(196,125,110,.13)}
+.cs-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3);text-decoration:none;margin-bottom:40px;
+  transition:color .15s,gap .15s}
+.cs-back:hover{color:var(--bld);gap:12px}
+.cs-back svg{transition:transform .15s}
+.cs-back:hover svg{transform:translateX(-3px)}
+.cs-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:16px}
+.cs-title{font-family:var(--serif);font-size:clamp(38px,5.5vw,72px);font-weight:300;
+  line-height:1.04;letter-spacing:-.03em;color:var(--ink);max-width:820px;margin-bottom:28px}
+.cs-title em{font-style:italic;color:var(--bld)}
+.cs-subtitle{font-size:16px;color:var(--ink2);line-height:1.75;font-weight:300;max-width:560px;margin-bottom:44px}
+.cs-meta{display:flex;flex-wrap:wrap;gap:32px}
+.cs-meta-item{display:flex;flex-direction:column;gap:5px}
+.cs-meta-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+.cs-meta-value{font-size:14px;color:var(--ink);font-weight:400}
+.cs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.cs-pill{font-size:12px;color:var(--bld);background:var(--bll);border:1px solid var(--bl);
+  padding:5px 14px;border-radius:20px;font-weight:500}
+
+/* BODY */
+.cs-body{padding:0 var(--pad)}
+.cs-section{padding:72px 0;border-bottom:1px solid rgba(196,125,110,.1)}
+.cs-section:last-child{border-bottom:none}
+.section-num{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--bl);display:block;margin-bottom:8px}
+.section-title{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:-.025em;color:var(--ink);margin-bottom:24px;line-height:1.1}
+.section-title em{font-style:italic;color:var(--bld)}
+.body-p{font-size:15px;color:var(--ink2);line-height:1.85;font-weight:300;margin-bottom:20px;max-width:680px}
+.body-p:last-child{margin-bottom:0}
+
+/* TWO-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:16px}
+.two-col-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start}
+
+/* CALLOUT */
+.callout{background:var(--iv2);border:1px solid rgba(196,125,110,.2);border-radius:16px;padding:36px 40px;margin:32px 0}
+.callout-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px}
+.callout-text{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--ink);line-height:1.55;font-style:italic}
+
+/* STAT BLOCKS */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(196,125,110,.15);border-radius:16px;overflow:hidden;margin:32px 0}
+.stat-item{background:var(--iv);padding:28px 24px;display:flex;flex-direction:column;gap:6px}
+.stat-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--bld);line-height:1;letter-spacing:-.02em}
+.stat-label{font-size:12px;color:var(--ink3);font-weight:300;line-height:1.4}
+
+/* USER CARDS */
+.user-card{background:var(--iv);border:1px solid rgba(196,125,110,.2);border-radius:16px;overflow:hidden}
+.user-card-head{background:var(--iv2);padding:20px 24px;border-bottom:1px solid rgba(196,125,110,.12)}
+.user-initial{width:40px;height:40px;border-radius:50%;background:var(--bll);border:1px solid var(--bl);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;font-style:italic;color:var(--bld);margin-bottom:10px}
+.user-name{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:2px}
+.user-desc{font-size:12px;color:var(--ink3);font-weight:300}
+.user-body{padding:20px 24px}
+.user-section{margin-bottom:14px}
+.user-section:last-child{margin-bottom:0}
+.user-section-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:6px}
+.user-section ul{list-style:none;padding:0}
+.user-section li{font-size:13px;color:var(--ink2);line-height:1.6;font-weight:300;padding:2px 0 2px 14px;position:relative}
+.user-section li::before{content:"—";position:absolute;left:0;color:var(--bl);font-size:10px;top:5px}
+.user-quote{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--ink2);border-top:1px solid rgba(196,125,110,.12);padding-top:14px;margin-top:14px;line-height:1.6}
+
+/* DECISION BLOCKS */
+.decision-row{display:grid;grid-template-columns:56px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid rgba(196,125,110,.1)}
+.decision-row:last-child{border-bottom:none}
+.decision-num{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--bl);line-height:1;padding-top:2px}
+.decision-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.decision-desc{font-size:14px;color:var(--ink2);line-height:1.75;font-weight:300}
+.decision-tag{display:inline-block;font-size:10px;color:var(--bld);background:var(--bll);border:1px solid var(--bl);padding:3px 10px;border-radius:10px;font-weight:500;margin-top:8px;letter-spacing:.04em}
+
+/* LESSONS */
+.lessons-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.lesson-card{background:var(--iv2);border-radius:12px;padding:28px;border:1px solid rgba(196,125,110,.15)}
+.lesson-num{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--bl);line-height:1;margin-bottom:10px}
+.lesson-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.lesson-desc{font-size:13px;color:var(--ink2);line-height:1.75;font-weight:300}
+
+/* USER QUOTE CARDS */
+.quote-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+.user-quote-card{background:var(--iv2);border:1px solid rgba(196,125,110,.18);border-radius:14px;padding:32px 32px 28px;position:relative;overflow:hidden}
+.user-quote-card::before{content:"\201C";font-family:var(--serif);font-size:96px;color:var(--bl);line-height:1;position:absolute;top:4px;left:20px;opacity:.5;pointer-events:none}
+.user-quote-text{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink);line-height:1.62;font-style:italic;padding-top:32px}
+.user-quote-attr{font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:16px;padding-top:14px;border-top:1px solid rgba(196,125,110,.12)}
+
+/* ─── PRODUCT MOCKUPS (Kobl brand: blue) ─── */
+.k-frame{border-radius:14px;overflow:hidden;border:1px solid rgba(196,125,110,.18);
+  background:#F8FAFC;box-shadow:0 8px 40px rgba(26,21,18,.07);margin:28px 0}
+.k-shell{display:grid;grid-template-columns:200px 1fr;min-height:340px}
+.k-sidebar{background:#fff;border-right:1px solid #E2E8F0;padding:0}
+.k-sidebar-logo{padding:18px 20px 14px;font-size:12px;font-weight:600;color:#1E293B;letter-spacing:.01em;border-bottom:1px solid #F1F5F9}
+.k-sidebar-nav{padding:8px 0}
+.k-nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:12px;color:#64748B;font-weight:400;cursor:default}
+.k-nav-item.active{background:#EFF6FF;color:#1D4ED8;font-weight:500;border-right:2px solid #2563EB}
+.k-nav-item svg{width:14px;height:14px;flex-shrink:0;opacity:.7}
+.k-nav-item.active svg{opacity:1}
+.k-main{padding:24px 28px;overflow:hidden}
+.k-page-title{font-size:20px;font-weight:600;color:#1E293B;margin-bottom:4px}
+.k-page-sub{font-size:12px;color:#94A3B8;margin-bottom:20px}
+
+/* form mockup */
+.k-form-row{margin-bottom:14px}
+.k-label{font-size:11px;font-weight:500;color:#475569;margin-bottom:5px;letter-spacing:.02em}
+.k-input{width:100%;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;padding:8px 12px;font-size:12px;color:#94A3B8;font-family:inherit}
+.k-input.filled{color:#1E293B;background:#fff}
+.k-rule-builder{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:14px 16px;margin-top:4px}
+.k-rule-builder-head{font-size:12px;font-weight:600;color:#1E293B;margin-bottom:10px}
+.k-add-condition{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563EB;font-weight:500}
+.k-btn-row{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}
+.k-btn{font-size:12px;padding:8px 16px;border-radius:6px;font-weight:500;cursor:default;font-family:inherit}
+.k-btn-outline{background:#fff;border:1px solid #CBD5E1;color:#475569}
+.k-btn-primary{background:#2563EB;border:none;color:#fff}
+.k-new-rule{position:absolute;top:24px;right:28px;font-size:11px;font-weight:500;color:#2563EB;background:#EFF6FF;border:1px solid #BFDBFE;padding:6px 14px;border-radius:6px}
+
+/* table mockup */
+.k-search{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:8px 14px;font-size:12px;color:#94A3B8;width:100%;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.k-filter-row{display:flex;gap:10px;margin-bottom:16px}
+.k-filter{background:#fff;border:1px solid #E2E8F0;border-radius:6px;padding:7px 12px;font-size:11px;color:#475569;display:flex;align-items:center;gap:6px}
+.k-table{width:100%;border-collapse:collapse;font-size:11px}
+.k-table th{text-align:left;padding:8px 10px;color:#64748B;font-weight:500;border-bottom:2px solid #E2E8F0;white-space:nowrap;font-size:10px;letter-spacing:.04em;text-transform:uppercase}
+.k-table td{padding:8px 10px;color:#334155;border-bottom:1px solid #F1F5F9;white-space:nowrap}
+.k-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px;white-space:nowrap}
+.k-badge.gold{background:#FEF3C7;color:#92400E}
+.k-badge.silver{background:#F1F5F9;color:#475569}
+.k-badge.tier1{background:#DCFCE7;color:#166534}
+.k-badge.tier2{background:#EDE9FE;color:#5B21B6}
+.k-badge.tier3{background:#FEE2E2;color:#991B1B}
+
+/* chart mockup */
+.k-chart-area{margin-top:16px;padding:14px 16px;background:#fff;border-radius:8px;border:1px solid #E2E8F0}
+.k-chart-title{font-size:11px;font-weight:600;color:#1E293B;margin-bottom:12px}
+.k-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.k-bar-label{font-size:10px;color:#64748B;width:40px;text-align:right;flex-shrink:0}
+.k-bar-track{flex:1;background:#F1F5F9;border-radius:4px;overflow:hidden;height:20px}
+.k-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:600;color:#fff}
+
+/* summary mockup */
+.k-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.k-stat-card{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:14px 16px}
+.k-stat-label{font-size:10px;color:#64748B;font-weight:500;margin-bottom:4px;letter-spacing:.03em}
+.k-stat-val{font-size:20px;font-weight:700;color:#1E293B;letter-spacing:-.02em}
+.k-tabs{display:flex;border-bottom:1px solid #E2E8F0;margin-bottom:16px;gap:0}
+.k-tab{font-size:11px;padding:8px 14px;color:#94A3B8;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:default;font-weight:400}
+.k-tab.active{color:#2563EB;border-bottom-color:#2563EB;font-weight:600}
+
+/* CLOSING */
+.cs-closing{padding:80px var(--pad);background:var(--ink)}
+.closing-text{font-family:var(--serif);font-size:clamp(24px,3vw,38px);font-weight:300;font-style:italic;color:var(--iv);line-height:1.45;max-width:720px;margin-bottom:32px}
+.closing-sub{font-size:14px;color:rgba(251,248,243,.45);font-weight:300;line-height:1.8;max-width:560px}
+.back-link{display:inline-flex;align-items:center;gap:8px;margin-top:40px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);text-decoration:none;transition:gap .15s,color .15s}
+.back-link:hover{gap:12px;color:var(--iv)}
+
+/* FOOTER */
+footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(251,248,243,.06)}
+.footer-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22)}
+.footer-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
+
+/* SCROLL ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes reveal-fallback{to{opacity:1;transform:none}}
+.reveal{opacity:0;animation:reveal-fallback 0.01s 0.8s forwards}
+.reveal.in{animation:fadeUp .65s var(--ease) forwards}
+.d1{animation-delay:.07s}.d2{animation-delay:.15s}.d3{animation-delay:.23s}.d4{animation-delay:.31s}
+
+/* MOBILE */
+@media(max-width:768px){
+  :root{--pad:24px}
+  .two-col,.two-col-3,.stat-grid,.lessons-grid,.quote-pair{grid-template-columns:1fr}
+  .stat-grid{background:none;gap:16px}
+  .stat-item{border:1px solid rgba(196,125,110,.15);border-radius:12px}
+  .k-shell{grid-template-columns:1fr}
+  .k-sidebar{display:none}
+  nav{padding:0 24px !important}
+  .nav-r a:not(.nav-badge){display:none}
+}
+</style>
+</head>
+<body>
+<div id="bf-cursor" style="position:fixed;pointer-events:none;z-index:99999;width:80px;height:80px;transform:translate(-50%,-50%);display:none;top:0;left:0"><img src="data:image/png;base64,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" style="width:80px;height:80px"></div>
+<canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
+
+<nav>
+  <a class="logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" height="36" style="display:block" viewBox="0 0 1200 700">
+  <defs><style>.nlc{fill:none;stroke:rgba(26,21,18,0.7);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.nlt{fill:rgba(26,21,18,0.7);font-family:Didot,"Bodoni 72","Bodoni MT",Georgia,serif;font-size:300px;font-weight:400;letter-spacing:-32px}</style></defs>
+  <g transform="translate(0,0)"><path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/><path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/><path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/><path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/><path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/><path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/></g>
+  <text x="392" y="455" class="nlt">AB</text>
+  <path class="nlc" d="M 394 352 C 507 294, 646 328, 704 420 C 733 467, 704 536, 637 544 C 590 550, 553 520, 560 475"/>
+  <g transform="translate(1200,0) scale(-1,1)"><path class="nlc" d="M 315 398 C 245 360, 190 292, 155 186 C 148 225, 157 281, 191 333 C 222 380, 261 402, 315 398"/><path class="nlc" d="M 300 376 C 239 342, 194 302, 161 251"/><path class="nlc" d="M 303 340 C 244 319, 200 290, 170 252"/><path class="nlc" d="M 291 404 C 231 431, 180 404, 154 365 C 200 365, 242 376, 291 404"/><path class="nlc" d="M 270 427 C 227 462, 206 509, 234 558 C 202 543, 181 505, 190 465 C 198 431, 227 413, 270 427"/><path class="nlc" d="M 233 558 C 247 580, 283 574, 288 545 C 269 557, 248 557, 233 558"/></g>
+</svg>
+    <span class="logo-name">Anika Badkul</span>
+  </a>
+  <div class="nav-r">
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="whatelse.html">What Else</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <a href="work.html" class="cs-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to work
+  </a>
+  <div class="cs-eyebrow">Product Management · Kobl Internship · Banking & Fintech</div>
+  <h1 class="cs-title">When commission <em>spreadsheets</em> fail everyone</h1>
+  <p class="cs-subtitle">Every time a relationship manager closes a loan at an Indian bank, someone manually calculates their incentive. That someone is usually a junior analyst with a spreadsheet, the number is almost never right on the first try, and the RM waits days to find out what they earned. At Kobl, I worked as a PM intern to build the system that makes this automatic, transparent, and configurable by any branch admin — no code required.</p>
+  <div class="cs-meta">
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Company</span>
+      <span class="cs-meta-value">Kobl</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">My Role</span>
+      <span class="cs-meta-value">PM Intern</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Industry</span>
+      <span class="cs-meta-value">Banking & Financial Services</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Stack</span>
+      <span class="cs-meta-value">React · Node.js · PostgreSQL</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Impact</span>
+      <span class="cs-meta-value">60% fewer disputes · 70% faster computation</span>
+    </div>
+  </div>
+  <div class="cs-pills">
+    <span class="cs-pill">Product Management</span>
+    <span class="cs-pill">B2B SaaS</span>
+    <span class="cs-pill">Rule Engine Design</span>
+    <span class="cs-pill">Fintech</span>
+    <span class="cs-pill">Stakeholder Research</span>
+  </div>
+</section>
+
+<div class="cs-body">
+
+<!-- 01 THE PROBLEM -->
+<section class="cs-section">
+  <span class="section-num">01</span>
+  <h2 class="section-title reveal">The <em>Problem</em></h2>
+  <div class="two-col">
+    <div>
+      <p class="body-p reveal">Indian banks manage incentives for thousands of relationship managers across hundreds of branches. The incentive logic isn't simple — it varies by product type, employee designation, region, and active campaigns. A rural loan RM earns differently than an urban investments RM. A Silver-tier rep in Maharashtra earns differently than a Gold-tier rep in Karnataka. And both of those change the moment a new seasonal scheme goes live.</p>
+      <p class="body-p reveal d1">The way most banks handled this in practice: a junior analyst at each branch maintained a spreadsheet. Every deal closure triggered a manual lookup — check the tier, apply the regional modifier, account for cross-sell bonuses, subtract clawbacks — then send the number to payroll three to five days later. If the RM thought the number was wrong, they filed a dispute. Most of the time, they were at least partially right.</p>
+      <p class="body-p reveal d2">The downstream effects were predictable: errors, disputes, delayed payouts, and RMs who simply stopped trusting the numbers. High performers — the ones you most need to retain — were most affected, because they had the most at stake. The incentive system designed to motivate people was actively demotivating them.</p>
+    </div>
+    <div>
+      <div class="callout reveal d1">
+        <div class="callout-label">The Core Tension</div>
+        <p class="callout-text">"Each branch needs its own incentive logic, but no branch should need a developer to change it — and every RM should be able to see exactly how their number was calculated."</p>
+      </div>
+      <div class="stat-grid reveal d2" style="grid-template-columns:1fr 1fr;margin-top:0">
+        <div class="stat-item">
+          <span class="stat-num">3–5</span>
+          <span class="stat-label">Days between deal closure and incentive payout</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1000+</span>
+          <span class="stat-label">Branches the platform needs to scale across</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Existing CRMs with no-code configurable incentive logic</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">Every</span>
+          <span class="stat-label">Branch running its own spreadsheet with its own rules</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WHO THIS WAS FOR -->
+<section class="cs-section">
+  <span class="section-num">02</span>
+  <h2 class="section-title reveal">Who I <em>Designed For</em></h2>
+  <p class="body-p reveal">The product had three distinct users with distinct needs — and they were in tension with each other. Branch admins needed flexibility. RMs needed transparency. Compliance needed airtight audit trails. Designing for one without the others would have solved part of the problem and introduced new ones.</p>
+
+  <div class="quote-pair reveal d1" style="margin-top:40px">
+    <div class="user-quote-card">
+      <p class="user-quote-text">"We change our incentive scheme almost every month for new products. Right now I have to go to IT every time and wait two weeks. By then the scheme is already changing again."</p>
+      <div class="user-quote-attr">Branch Admin · Mid-size private bank</div>
+    </div>
+    <div class="user-quote-card">
+      <p class="user-quote-text">"I don't trust the number. I know I closed four loans last month but I don't know how they calculated what I got paid. There's no breakdown anywhere."</p>
+      <div class="user-quote-attr">Relationship Manager · Urban branch, Loans</div>
+    </div>
+  </div>
+
+  <div class="two-col-3" style="margin-top:32px">
+    <div class="user-card reveal">
+      <div class="user-card-head">
+        <div class="user-initial">B</div>
+        <div class="user-name">Branch Admin</div>
+        <div class="user-desc">Non-technical · configures rules for their branch</div>
+      </div>
+      <div class="user-body">
+        <div class="user-section">
+          <div class="user-section-label">Goals</div>
+          <ul>
+            <li>Change incentive rules instantly without IT</li>
+            <li>Run time-bound campaigns for new products</li>
+            <li>See how rule changes will affect payouts before saving</li>
+          </ul>
+        </div>
+        <div class="user-section">
+          <div class="user-section-label">Frustrations</div>
+          <ul>
+            <li>Every rule change requires an IT ticket and a 2-week wait</li>
+            <li>No preview mode — changes go live immediately</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="user-card reveal d1">
+      <div class="user-card-head">
+        <div class="user-initial">R</div>
+        <div class="user-name">Relationship Manager</div>
+        <div class="user-desc">Sales rep · receives and disputes incentives</div>
+      </div>
+      <div class="user-body">
+        <div class="user-section">
+          <div class="user-section-label">Goals</div>
+          <ul>
+            <li>See exactly how their payout was calculated</li>
+            <li>Track earnings in real time as deals close</li>
+            <li>Resolve disputes without a multi-day back-and-forth</li>
+          </ul>
+        </div>
+        <div class="user-section">
+          <div class="user-section-label">Frustrations</div>
+          <ul>
+            <li>Payouts arrive as a single number, no breakdown</li>
+            <li>No way to verify without asking a manager</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="user-card reveal d2">
+      <div class="user-card-head">
+        <div class="user-initial">C</div>
+        <div class="user-name">Compliance Officer</div>
+        <div class="user-desc">Finance / audit · needs RBI-ready records</div>
+      </div>
+      <div class="user-body">
+        <div class="user-section">
+          <div class="user-section-label">Goals</div>
+          <ul>
+            <li>Full audit trail for every incentive calculation</li>
+            <li>Rule versioning so historical calculations can be reconstructed</li>
+            <li>One-click RBI-format export for audits</li>
+          </ul>
+        </div>
+        <div class="user-section">
+          <div class="user-section-label">Frustrations</div>
+          <ul>
+            <li>Spreadsheet history is unreliable and easily overwritten</li>
+            <li>No version control on past rule logic</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 KEY DECISIONS -->
+<section class="cs-section">
+  <span class="section-num">03</span>
+  <h2 class="section-title reveal">Decisions That <em>Shaped the Product</em></h2>
+  <p class="body-p reveal">The architecture of this product came down to four PM decisions. Each involved a real tradeoff — not obvious in either direction. These were the ones I spent the most time on.</p>
+
+  <div style="margin-top:36px">
+    <div class="decision-row reveal">
+      <div class="decision-num">01</div>
+      <div>
+        <div class="decision-title">Store rules as JSON logic, not hardcoded per branch</div>
+        <div class="decision-desc">The tempting path was to build each branch's rules directly into the database schema — fast to ship, simple to compute. We chose JSON logic evaluated at runtime instead. The upfront engineering cost was higher, but it meant any admin could define AND/OR conditional logic through the UI without a developer touching anything. This single decision unlocked the whole no-code promise. Without it, every branch update would still need IT.</div>
+        <span class="decision-tag">Core architecture decision</span>
+      </div>
+    </div>
+    <div class="decision-row reveal d1">
+      <div class="decision-num">02</div>
+      <div>
+        <div class="decision-title">Real-time calculation vs. end-of-month batch</div>
+        <div class="decision-desc">Every existing incentive system runs on a monthly batch job. It's simpler and cheaper to compute. We went real-time instead — recalculating the moment a deal closes, a status updates, or a rule changes retroactively. The reason: the core RM trust problem couldn't be solved by a number that appeared once a month. RMs needed to see their earnings move when they closed a deal. Real-time calculation turned incentives from a payout into feedback.</div>
+        <span class="decision-tag">UX-driven technical choice</span>
+      </div>
+    </div>
+    <div class="decision-row reveal d2">
+      <div class="decision-num">03</div>
+      <div>
+        <div class="decision-title">Four-level hierarchy: Branch → Region → Zone → National</div>
+        <div class="decision-desc">Some incentive modifiers apply nationally (new product launch), some regionally (zone performance bonuses), some at branch level. We built a four-tier override model so each level could add its own logic without removing what's inherited from above. A branch admin can add a local modifier; they can't remove a national compliance rule. This preserved autonomy without creating compliance gaps — a distinction that came directly from our compliance officer interviews.</div>
+        <span class="decision-tag">Governance model</span>
+      </div>
+    </div>
+    <div class="decision-row reveal d3">
+      <div class="decision-num">04</div>
+      <div>
+        <div class="decision-title">Audit trail as a core feature, not a log</div>
+        <div class="decision-desc">Most systems log transactions as an afterthought — a timestamped record that compliance teams dig through when something goes wrong. We built the audit trail as a first-class product surface: every RM can see their complete incentive trail, every rule has a version history, and the dashboard exports directly in RBI audit format. The business case was compliance. The product case was trust. Both needed the same feature.</div>
+        <span class="decision-tag">Compliance + trust driver</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 WHAT WE BUILT -->
+<section class="cs-section">
+  <span class="section-num">04</span>
+  <h2 class="section-title reveal">What We <em>Built</em></h2>
+  <p class="body-p reveal">Three surfaces. Each targeting a different user — branch admin, RM, and compliance — but sharing one rule engine underneath.</p>
+
+  <!-- MOCKUP 1: RULE BUILDER -->
+  <div style="margin-top:40px">
+    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px" class="reveal">Rule Configuration — Branch Admin View</div>
+    <div class="body-p reveal d1" style="margin-bottom:20px">The no-code rule builder. A branch admin selects a product, sets volume thresholds and tier logic, enters commission rate and max cap, and defines conditional AND/OR rules — all through form fields. No SQL, no IT ticket. The "Preview Payout" button runs a live simulation so admins can verify before saving.</div>
+    <div class="k-frame reveal d1" style="position:relative">
+      <div class="k-shell">
+        <div class="k-sidebar">
+          <div class="k-sidebar-logo">Incentive Panel</div>
+          <div class="k-sidebar-nav">
+            <div class="k-nav-item active">
+              <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Dashboard
+            </div>
+            <div class="k-nav-item">
+              <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4 7h6M4 4.5h6M4 9.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Rules
+            </div>
+            <div class="k-nav-item">
+              <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Payouts
+            </div>
+            <div class="k-nav-item">
+              <svg viewBox="0 0 14 14" fill="none"><path d="M2 10V4l4-2 4 2v6l-4 2-4-2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              Reports
+            </div>
+            <div class="k-nav-item">
+              <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 9V7m0-2.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Settings
+            </div>
+          </div>
+        </div>
+        <div class="k-main" style="position:relative">
+          <span class="k-new-rule">+ New Rule</span>
+          <div class="k-page-title">Create New Rule</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
+            <div>
+              <div class="k-form-row">
+                <div class="k-label">Select Product</div>
+                <div class="k-input filled">Loans ▾</div>
+              </div>
+              <div class="k-form-row">
+                <div class="k-label">Volume Threshold (₹)</div>
+                <div class="k-input">Enter threshold...</div>
+              </div>
+              <div class="k-form-row">
+                <div class="k-label">Tier</div>
+                <div class="k-input">Select tier ▾</div>
+              </div>
+              <div class="k-form-row">
+                <div class="k-label">Commission Rate (%)</div>
+                <div class="k-input">Enter rate...</div>
+              </div>
+              <div class="k-form-row">
+                <div class="k-label">Max Cap (₹)</div>
+                <div class="k-input">Enter maximum...</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+                <div style="width:14px;height:14px;border:1px solid #CBD5E1;border-radius:3px;background:#fff;flex-shrink:0"></div>
+                <span style="font-size:12px;color:#475569">Enable Quality Adjustments</span>
+              </div>
+            </div>
+            <div>
+              <div class="k-label">Rule Builder</div>
+              <div class="k-rule-builder">
+                <div class="k-rule-builder-head">Conditions</div>
+                <div style="font-size:11px;color:#94A3B8;margin-bottom:10px">Define AND / OR logic for this incentive rule.</div>
+                <div class="k-add-condition">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  Add Condition
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="k-btn-row">
+            <div class="k-btn k-btn-outline">Preview Payout</div>
+            <div class="k-btn k-btn-primary">Save Rule</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP 2: DASHBOARD -->
+  <div style="margin-top:48px">
+    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px" class="reveal">Rep Performance Dashboard — Manager View</div>
+    <div class="body-p reveal d1" style="margin-bottom:20px">Real-time rep performance across zone, product, volume, and cross-sell. Filterable by date, zone, and product type. The bar chart at the bottom surfaces Urban vs. Rural cross-sell ratios — the metric most correlated with tier advancement. Exports in Excel and RBI audit format with a single click.</div>
+    <div class="k-frame reveal d1">
+      <div class="k-shell">
+        <div class="k-sidebar">
+          <div class="k-sidebar-logo">Incentive Panel</div>
+          <div class="k-sidebar-nav">
+            <div class="k-nav-item active">
+              <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Dashboard
+            </div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4 7h6M4 4.5h6M4 9.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Rules</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Payouts</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><path d="M2 10V4l4-2 4 2v6l-4 2-4-2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>Reports</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 9V7m0-2.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Settings</div>
+          </div>
+        </div>
+        <div class="k-main">
+          <div class="k-page-title">Dashboard</div>
+          <div class="k-search" style="margin-bottom:12px">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="4" stroke="#94A3B8" stroke-width="1.3"/><path d="M8.5 8.5l2 2" stroke="#94A3B8" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span style="font-size:12px;color:#94A3B8">Search by Rep ID or Name</span>
+          </div>
+          <div class="k-filter-row" style="margin-bottom:12px">
+            <div class="k-filter">Select Date Range <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:4px"><path d="M2 4l3 3 3-3" stroke="#64748B" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+            <div class="k-filter">Select Zone <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:4px"><path d="M2 4l3 3 3-3" stroke="#64748B" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+            <div class="k-filter">Select Product Type <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:4px"><path d="M2 4l3 3 3-3" stroke="#64748B" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="k-table">
+              <thead>
+                <tr><th>Rep ID</th><th>Name</th><th>Zone</th><th>Product</th><th>Volume</th><th>Cross-Sell</th><th>Complaints</th><th>Tier</th><th>Final Payout ₹</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>RP1001</td><td>Representative 1</td><td>Urban</td><td>Loans</td><td>150</td><td>20</td><td>0</td><td><span class="k-badge silver">Silver</span></td><td style="font-weight:600">12,500</td></tr>
+                <tr><td>RP1002</td><td>Representative 2</td><td>Rural</td><td>Savings</td><td>200</td><td>15</td><td>1</td><td><span class="k-badge gold">Gold</span></td><td style="font-weight:600">10,000</td></tr>
+                <tr><td>RP1003</td><td>Representative 3</td><td>Urban</td><td>Investments</td><td>120</td><td>25</td><td>0</td><td><span class="k-badge tier1">Tier 1</span></td><td style="font-weight:600">11,000</td></tr>
+                <tr><td>RP1004</td><td>Representative 4</td><td>Rural</td><td>Loans</td><td>180</td><td>18</td><td>0</td><td><span class="k-badge tier2">Tier 2</span></td><td style="font-weight:600">13,000</td></tr>
+                <tr><td>RP1005</td><td>Representative 5</td><td>Urban</td><td>Savings</td><td>220</td><td>12</td><td>2</td><td><span class="k-badge tier3">Tier 3</span></td><td style="font-weight:600">8,500</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="k-chart-area" style="margin-top:14px">
+            <div class="k-chart-title">Volume vs. Cross-Sell Ratio by Zone</div>
+            <div class="k-bar-row">
+              <div class="k-bar-label" style="font-size:10px">Urban</div>
+              <div class="k-bar-track"><div class="k-bar-fill" style="width:68%;background:#2563EB">68%</div></div>
+            </div>
+            <div class="k-bar-row">
+              <div class="k-bar-label" style="font-size:10px">Rural</div>
+              <div class="k-bar-track"><div class="k-bar-fill" style="width:44%;background:#93C5FD">44%</div></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <div class="k-btn k-btn-outline" style="font-size:11px;padding:6px 12px">Export to Excel</div>
+            <div class="k-btn k-btn-outline" style="font-size:11px;padding:6px 12px">Export to PDF (RBI Audit Format)</div>
+          </div>
+          <div style="font-size:10px;color:#94A3B8;margin-top:8px">Last Refreshed: 10:30 AM &nbsp;|&nbsp; Auto-Update: On</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP 3: INCENTIVE MANAGEMENT -->
+  <div style="margin-top:48px">
+    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px" class="reveal">Incentive Details — Compliance / Finance View</div>
+    <div class="body-p reveal d1" style="margin-bottom:20px">The full incentive breakdown: base payout, quality adjustments, zone bonuses, clawbacks, and points — line by line for every rep. Filterable by month, team, and tier. Designed for compliance review and RM self-service. The "Compliance Issues Flagged" stat at the top is the number I'm most proud of — it turns a hidden risk into a visible metric.</div>
+    <div class="k-frame reveal d1">
+      <div class="k-shell">
+        <div class="k-sidebar">
+          <div class="k-sidebar-logo">Incentive Panel</div>
+          <div class="k-sidebar-nav">
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>Dashboard</div>
+            <div class="k-nav-item active"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4 7h6M4 4.5h6M4 9.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Incentives</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><path d="M2 10V4l4-2 4 2v6l-4 2-4-2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>Reports</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 9V7m0-2.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Settings</div>
+            <div class="k-nav-item"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 12c0-2.2 2.2-4 5-4s5 1.8 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Support</div>
+          </div>
+        </div>
+        <div class="k-main">
+          <div class="k-page-title">Incentive Management</div>
+          <div class="k-page-sub">Manage and track incentives for your sales team.</div>
+          <div class="k-tabs">
+            <div class="k-tab active">Summary</div>
+            <div class="k-tab">By Rep</div>
+            <div class="k-tab">By Product</div>
+            <div class="k-tab">Download CSV</div>
+          </div>
+          <div class="k-stat-row">
+            <div class="k-stat-card">
+              <div class="k-stat-label">Total Incentives Paid</div>
+              <div class="k-stat-val">₹12.5L</div>
+            </div>
+            <div class="k-stat-card">
+              <div class="k-stat-label">Avg Points per Rep</div>
+              <div class="k-stat-val">150</div>
+            </div>
+            <div class="k-stat-card" style="border-color:#FEE2E2">
+              <div class="k-stat-label" style="color:#991B1B">Compliance Issues Flagged</div>
+              <div class="k-stat-val" style="color:#DC2626">5</div>
+            </div>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:#1E293B;margin-bottom:12px">Incentive Details</div>
+          <div class="k-filter-row" style="margin-bottom:12px">
+            <div class="k-filter">Select Month ▾</div>
+            <div class="k-filter">Team ▾</div>
+            <div class="k-filter">Tier ▾</div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="k-table">
+              <thead>
+                <tr><th>Rep</th><th>Tier</th><th>Base Payout</th><th>Quality Adj.</th><th>Final</th><th>Zone Bonus</th><th>Clawbacks</th><th>Points</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Rep 1</td><td><span class="k-badge tier1">Tier 1</span></td><td>₹10,000</td><td>₹1,000</td><td style="font-weight:600">₹11,000</td><td>₹500</td><td style="color:#DC2626">₹200</td><td>120</td></tr>
+                <tr><td>Rep 2</td><td><span class="k-badge tier2">Tier 2</span></td><td>₹12,000</td><td>₹1,200</td><td style="font-weight:600">₹13,200</td><td>₹500</td><td style="color:#DC2626">₹300</td><td>100</td></tr>
+                <tr><td>Rep 3</td><td><span class="k-badge tier1">Tier 1</span></td><td>₹9,000</td><td>₹900</td><td style="font-weight:600">₹9,500</td><td>₹450</td><td style="color:#DC2626">₹150</td><td>160</td></tr>
+                <tr><td>Rep 4</td><td><span class="k-badge tier3">Tier 3</span></td><td>₹15,000</td><td>₹1,500</td><td style="font-weight:600">₹16,500</td><td>₹750</td><td style="color:#DC2626">₹400</td><td>160</td></tr>
+                <tr><td>Rep 5</td><td><span class="k-badge tier2">Tier 2</span></td><td>₹10,000</td><td>₹1,300</td><td style="font-weight:600">₹12,300</td><td>₹550</td><td style="color:#DC2626">₹250</td><td>100</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 IMPACT -->
+<section class="cs-section">
+  <span class="section-num">05</span>
+  <h2 class="section-title reveal"><em>Impact</em></h2>
+
+  <div class="two-col">
+    <div>
+      <p class="body-p reveal">The product shipped to multiple bank branches and immediately changed how incentive management worked at those institutions. The 60% reduction in disputes wasn't just an efficiency metric — it was a signal that RMs finally trusted their numbers. When people stop disputing payouts, it means the transparency is working.</p>
+      <p class="body-p reveal d1">The 70% reduction in computation time closed the gap that was hurting morale most. Moving from a 3–5 day wait to real-time calculation made incentives feel like feedback instead of a delayed report card. That psychological shift — closing a deal and immediately seeing it reflected in your earnings — was the part I was most invested in getting right.</p>
+      <p class="body-p reveal d2">The compliance angle surprised me most. I came in thinking the audit trail was a regulatory checkbox. What I learned was that it was actually the feature RMs wanted most — not for compliance, but because it let them show a manager exactly where they thought their payout was wrong. Transparency and auditability turned out to be the same feature solving two different user problems.</p>
+    </div>
+    <div>
+      <div class="stat-grid reveal d1" style="grid-template-columns:1fr 1fr;margin:0">
+        <div class="stat-item">
+          <span class="stat-num">60%</span>
+          <span class="stat-label">Reduction in incentive disputes after launch</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">70%</span>
+          <span class="stat-label">Faster incentive computation vs. manual spreadsheet</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">IT tickets required for rule updates post-launch</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1000+</span>
+          <span class="stat-label">Branches the SaaS architecture scales to</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:40px">
+    <div class="callout-label">What I'd measure next</div>
+    <p class="callout-text" style="font-size:15px;font-style:normal;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:1.85">North star metric: <strong style="color:var(--ink);font-weight:500">RM dispute rate per 100 deals closed.</strong> Alongside that: time-to-payout from deal closure, and rule update frequency by branch (a proxy for how much autonomy is actually being used). The 60% dispute reduction is the headline — but dispute rate per deal, not total disputes, is what scales cleanly across branches of different sizes. I'd also want to track whether the Compliance Issues Flagged count trends down over time as admins learn the system, or stays flat — which would indicate a training problem, not a product problem.</p>
+  </div>
+</section>
+
+<!-- 06 WHAT I LEARNED -->
+<section class="cs-section">
+  <span class="section-num">06</span>
+  <h2 class="section-title reveal">What I <em>Learned</em></h2>
+
+  <div class="lessons-grid">
+    <div class="lesson-card reveal">
+      <div class="lesson-num">01</div>
+      <div class="lesson-title">Transparency and auditability are the same feature</div>
+      <div class="lesson-desc">I designed the audit trail for compliance officers. But when I showed RMs the full breakdown view, they were the ones who responded the most. The feature that satisfies a regulatory requirement is often the same feature that builds end-user trust — you just have to surface it to both audiences.</div>
+    </div>
+    <div class="lesson-card reveal d1">
+      <div class="lesson-num">02</div>
+      <div class="lesson-title">Real-time vs. batch isn't an engineering choice — it's a product one</div>
+      <div class="lesson-desc">The recommendation from the engineering team was batch processing. It's simpler, cheaper, and standard practice. I pushed back because I understood that the RM trust problem couldn't be solved by a number that appeared once a month. Changing the cadence of feedback changed how people felt about the product entirely.</div>
+    </div>
+    <div class="lesson-card reveal d2">
+      <div class="lesson-num">03</div>
+      <div class="lesson-title">The people who adapt are telling you something important</div>
+      <div class="lesson-desc">Branch admins had built workarounds — shadow spreadsheets, Slack messages to IT, informal region-level agreements — to manage the flexibility the official system didn't have. Every workaround was a feature request that nobody filed. Mapping those workarounds was more valuable than the formal requirements list.</div>
+    </div>
+    <div class="lesson-card reveal d3">
+      <div class="lesson-num">04</div>
+      <div class="lesson-title">Scope ruthlessly at the architecture level, not just the feature level</div>
+      <div class="lesson-desc">The JSON logic rule engine was a bigger upfront bet than a hardcoded schema. It was the right call — but it required defending at every design review. Scope decisions at the architecture level have downstream consequences for everything built on top. That's where PM input matters most, and it's usually the conversation that happens without you.</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /cs-body -->
+
+<!-- CLOSING -->
+<div class="cs-closing">
+  <p class="closing-text">"The incentive system designed to motivate people was actively demotivating them — and the fix was just making the math visible."</p>
+  <p class="closing-sub">This project taught me that product problems in enterprise software almost always come back to trust. The features people ask for on the surface — speed, accuracy, flexibility — are often proxies for a single deeper need: confidence that the system is working in their interest.</p>
+  <a href="work.html" class="back-link">
+    ← Back to all work
+  </a>
+</div>
+
+<footer>
+  <span class="footer-name">Anika Badkul</span>
+  <span class="footer-copy">© 2025 &nbsp;·&nbsp; built with curiosity</span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
