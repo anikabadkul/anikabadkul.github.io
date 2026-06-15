@@ -23,7 +23,7 @@ body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-
 nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
 nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93);backdrop-filter:blur(20px);z-index:-1}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{height:56px;display:block}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{height:56px;display:block;mix-blend-mode:multiply}
 .logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
 .nav-r{display:flex;align-items:center;gap:28px}
 .nav-r a{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
@@ -84,7 +84,7 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 .ft-link svg{transition:transform .2s;opacity:.5}
 .ft-link:hover svg{opacity:1}
 .footer-base{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
-.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:52px}
+.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:52px;mix-blend-mode:screen}
 .ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
 .ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
 
@@ -183,8 +183,27 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
       </div>
     </div>
 
-    <!-- 3: Apple Wallet -->
+    <!-- 3: Self Checkout+ -->
     <div class="cs-feat reveal d2">
+      <div class="cs-feat-img">
+        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#0D2818,#1A4A28)"></div>
+        <span class="cs-feat-lbl" style="color:rgba(34,197,94,.45)">Senior Capstone &middot; 2025–26</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">PRODUCT & UI LEAD &middot; SENIOR DESIGN PROJECT</p>
+        <h2 class="cs-h">Barcode-free grocery checkout with computer vision</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">React</span>
+          <span class="cs-pill">Computer Vision</span>
+          <span class="cs-pill">Product Ownership</span>
+        </div>
+        <p class="cs-p">YOLOv8 + CLIP pipeline → customer checkout flow → admin dashboard → end-to-end prototype.</p>
+        <a href="cs-sdp-selfcheckout.html" class="cs-cta">VIEW PROJECT ➞</a>
+      </div>
+    </div>
+
+    <!-- 4: Apple Wallet -->
+    <div class="cs-feat reveal d3">
       <div class="cs-feat-img">
         <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E8E0D4,#D8CCBC)"></div>
         <span class="cs-feat-lbl">Product Teardown &middot; 2024</span>
