@@ -3,135 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Work — Anika Badkul</title>
+<title>Work · Anika Badkul</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --iv:#FBF8F3;--iv2:#F4EDE3;
-  --bl:#E8BFB4;--bld:#C47D6E;--bll:#F7EBE7;--blm:#D49A8E;
-  --ink:#1A1512;--ink2:#5A4840;--ink3:#9E8A7E;
-  --serif:"Cormorant Garamond",Georgia,serif;
-  --sans:"Instrument Sans",system-ui,sans-serif;
-  --ease:cubic-bezier(.25,.46,.45,.94);
-}
-html{scroll-behavior:smooth;background:var(--iv)}
-body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}*,*::before,*::after{cursor:none!important}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-/* ── NAV ── */
-nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
-nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93);backdrop-filter:blur(20px);z-index:-1}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{height:56px;display:block;mix-blend-mode:multiply}
-.logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
-.nav-r{display:flex;align-items:center;gap:28px}
-.nav-r a{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
-.nav-r a:hover,.nav-r a.active{color:var(--ink)}
-
-/* ── PAGE HEADER ── */
-.page-header{padding:80px max(56px, calc((100vw - 1100px) / 2 + 56px)) 56px;border-bottom:1px solid rgba(196,125,110,.13)}
-.ey{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px}
-.sh{font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);font-weight:300;letter-spacing:-.025em;line-height:1.08;color:var(--ink)}
-.sh em{font-style:italic;color:var(--bld)}
-.page-subtitle{font-size:15px;color:var(--ink2);line-height:1.82;font-weight:300;max-width:520px;margin-top:14px}
-
-/* ── CASE STUDY CARDS ── */
-.cs-section{border-bottom:1px solid rgba(196,125,110,.13)}
-
-.cs-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px)) 72px}
-.cs-cards-top{padding-top:56px}
-
-.cs-feat{display:grid;grid-template-columns:155px 1fr;min-height:230px;border-radius:20px;border:1px solid rgba(196,125,110,.18);overflow:hidden;transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease)}
-.cs-feat:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,21,18,.1);border-color:rgba(196,125,110,.35)}
-
-.cs-feat-img{position:relative;overflow:hidden;flex-shrink:0}
-.cs-feat-img-inner{width:100%;height:100%;position:absolute;inset:0;transition:transform .55s var(--ease)}
-.cs-feat:hover .cs-feat-img-inner{transform:scale(1.06)}
-
-.cs-feat-lbl{position:absolute;bottom:16px;left:16px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(90,50,40,.38);font-weight:400}
-
-.cs-feat-txt{display:flex;flex-direction:column;justify-content:center;padding:28px 32px;background:var(--iv2)}
-
-.cs-feat .cs-h{font-size:clamp(16px,1.7vw,22px);font-family:var(--serif);font-weight:300;margin-bottom:10px;transition:color .2s;color:var(--ink);line-height:1.2;letter-spacing:-.01em}
-.cs-feat:hover .cs-h{color:var(--bld)}
-
-.cs-ey{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:16px}
-
-.cs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.cs-pill{font-size:12px;color:var(--bld);background:var(--bll);border:1px solid var(--bl);padding:5px 14px;border-radius:20px;font-weight:500}
-
-.cs-p{font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:16px}
-
-.cs-cta{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;text-decoration:none;color:var(--ink2);border-bottom:1px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s;display:inline-block}
-.cs-cta:hover{color:var(--bld);border-color:var(--bld)}
-
-.cs-cta-wip{font-size:11px;color:var(--ink3);font-style:italic;opacity:.6}
-
-/* ── FOOTER ── */
-.footer{background:#3A2E2A;padding:80px max(56px, calc((100vw - 1100px) / 2 + 56px)) 0}
-.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:72px;border-bottom:1px solid rgba(251,248,243,.08)}
-.ft-tagline{font-family:var(--serif);font-size:clamp(30px,4.5vw,56px);font-weight:300;font-style:italic;color:var(--iv);line-height:1.04;letter-spacing:-.025em;margin-bottom:18px}
-.ft-sub{font-size:14px;color:rgba(251,248,243,.45);font-weight:300;line-height:1.8;max-width:360px}
-.ft-lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,191,180,.5);margin-bottom:12px;font-weight:500}
-.ft-email{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:300;color:rgba(251,248,243,.72);text-decoration:none;display:block;margin-bottom:32px;transition:color .2s}
-.ft-email:hover{color:var(--bl)}
-.ft-links{display:flex;flex-direction:column}
-.ft-link{font-family:var(--serif);font-size:20px;font-style:italic;font-weight:300;color:rgba(251,248,243,.52);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(251,248,243,.07);display:flex;justify-content:space-between;align-items:center;transition:color .2s;gap:0}
-.ft-link:hover{color:var(--bl)}
-.ft-link:hover svg{transform:translate(2px,-2px)}
-.ft-link:last-child{border-bottom:none}
-.ft-link svg{transition:transform .2s;opacity:.5}
-.ft-link:hover svg{opacity:1}
-.footer-base{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
-.ft-logo{display:flex;align-items:center;gap:10px}.ft-logo img{height:52px;mix-blend-mode:screen}
-.ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
-.ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
-
-/* ── SCROLL REVEAL ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes reveal-fallback{to{opacity:1;transform:none}}
-.reveal{opacity:0;animation:reveal-fallback 0.01s 0.8s forwards}
-.reveal.in{animation:fadeUp .7s var(--ease) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}
-
-/* ── MOBILE ── */
-@media(max-width:768px){
-  nav{padding:0 24px !important}
-  .nav-r a:not(.nav-badge){display:none}
-  .page-header{padding:48px 24px 40px !important}
-  .cs-cards{grid-template-columns:1fr;padding:0 24px 56px !important;gap:12px}
-  .cs-feat{grid-template-columns:1fr}
-  .cs-feat-img{min-height:160px}
-  .cs-feat-txt{padding:24px}
-  .footer{padding:48px 24px 0 !important}
-  .footer-grid{grid-template-columns:1fr;gap:40px}
-}
-
-@media print{
-  *{opacity:1!important;animation:none!important;transform:none!important;transition:none!important}
-  #tc{display:none!important}
-}
-</style>
+<link rel="stylesheet" href="site.css?v=4">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
-<div id="bf-cursor" style="position:fixed;pointer-events:none;z-index:99999;width:100px;height:100px;display:none;top:0;left:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.25))"><img src="data:image/png;base64,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" style="width:100px;height:100px"></div>
-<script>!function(){var e=document.getElementById("bf-cursor");if(!e)return;e.style.willChange="transform";var r=null,x=0,y=0;document.addEventListener("mousemove",function(t){x=t.clientX;y=t.clientY;if(!r)r=requestAnimationFrame(function(){e.style.transform="translate("+(x-50)+"px,"+(y-50)+"px)";e.style.display="block";r=null})});document.addEventListener("mouseleave",function(){e.style.display="none"})}();</script>
-<canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
-
 <nav>
-  <a class="logo" href="index.html">
-    <img src="logo-light.png" alt="AB" style="height:56px;display:block">
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose.png" alt="">
     <span class="logo-name">Anika Badkul</span>
   </a>
-  <div class="nav-r">
+  <div class="nav-r" id="nav-menu">
     <a href="about.html">About</a>
     <a href="work.html" class="active">Work</a>
-    <a href="projects.html">Projects</a>
+    <a href="projects.html">Curiosities</a>
     <a href="resume.html">Resume</a>
-    <a href="whatelse.html">What Else</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
   </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -145,10 +38,29 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 <section class="cs-section">
   <div class="cs-cards cs-cards-top">
 
-    <!-- 1: Schedule Builder -->
+    <!-- 1: MealPlan -->
     <div class="cs-feat reveal">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0D8EA,#CBBEDD)"></div>
+      <div class="cs-feat-img has-shot">
+        <img class="cs-feat-shot" src="cs-mp-home.png" alt="">
+        <span class="cs-feat-lbl">Hackathon &middot; 2026</span>
+      </div>
+      <div class="cs-feat-txt">
+        <p class="cs-ey">PRODUCT &amp; PRD &middot; GHW: HACKING FOR GOOD</p>
+        <h2 class="cs-h">MealPlan, an honest meal planner</h2>
+        <div class="cs-pills">
+          <span class="cs-pill">Product Lead</span>
+          <span class="cs-pill">PRD</span>
+          <span class="cs-pill">Vibe Coding</span>
+        </div>
+        <p class="cs-p">SNAP budget → honest 7-day plan → shop once. Built in 6 days with a team of 4.</p>
+        <a href="cs-mealplan.html" class="cs-cta">VIEW PROJECT ➞</a>
+      </div>
+    </div>
+
+    <!-- 2: Schedule Builder -->
+    <div class="cs-feat reveal d1">
+      <div class="cs-feat-img has-shot">
+        <img class="cs-feat-shot" src="cs-sb-final-arr.png" alt="">
         <span class="cs-feat-lbl">UX Research &middot; 2026</span>
       </div>
       <div class="cs-feat-txt">
@@ -166,9 +78,9 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 
     <!-- 2: Kobl Internship -->
     <div class="cs-feat reveal d1">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#DBEAFE,#BFDBFE)"></div>
-        <span class="cs-feat-lbl">PM Internship &middot; Kobl</span>
+      <div class="cs-feat-img has-shot">
+        <img class="cs-feat-shot" src="cs-kobl-incentive-mgmt.png" alt="">
+        <span class="cs-feat-lbl">PM Internship &middot; 2025</span>
       </div>
       <div class="cs-feat-txt">
         <p class="cs-ey">PRODUCT MANAGEMENT &middot; KOBL INTERNSHIP</p>
@@ -185,9 +97,9 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 
     <!-- 3: Self Checkout+ -->
     <div class="cs-feat reveal d2">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#0D2818,#1A4A28)"></div>
-        <span class="cs-feat-lbl" style="color:rgba(34,197,94,.45)">Senior Capstone &middot; 2025–26</span>
+      <div class="cs-feat-img has-shot">
+        <img class="cs-feat-shot" src="sdp-screen1.png" alt="">
+        <span class="cs-feat-lbl">Senior Capstone &middot; 2025–2026</span>
       </div>
       <div class="cs-feat-txt">
         <p class="cs-ey">PRODUCT & UI LEAD &middot; SENIOR DESIGN PROJECT</p>
@@ -202,74 +114,33 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
       </div>
     </div>
 
-    <!-- 4: Apple Wallet -->
-    <div class="cs-feat reveal d3">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E8E0D4,#D8CCBC)"></div>
-        <span class="cs-feat-lbl">Product Teardown &middot; 2024</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">PRODUCT TEARDOWN</p>
-        <h2 class="cs-h">Apple Wallet for new immigrants</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">Teardown</span>
-          <span class="cs-pill">Apple</span>
-          <span class="cs-pill">2024</span>
-        </div>
-        <p class="cs-p">JTBD analysis + journey mapping for an underserved segment navigating a new financial system.</p>
-        <span class="cs-cta-wip">Coming soon</span>
-      </div>
-    </div>
-
-    <!-- 4: Habit Tracker -->
-    <div class="cs-feat reveal d3">
-      <div class="cs-feat-img">
-        <div class="cs-feat-img-inner" style="background:linear-gradient(145deg,#E0EAD4,#CEDFBE)"></div>
-        <span class="cs-feat-lbl">Side Project &middot; 2024</span>
-      </div>
-      <div class="cs-feat-txt">
-        <p class="cs-ey">SIDE PROJECT &middot; B2C</p>
-        <h2 class="cs-h">Habit tracker: zero to shipped</h2>
-        <div class="cs-pills">
-          <span class="cs-pill">No-code</span>
-          <span class="cs-pill">B2C</span>
-          <span class="cs-pill">2024</span>
-        </div>
-        <p class="cs-p">5 interviews → Glide build → live product in 4 weeks.</p>
-        <span class="cs-cta-wip">Coming soon</span>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="ft-grid">
     <div class="reveal">
-      <div class="ft-tagline">The best products<br>start with a<br>conversation.</div>
-      <p class="ft-sub">Whether it's about a PM role, a product you're building, or just a chat — I'm always up to talk.</p>
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
     </div>
     <div class="reveal d1">
-      <div class="ft-lbl">Contact me</div>
+      <div class="ft-lbl">Contact</div>
       <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
-      <div class="ft-lbl">Let's connect</div>
+      <div class="ft-lbl">Elsewhere</div>
       <div class="ft-links">
-        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </div>
-  <div class="footer-base">
-    <div class="ft-logo">
-      <img src="logo-dark.png" alt="AB">
-      <span class="ft-name">Anika Badkul</span>
-    </div>
-    <span class="ft-copy">© 2025 &nbsp;·&nbsp; built with curiosity · running shoes optional</span>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream.png" alt=""><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="site.js?v=4"></script>
 </body>
 </html>

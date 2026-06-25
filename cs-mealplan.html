@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealPlan · an honest meal planner · Anika Badkul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=4">
+<style>
+/* ===== Case study (Brandon-style layout, Anika system), shared csb block ===== */
+.csb-hero{padding:clamp(40px,6vh,72px) var(--edge) clamp(24px,3vh,36px)}
+.csb-back{font-size:13px;color:var(--terra-deep);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:7px;margin-bottom:26px;transition:gap .2s}
+.csb-back:hover{gap:11px}
+.csb-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-deep);font-weight:600}
+.csb-title{font-family:var(--serif);font-size:clamp(42px,6.5vw,82px);font-weight:600;line-height:1.0;letter-spacing:-.015em;margin:16px 0 0;text-wrap:balance}
+.csb-title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+.csb-lede{font-size:clamp(17px,1.7vw,20px);color:var(--ink2);line-height:1.6;margin-top:22px;max-width:60ch}
+.csb-heroshot{margin:clamp(28px,4vh,44px) var(--edge) 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--blush),var(--blush2));padding:clamp(16px,2.5vw,30px)}
+.csb-heroshot img{width:100%;display:block;border-radius:8px;border:1px solid var(--line)}
+.csb-hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+.csb-hero-grid img{background:#fff;object-fit:cover;object-position:top center;height:320px}
+.csb-cap{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-top:12px}
+.csb-meta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,48px);padding:clamp(28px,4vh,40px) var(--edge);border-bottom:1px solid var(--line)}
+.csb-meta-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;display:block;margin-bottom:6px}
+.csb-meta-val{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}
+.csb-meta-val a{color:inherit;text-decoration:none;border-bottom:1px solid var(--terra)}
+.csb-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.csb-pill{font-size:11.5px;color:var(--terra-deep);background:var(--blush);border:1px solid rgba(196,125,110,.3);padding:5px 13px;border-radius:30px;font-weight:500}
+
+.csb-body{padding:clamp(48px,7vh,84px) var(--edge);max-width:none}
+.csb-sec{padding:clamp(40px,6vh,72px) 0;border-top:1px solid var(--line)}
+.csb-sec:first-child{border-top:none;padding-top:0}
+.csb-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;margin-bottom:18px}
+.csb-label b{color:var(--ink3);font-weight:600}
+.csb-statement{font-family:var(--serif);font-size:clamp(26px,3.4vw,42px);font-weight:500;line-height:1.16;letter-spacing:-.01em;color:var(--ink);max-width:18ch;margin-bottom:26px;text-wrap:balance}
+.csb-statement.wide{max-width:24ch}
+.csb-statement em{font-style:italic;color:var(--terra-deep)}
+.csb-p{font-size:16.5px;color:var(--ink2);line-height:1.8;margin-bottom:18px;max-width:68ch}
+.csb-p strong{color:var(--ink);font-weight:600}
+
+.csb-brief{background:var(--paper2);border-left:3px solid var(--terra);border-radius:0 14px 14px 0;padding:26px 30px;margin:24px 0;max-width:760px}
+.csb-brief .csb-meta-label{margin-bottom:10px}
+.csb-brief q,.csb-brief p{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--ink);line-height:1.4;quotes:none}
+.csb-brief p.note{font-family:var(--sans);font-size:16px;font-style:normal;color:var(--ink2);line-height:1.7}
+.csb-brief p.note strong{color:var(--ink);font-weight:600}
+
+.csb-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:28px}
+.csb-stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.csb-stat-n{font-family:var(--serif);font-size:clamp(34px,4.4vw,52px);font-weight:600;color:var(--terra-deep);line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums}
+.csb-stat-l{font-size:13px;color:var(--ink2);margin-top:10px;line-height:1.5}
+
+.csb-subhead{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin:36px 0 16px}
+.csb-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.csb-cards.two{grid-template-columns:1fr 1fr}
+.csb-cards.four{grid-template-columns:repeat(2,1fr)}
+.csb-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.csb-card-t{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.csb-card-emoji{font-size:20px;display:block;margin-bottom:10px;line-height:1}
+.csb-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+.csb-card p b{color:var(--terra-deep);font-weight:600}
+.csb-card ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.csb-card li{font-size:13.5px;color:var(--ink2);line-height:1.5;padding-left:16px;position:relative}
+.csb-card li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--terra)}
+
+.csb-personas{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.csb-persona{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.csb-persona-top{display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.csb-persona-badge{width:46px;height:46px;border-radius:50%;background:var(--blush);color:var(--terra-deep);font-family:var(--serif);font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.csb-persona-name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);line-height:1.1}
+.csb-persona-meta{font-size:12.5px;color:var(--ink3);margin-top:3px}
+.csb-persona h5{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;margin:16px 0 8px}
+.csb-persona ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.csb-persona li{font-size:14px;color:var(--ink2);line-height:1.5;padding-left:16px;position:relative}
+.csb-persona li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--terra)}
+.csb-persona .tags{display:flex;gap:7px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.csb-persona .tags span{font-size:11px;font-weight:600;padding:5px 11px;border-radius:30px}
+.csb-persona .tags .diet{background:var(--blush);color:var(--terra-deep)}
+.csb-persona .tags .floor{background:#F6E5E0;color:#9c4226;border:1px solid #ecccc2}
+
+.csb-feature{padding-top:40px;margin-top:8px;border-top:1px dashed var(--line)}
+.csb-feature:first-of-type{border-top:none;padding-top:8px}
+.csb-feature-n{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--terra);letter-spacing:.04em}
+.csb-feature-t{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--ink);margin:6px 0 12px;line-height:1.12}
+.csb-feature-d{font-size:15.5px;color:var(--ink2);line-height:1.7;max-width:68ch;margin-bottom:24px}
+
+.csb-fig{margin:24px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2);padding:clamp(12px,2vw,22px)}
+.csb-fig img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#fff}
+.csb-fig.crop{max-height:620px;overflow:hidden;position:relative}
+.csb-fig.crop img{border-radius:8px 8px 0 0}
+
+.csb-vid{margin:24px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000}
+.csb-vid video{width:100%;display:block}
+
+.csb-lessons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.csb-lesson{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+.csb-lesson-n{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--terra);display:block;margin-bottom:12px}
+.csb-lesson-t{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.csb-lesson p{font-size:14px;color:var(--ink2);line-height:1.62}
+.csb-takeaway{background:var(--paper2);border:1px solid var(--line);border-radius:16px;padding:clamp(28px,4vw,40px);margin-top:24px}
+.csb-takeaway .csb-meta-label{margin-bottom:12px}
+.csb-takeaway p{font-family:var(--serif);font-size:clamp(20px,2.4vw,28px);font-style:italic;font-weight:500;color:var(--ink);line-height:1.3;max-width:30ch}
+
+.csb-closing{background:#241C18;color:var(--paper);padding:clamp(56px,8vh,90px) var(--edge);text-align:center}
+.csb-closing-q{font-family:var(--serif);font-size:clamp(26px,3.4vw,42px);font-weight:500;font-style:italic;line-height:1.2;max-width:26ch;margin:0 auto 28px;color:var(--paper)}
+.csb-closing-q em{font-style:normal;color:var(--terra)}
+.csb-closing a{color:var(--terra);text-decoration:none;font-weight:500;font-size:14px;border:1px solid rgba(196,125,110,.4);padding:11px 22px;border-radius:30px;transition:all .2s}
+.csb-closing a:hover{background:var(--terra);color:#fff}
+
+/* gap chart, the insight, visualized */
+.csb-gap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3vw,32px);margin:28px 0 8px;max-width:760px}
+.csb-gap-cap{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:22px}
+.csb-gap-row{margin-top:22px}
+.csb-gap-row:first-of-type{margin-top:0}
+.csb-gap-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;gap:12px}
+.csb-gap-head b{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink)}
+.csb-gap-head span{font-size:13px;color:var(--ink2)}
+.csb-gap-track{position:relative;height:30px;border-radius:8px;border:1px solid var(--blush2);overflow:hidden;background:repeating-linear-gradient(135deg,#F3E3DC 0 7px,#EFDBD2 7px 14px)}
+.csb-gap-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--terra-deep);border-radius:7px 0 0 7px;display:flex;align-items:center;transition:width 1.1s var(--ease)}
+.reveal.in .csb-gap-fill{width:var(--w)}
+.csb-gap-fill b{color:#fff;font-size:12px;font-weight:600;padding-left:11px;white-space:nowrap}
+.csb-gap-tail{display:flex;justify-content:flex-end;margin-top:7px}
+.csb-gap-tail span{font-size:12px;color:var(--terra-deep);font-weight:600}
+.csb-gap-legend{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2)}
+.csb-gap-legend i{display:inline-flex;align-items:center;gap:8px;font-style:normal}
+.csb-gap-sw{width:14px;height:14px;border-radius:4px;display:block;flex-shrink:0}
+.csb-gap-sw.fill{background:var(--terra-deep)}
+.csb-gap-sw.cost{background:repeating-linear-gradient(135deg,#F3E3DC 0 5px,#EFDBD2 5px 10px);border:1px solid var(--blush2)}
+
+/* competitive table */
+.csb-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);margin:24px 0 8px}
+.csb-table{width:100%;min-width:600px;border-collapse:collapse;font-size:14.5px}
+.csb-table th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;padding:18px 18px 12px;border-bottom:1px solid var(--line)}
+.csb-table td{padding:15px 18px;border-bottom:1px solid var(--line2);color:var(--ink2);line-height:1.5;vertical-align:top}
+.csb-table tr td:first-child{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);white-space:nowrap}
+.csb-table td.edge{color:var(--terra-deep);font-weight:500}
+.csb-table tr:last-child td{border-bottom:none}
+
+/* six-day timeline strip */
+.csb-timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:24px 0 8px}
+.csb-day{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 15px}
+.csb-day.end{background:var(--paper2);border-color:var(--terra)}
+.csb-day-d{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--terra);font-weight:500;margin-bottom:9px}
+.csb-day-t{font-size:13px;color:var(--ink2);line-height:1.45}
+.csb-day-tag{display:inline-block;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--terra-deep);background:var(--blush);border:1px solid rgba(196,125,110,.3);padding:3px 9px;border-radius:20px;margin-top:11px}
+
+/* demo, demoted to an optional walkthrough */
+.csb-demo{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.csb-demo-thumb{position:relative;flex:0 0 auto;width:min(380px,100%);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:block;background:#000;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.csb-demo-thumb:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(80,45,40,.45)}
+.csb-demo-thumb img{width:100%;display:block;opacity:.94}
+.csb-demo-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.csb-demo-play span{width:58px;height:58px;border-radius:50%;background:rgba(36,28,24,.74);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(251,248,243,.32)}
+.csb-demo-meta{flex:1;min-width:220px}
+.csb-demo-meta .len{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:10px}
+.csb-demo-meta p{font-size:15.5px;color:var(--ink2);line-height:1.7;max-width:44ch}
+.csb-demo-meta a.watch{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:13px;font-weight:600;color:var(--terra-deep);transition:gap .2s}
+.csb-demo-meta a.watch:hover{gap:11px}
+
+@media(max-width:820px){
+  .csb-hero-grid{grid-template-columns:1fr 1fr}
+  .csb-hero-grid img{height:260px}
+  .csb-quotes,.csb-personas,.csb-pair,.csb-lessons,.csb-cards,.csb-cards.two,.csb-cards.four{grid-template-columns:1fr}
+  .csb-statement{max-width:none}
+  .csb-timeline{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose.png" alt="">
+    <span class="logo-name">Anika Badkul</span>
+  </a>
+  <div class="nav-r" id="nav-menu">
+    <a href="about.html">About</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="projects.html">Curiosities</a>
+    <a href="resume.html">Resume</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="csb-hero">
+    <a href="work.html" class="csb-back">← Back to work</a>
+    <div class="csb-eyebrow reveal">PM Case Study · GHW: Hacking for Good</div>
+    <h1 class="csb-title reveal d1">Meal<em>Plan</em></h1>
+    <p class="csb-lede reveal d2">In 2026 the average SNAP benefit is about $6.17 a person per day, and no free tool tells people what to eat this week, what it costs, and where they fall short. In six days I led a four-person team to build MealPlan, a meal planner that turns a real budget into an honest week of food, and says so plainly when the budget can't cover a fully nutritious one.</p>
+  </section>
+
+  <figure class="csb-heroshot reveal">
+    <div class="csb-hero-grid">
+      <img src="cs-mp-home.png" alt="MealPlan home screen">
+      <img src="cs-mp-setup.png" alt="Set up your plan, budget, household, dietary needs">
+      <img src="cs-mp-plan.png" alt="Your 7-day plan with cost and nutrition">
+      <img src="cs-mp-shopping.png" alt="Consolidated shopping list by aisle">
+    </div>
+    <figcaption class="csb-cap">The shipped product · set a budget, get an honest 7-day plan, shop once · live at planmymeals.vercel.app</figcaption>
+  </figure>
+
+  <div class="csb-meta">
+    <div><span class="csb-meta-label">Context</span><span class="csb-meta-val">GHW: Hacking for Good</span></div>
+    <div><span class="csb-meta-label">My role</span><span class="csb-meta-val">Product Lead · PRD · Survey · Prototyping</span></div>
+    <div><span class="csb-meta-label">Team</span><span class="csb-meta-val">4 people</span></div>
+    <div><span class="csb-meta-label">Timeline</span><span class="csb-meta-val">June 13–18, 2026 · 6 days</span></div>
+    <div><span class="csb-meta-label">Live</span><span class="csb-meta-val"><a href="https://planmymeals.vercel.app" target="_blank" rel="noopener">planmymeals.vercel.app</a></span></div>
+    <div>
+      <span class="csb-meta-label">Built with</span>
+      <div class="csb-pills"><span class="csb-pill">Claude</span><span class="csb-pill">Claude Code</span><span class="csb-pill">Lovable</span><span class="csb-pill">Gemini API</span></div>
+    </div>
+  </div>
+
+  <div class="csb-body">
+
+    <!-- 01 PROBLEM -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">01 · <b>The Problem</b></div>
+      <h2 class="csb-statement wide">By law, the most SNAP can give you is the cost of a nutritious <em>week.</em></h2>
+      <p class="csb-p">SNAP's maximum benefit is pegged to the USDA Thrifty Food Plan, so most recipients start at, or below, the floor for a fully nutritious week. Spending less isn't a mistake; <strong>it's the math.</strong> Meanwhile grocery prices have climbed and the planning tools that exist aren't built for this budget: they're generic, unpriced, and ignore dietary needs.</p>
+      <p class="csb-p">That gap is the product. The hard part isn't generating recipes, it's being honest about money without being useless about it.</p>
+      <div class="csb-brief">
+        <span class="csb-meta-label">The insight the whole product rests on</span>
+        <p>"Budget too low" isn't an edge case. It's the normal case, so the product has to handle it with dignity, not hide it.</p>
+      </div>
+      <div class="csb-gap">
+        <div class="csb-gap-cap">What people have to spend vs. the cost of a nutritious week</div>
+        <div class="csb-gap-row">
+          <div class="csb-gap-head"><b>Typical single adult</b><span>≈ $41.50 / week</span></div>
+          <div class="csb-gap-track"><span class="csb-gap-fill" style="--w:62%"><b>What the budget covers</b></span></div>
+          <div class="csb-gap-tail"><span>↔ gap to the USDA floor</span></div>
+        </div>
+        <div class="csb-gap-row">
+          <div class="csb-gap-head"><b>Typical family of four</b><span>≈ $198 / week</span></div>
+          <div class="csb-gap-track"><span class="csb-gap-fill" style="--w:70%"><b>What the budget covers</b></span></div>
+          <div class="csb-gap-tail"><span>↔ gap to the USDA floor</span></div>
+        </div>
+        <div class="csb-gap-legend">
+          <i><span class="csb-gap-sw fill"></span>What the budget covers</i>
+          <i><span class="csb-gap-sw cost"></span>Cost of a nutritious week, the maximum SNAP benefit, by law</i>
+        </div>
+      </div>
+      <div class="csb-stats">
+        <div class="csb-stat"><div class="csb-stat-n">$6.17</div><div class="csb-stat-l">Average SNAP benefit per person, per day in FY2026 (≈ $188 / month)</div></div>
+        <div class="csb-stat"><div class="csb-stat-n">+29%</div><div class="csb-stat-l">Grocery prices since 2020, food-at-home CPI, Mar 2020 to Dec 2025</div></div>
+        <div class="csb-stat"><div class="csb-stat-n">0</div><div class="csb-stat-l">Free tools that say what to eat, what it costs, and where you fall short</div></div>
+      </div>
+      <div class="csb-subhead">Why MealPlan, not a Google search</div>
+      <div class="csb-table-wrap">
+        <table class="csb-table">
+          <thead><tr><th>Tool</th><th>What they do</th><th>Where they fall short</th><th>MealPlan's edge</th></tr></thead>
+          <tbody>
+            <tr><td>Google / Reddit</td><td>Generic cheap-meal ideas</td><td>Not personalized; no nutrition, price, or diet filter; ~45 min of digging</td><td class="edge">One form: personalized, priced, validated, fast</td></tr>
+            <tr><td>FoodSwitch</td><td>Nutrition swaps</td><td>Not US-budget focused; no meal planning</td><td class="edge">Budget-first, full weekly planning</td></tr>
+            <tr><td>FoodiePrep</td><td>AI meal planning</td><td>Paid; no SNAP-budget alignment</td><td class="edge">Free, built around SNAP budgets</td></tr>
+            <tr><td>Mealime</td><td>Quick dinner ideas</td><td>No budget input; no breakfast or lunch</td><td class="edge">All meals, all budgets</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 02 RESEARCH / WHO -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">02 · <b>Research &amp; Who It's For</b></div>
+      <h2 class="csb-statement wide">Two households with the same dead end, for very different <em>reasons.</em></h2>
+      <p class="csb-p">I wrote the survey and sent it before we built anything, then grounded the product in two composite households at opposite ends of the problem: a single adult on a tight budget, and a family balancing kids' needs against the same shortfall. Reviewing the personas under a critical PM lens is what told us a single persona wasn't enough: a student and a SNAP family behave differently, which is why the household input ended up by age and gender, not a headcount.</p>
+      <div class="csb-personas">
+        <div class="csb-persona">
+          <div class="csb-persona-top"><div class="csb-persona-badge">M</div><div><div class="csb-persona-name">Maya</div><div class="csb-persona-meta">24 · 1 person · about $41.50 / week</div></div></div>
+          <h5>Goals</h5>
+          <ul><li>Eat a real week of food, not just whatever's cheapest</li><li>Spend minutes planning, not an evening</li></ul>
+          <h5>Coping today</h5>
+          <ul><li>Googles "cheap healthy vegetarian meals," gets generic boards and old threads</li><li>After ~45 minutes gives up and falls back on instant ramen</li></ul>
+          <div class="tags"><span class="diet">Vegetarian</span><span class="floor">Below USDA floor</span></div>
+        </div>
+        <div class="csb-persona">
+          <div class="csb-persona-top"><div class="csb-persona-badge">D</div><div><div class="csb-persona-name">Darnell &amp; Keisha</div><div class="csb-persona-meta">Family of 4 · kids 6 &amp; 9 · about $198 / week</div></div></div>
+          <h5>Goals</h5>
+          <ul><li>Find gluten-free meals their youngest needs, within budget</li><li>Stop running out of good food mid-week</li></ul>
+          <h5>Coping today</h5>
+          <ul><li>Shop from memory and rotate the same five staples</li><li>Run out of good food by Wednesday</li></ul>
+          <div class="tags"><span class="diet">Gluten-free</span><span class="floor">Below USDA floor</span></div>
+        </div>
+      </div>
+      <div class="csb-brief">
+        <span class="csb-meta-label">An honest note on the research</span>
+        <p class="note">These personas are composites, built from public USDA, Census, and Federal Reserve data, <strong>not interviews.</strong> The survey went out June 15; real user research is the immediate next step, and we won't publish quotes until we have them. Holding that line was deliberate, the same honesty the product is built on.</p>
+      </div>
+    </section>
+
+    <!-- 03 APPROACH / DECISIONS -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">03 · <b>Approach &amp; Decisions</b></div>
+      <h2 class="csb-statement">With six days, the first real PM decisions were about what to <em>cut</em> and what to never fake.</h2>
+      <p class="csb-p">I wrote the full PRD, problem, personas, MoSCoW scope, success metrics, and a dependency-mapped timeline, and held the team to a hard <strong>feature freeze on June 16</strong>. A tight scope is what let four people ship something solid. The decisions below are the ones I'd defend in a review.</p>
+      <div class="csb-subhead">The six days</div>
+      <div class="csb-timeline">
+        <div class="csb-day"><div class="csb-day-d">Jun 13</div><div class="csb-day-t">Brainstorm and lock the idea and team name.</div></div>
+        <div class="csb-day"><div class="csb-day-d">Jun 14</div><div class="csb-day-t">Draft and send the user survey. Competitive analysis.</div></div>
+        <div class="csb-day"><div class="csb-day-d">Jun 15</div><div class="csb-day-t">Synthesize research, write the PRD. Figma mockups start.</div></div>
+        <div class="csb-day"><div class="csb-day-d">Jun 16</div><div class="csb-day-t">Vibe-code the prototype, build the deck.</div><span class="csb-day-tag">Feature freeze</span></div>
+        <div class="csb-day"><div class="csb-day-d">Jun 17</div><div class="csb-day-t">Finalize, test, and film the demo walkthrough.</div></div>
+        <div class="csb-day end"><div class="csb-day-d">Jun 18</div><div class="csb-day-t">Final review and submit.</div><span class="csb-day-tag">1pm EST</span></div>
+      </div>
+      <div class="csb-cards">
+        <div class="csb-card"><span class="csb-card-emoji">🫱</span><div class="csb-card-t">Honest feedback, not a fake plan</div><p>Below the USDA minimum, the app still delivers the best plan possible and <b>names the shortfall</b> instead of hiding it. Trust over polish.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🔓</span><div class="csb-card-t">No login, no account</div><p>Friction kills adoption for this user. Zero barriers between landing and first value.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">👪</span><div class="csb-card-t">Household by age &amp; gender</div><p>SNAP families include kids with different caloric needs, so nutrition is checked <b>per person, per day</b>, not a flat headcount.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🧮</span><div class="csb-card-t">Diet rules in the data, not the model</div><p>Halal, gluten-free, and dairy-free run on exclusion lists in our food data, so a plan <b>can't quietly break a restriction.</b></p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🧊</span><div class="csb-card-t">Feature freeze on June 16</div><p>Anything not locked two days out was a liability. I enforced it in the PRD and timeline, and it held.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🎭</span><div class="csb-card-t">Demo on prepared plans</div><p>The live demo runs on prepared plans across the filters, real output, citing the USDA plan, so <b>nothing breaks on stage.</b></p></div>
+      </div>
+      <div class="csb-brief">
+        <span class="csb-meta-label">A sequencing flaw we caught before building</span>
+        <p class="note">Reviewing the architecture with Claude as a critique partner surfaced a real bug-in-waiting: the plan was being generated <strong>before</strong> dietary filtering, so the AI could return foods that violated a restriction. We flipped the order, pre-filter eligible foods, then generate only from that set, before a line was written. Fixing it on paper saved hours of debugging on the clock.</p>
+      </div>
+      <div class="csb-subhead">What we said no to, on purpose</div>
+      <div class="csb-cards four">
+        <div class="csb-card"><div class="csb-card-t">Out of v1</div><ul><li>User accounts</li><li>Food-swap tool</li><li>Plan sharing</li><li>Barcode scanning &amp; health scores</li></ul></div>
+        <div class="csb-card"><div class="csb-card-t">So v1 nails the basics</div><ul><li>Budget → 7-day plan</li><li>Cost + nutrition per meal</li><li>Honest shortfall warning</li><li>Six dietary filters · shopping list · regenerate</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 04 PRODUCT -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">04 · <b>The Product</b></div>
+      <h2 class="csb-statement wide">One short form becomes an honest week of <em>meals.</em></h2>
+      <p class="csb-p">Three inputs turn into seven days of breakfast, lunch, and dinner, sized to the household, priced to the budget, and checked against nutrition guidelines. Three screens, no account.</p>
+
+      <div class="csb-feature">
+        <div class="csb-feature-n">Screen 01</div>
+        <h3 class="csb-feature-t">Set up your plan</h3>
+        <p class="csb-feature-d">A monthly budget, who's eating (adults by gender, plus children), and any of six dietary needs, multi-select. Nutrition targets are calculated individually by age and gender using USDA/WHO guidelines, so the plan fits the actual table, not an average.</p>
+        <figure class="csb-fig"><img src="cs-mp-setup.png" alt="Set up your plan screen, budget, household counts, and six dietary filters"><figcaption class="csb-cap">Setup · budget, household, and six dietary filters</figcaption></figure>
+      </div>
+
+      <div class="csb-feature">
+        <div class="csb-feature-n">Screen 02</div>
+        <h3 class="csb-feature-t">Your 7-day plan, honest, day by day</h3>
+        <p class="csb-feature-d">Every meal shows cost and full nutrition; every day gets a pass/fail flag and the header summarizes week total versus budget and calories per person. When the budget can't reach a full nutritious week, a banner names the gap and cites the USDA minimum, the shortfall is never hidden behind a plan that only looks complete.</p>
+        <figure class="csb-fig crop"><img src="cs-mp-plan.png" alt="7-day plan, week total, calories per person, days meeting nutrition, and expandable days with per-meal cost and nutrition"><figcaption class="csb-cap">The plan · per-meal cost and nutrition, with a daily pass/fail flag</figcaption></figure>
+      </div>
+
+      <div class="csb-feature">
+        <div class="csb-feature-n">Screen 03</div>
+        <h3 class="csb-feature-t">Shop once</h3>
+        <p class="csb-feature-d">Check the meals you want and the plan becomes one consolidated list, grouped by aisle with per-person quantities, built to take to the store. Tap to check items off as you shop, and save, copy, or download the list to your phone.</p>
+        <figure class="csb-fig crop"><img src="cs-mp-shopping.png" alt="Shopping list grouped by aisle with per-person quantities and tap-to-check-off"><figcaption class="csb-cap">Shopping list · grouped by aisle, per-person quantities, tap to check off</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 05 DEMO -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">05 · <b>See It Run</b></div>
+      <h2 class="csb-statement wide">The full walkthrough, deck and live prototype, end to <em>end.</em></h2>
+      <div class="csb-demo">
+        <a class="csb-demo-thumb" href="cs-mp-demo.mp4" target="_blank" rel="noopener" aria-label="Watch the MealPlan walkthrough">
+          <img src="cs-mp-demo-poster.jpg" alt="MealPlan demo walkthrough">
+          <span class="csb-demo-play"><span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 4l10 6-10 6V4z" fill="#FBF8F3"/></svg></span></span>
+        </a>
+        <div class="csb-demo-meta">
+          <div class="len">Walkthrough · ~9 min</div>
+          <p>The screens above tell the story in seconds; the recording is here for anyone who wants the full pitch and a live run through the prototype.</p>
+          <a class="watch" href="cs-mp-demo.mp4" target="_blank" rel="noopener">Watch the walkthrough →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 AI -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">06 · <b>How I Worked With AI</b></div>
+      <h2 class="csb-statement wide">AI for speed, product judgment for <em>direction.</em></h2>
+      <p class="csb-p">The point of this project, for me, was learning where AI accelerates PM work and where it can't replace it. I brought the opinions; the tools brought the execution speed.</p>
+      <div class="csb-cards">
+        <div class="csb-card"><span class="csb-card-emoji">🧠</span><div class="csb-card-t">Claude · critique partner</div><p>Drafted each PRD section, then had it pushed back on as a senior PM would. It caught the filter-then-generate sequencing flaw before build.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">⌨️</span><div class="csb-card-t">Claude Code · vibe coding</div><p>Described what I wanted in plain language, reviewed the output, redirected, iterating on the dietary filters and budget-validation flow myself.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🧱</span><div class="csb-card-t">Lovable · scaffolding</div><p>Rapid front-end setup without boilerplate, so the team spent its time on what mattered to the user.</p></div>
+        <div class="csb-card"><span class="csb-card-emoji">🥗</span><div class="csb-card-t">Gemini API · generation</div><p>Generates plans from the pre-filtered USDA food list only, with pre-cached fallbacks so a rate limit can't break a demo.</p></div>
+      </div>
+      <div class="csb-brief">
+        <span class="csb-meta-label">The takeaway on the tools</span>
+        <p>AI is most useful when you have a strong enough opinion to know when it's wrong.</p>
+      </div>
+    </section>
+
+    <!-- 07 LEARNED -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">07 · <b>What I Learned</b></div>
+      <h2 class="csb-statement wide">Honesty was the product strategy, and the team <em>strategy.</em></h2>
+      <div class="csb-lessons">
+        <div class="csb-lesson"><span class="csb-lesson-n">01</span><div class="csb-lesson-t">Survey first, build second</div><p>Writing the survey before the PRD forced me to separate what I assumed users wanted from what they'd actually say. That gap is exactly why household composition became age-and-gender, not a headcount.</p></div>
+        <div class="csb-lesson"><span class="csb-lesson-n">02</span><div class="csb-lesson-t">The PRD is the source of truth, or it's nothing</div><p>The feature freeze held because the PRD was specific enough that "is this in scope?" always had a clear answer. Vague PRDs create scope creep; precise ones prevent it.</p></div>
+        <div class="csb-lesson"><span class="csb-lesson-n">03</span><div class="csb-lesson-t">Vibe coding changes the PM-dev dynamic</div><p>When I could prototype a hypothesis myself, I wasn't waiting on a teammate to test it. I could build it, show it, and hand off something concrete. PMs who can build, even roughly, move faster.</p></div>
+        <div class="csb-lesson"><span class="csb-lesson-n">04</span><div class="csb-lesson-t">Honest products beat impressive-looking ones</div><p>Telling users when their budget falls short, instead of faking a complete plan, was the right call. It's the difference between a tool that builds trust and one that quietly erodes it.</p></div>
+      </div>
+      <div class="csb-takeaway">
+        <span class="csb-meta-label">The takeaway</span>
+        <p>The honest call, naming the gap instead of hiding it, was the whole product. Everything else was execution.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CLOSING -->
+  <section class="csb-closing reveal">
+    <div class="csb-closing-q">"We never fake a plan that fits. We get as close as the budget allows, and show exactly where the gap <em>is.</em>"</div>
+    <a href="work.html">← Back to all work</a>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-grid">
+    <div class="reveal">
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ft-lbl">Contact</div>
+      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
+      <div class="ft-lbl">Elsewhere</div>
+      <div class="ft-links">
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream.png" alt=""><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
+  </div>
+</footer>
+
+<script src="site.js?v=4"></script>
+</body>
+</html>

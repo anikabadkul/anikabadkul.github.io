@@ -3,154 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resume — Anika Badkul</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --iv:#FBF8F3;--iv2:#F4EDE3;
-  --bl:#E8BFB4;--bld:#C47D6E;--bll:#F7EBE7;--blm:#D49A8E;
-  --ink:#1A1512;--ink2:#5A4840;--ink3:#9E8A7E;
-  --serif:"Cormorant Garamond",Georgia,serif;
-  --sans:"Instrument Sans",system-ui,sans-serif;
-  --ease:cubic-bezier(.25,.46,.45,.94);
-}
-html{scroll-behavior:smooth;background:var(--iv)}
-body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}*,*::before,*::after{cursor:none!important}
-
-/* ── NAV ── */
-nav{height:64px;padding:0 max(56px, calc((100vw - 1100px) / 2 + 56px));display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,125,110,.2)}
-nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93);backdrop-filter:blur(20px);z-index:-1}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{height:56px;display:block}
-.logo-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--ink)}
-.nav-r{display:flex;align-items:center;gap:28px}
-.nav-r a{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
-.nav-r a:hover,.nav-r a.active{color:var(--ink)}
-
-/* ── RESUME WRAPPER ── */
-.resume-wrap{max-width:860px;margin:0 auto;padding:80px 56px 120px}
-
-/* ── HEADER ── */
-.r-header{margin-bottom:56px}
-.r-name{font-family:var(--serif);font-size:clamp(44px,6vw,72px);font-weight:300;letter-spacing:-.035em;line-height:.96;color:var(--ink);margin-bottom:14px}
-.r-subtitle{font-family:var(--serif);font-size:19px;font-style:italic;font-weight:300;color:var(--bld);margin-bottom:14px;letter-spacing:-.01em}
-.r-contact{font-size:13px;color:var(--ink3);margin-bottom:28px;font-weight:300}
-.r-contact a{color:var(--ink3);text-decoration:none;border-bottom:1px solid rgba(196,125,110,.3);transition:color .15s,border-color .15s}
-.r-contact a:hover{color:var(--bld);border-color:var(--bld)}
-
-/* ── DOWNLOAD BUTTON ── */
-.btn-ink{background:var(--ink);color:var(--iv);padding:12px 28px;border-radius:40px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;transition:background .2s,transform .15s}
-.btn-ink:hover{background:var(--bld);transform:translateY(-1px)}
-
-/* ── SECTION HEADINGS ── */
-.r-section{margin-bottom:52px}
-.r-section:last-of-type{margin-bottom:0}
-.r-heading{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);letter-spacing:-.015em;padding-bottom:10px;border-bottom:1px solid rgba(196,125,110,.3);margin-bottom:32px}
-
-/* ── EXPERIENCE ENTRIES ── */
-.exp-entry{padding-bottom:32px;margin-bottom:32px;border-bottom:1px solid rgba(196,125,110,.12)}
-.exp-entry:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
-.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:4px}
-.exp-role{font-size:15px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
-.exp-date{font-size:12px;color:var(--ink3);font-weight:300;white-space:nowrap;flex-shrink:0}
-.exp-company{font-size:13px;color:var(--ink2);font-weight:300;margin-bottom:12px}
-.exp-bullets{list-style:none;padding:0}
-.exp-bullets li{font-size:13px;color:var(--ink3);line-height:1.7;padding-left:16px;position:relative;margin-bottom:5px;font-weight:300}
-.exp-bullets li::before{content:"–";position:absolute;left:0;color:var(--blm)}
-.exp-bullets li:last-child{margin-bottom:0}
-
-/* ── EDUCATION ── */
-.edu-school{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.edu-degree{font-size:13px;color:var(--ink2);font-weight:300;margin-bottom:10px}
-.edu-course{font-size:13px;color:var(--ink3);line-height:1.7;font-weight:300}
-
-/* ── SKILLS ── */
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.skills-col-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:14px}
-.skills-list{list-style:none;padding:0}
-.skills-list li{font-size:13px;color:var(--ink2);line-height:1.8;font-weight:300;padding-left:14px;position:relative}
-.skills-list li::before{content:"·";position:absolute;left:0;color:var(--blm)}
-
-/* ── CTA BOTTOM ── */
-.r-cta{text-align:center;padding:72px 0 0;border-top:1px solid rgba(196,125,110,.18);margin-top:64px}
-.r-cta-label{font-family:var(--serif);font-size:24px;font-weight:300;font-style:italic;color:var(--ink2);margin-bottom:20px}
-
-/* ── GLOBAL SCROLL ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes reveal-fallback{to{opacity:1;transform:none}}
-.reveal{opacity:0;animation:reveal-fallback 0.01s 0.8s forwards}
-.reveal.in{animation:fadeUp .7s var(--ease) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}
-
-/* ── FOOTER ── */
-.footer{background:#3A2E2A;padding:64px max(56px, calc((100vw - 1100px) / 2 + 56px)) 0}
-.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:56px;border-bottom:1px solid rgba(251,248,243,.08)}
-.ft-tagline{font-family:var(--serif);font-size:clamp(26px,3.5vw,44px);font-weight:300;font-style:italic;color:var(--iv);line-height:1.08;letter-spacing:-.025em;margin-bottom:14px}
-.ft-sub{font-size:13px;color:rgba(251,248,243,.4);font-weight:300;line-height:1.8}
-.ft-lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,191,180,.5);margin-bottom:10px;font-weight:500}
-.ft-email{font-family:var(--serif);font-size:20px;font-style:italic;font-weight:300;color:rgba(251,248,243,.72);text-decoration:none;display:block;margin-bottom:28px;transition:color .2s}
-.ft-email:hover{color:var(--bl)}
-.ft-links{display:flex;flex-direction:column}
-.ft-link{font-family:var(--serif);font-size:18px;font-style:italic;font-weight:300;color:rgba(251,248,243,.52);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(251,248,243,.07);display:flex;justify-content:space-between;align-items:center;transition:color .2s}
-.ft-link:hover{color:var(--bl)}
-.ft-link:last-child{border-bottom:none}
-.ft-link svg{transition:transform .2s;opacity:.5}
-.ft-link:hover svg{opacity:1;transform:translate(2px,-2px)}
-.footer-base{padding:20px 0;display:flex;justify-content:space-between;align-items:center}
-.ft-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(251,248,243,.22);font-weight:300}
-.ft-copy{font-size:11px;color:rgba(251,248,243,.18);letter-spacing:.04em}
-
-@media(max-width:768px){
-  nav{padding:0 24px !important}
-  .nav-r a:not(.active){display:none}
-  .resume-wrap{padding:48px 24px 80px}
-  .skills-grid{grid-template-columns:1fr;gap:28px}
-  .footer{padding:48px 24px 0 !important}
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-}
-@media print{
-  *{opacity:1!important;animation:none!important;transform:none!important;transition:none!important}
-  nav,#tc,#bf-cursor,.r-cta,.footer{display:none!important}
-  .resume-wrap{padding:20px}
-  .reveal{opacity:1!important}
-}
-</style>
+<title>Resume · Anika Badkul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=4">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
-<div id="bf-cursor" style="position:fixed;pointer-events:none;z-index:99999;width:100px;height:100px;display:none;top:0;left:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.25))"><img src="data:image/png;base64,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" style="width:100px;height:100px"></div>
-<script>!function(){var e=document.getElementById("bf-cursor");if(!e)return;e.style.willChange="transform";var r=null,x=0,y=0;document.addEventListener("mousemove",function(t){x=t.clientX;y=t.clientY;if(!r)r=requestAnimationFrame(function(){e.style.transform="translate("+(x-50)+"px,"+(y-50)+"px)";e.style.display="block";r=null})});document.addEventListener("mouseleave",function(){e.style.display="none"})}();</script>
-<canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
-
 <nav>
-  <a class="logo" href="index.html">
-    <img src="logo-light.png" alt="AB" style="height:56px;display:block">
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose.png" alt="">
     <span class="logo-name">Anika Badkul</span>
   </a>
-  <div class="nav-r">
+  <div class="nav-r" id="nav-menu">
     <a href="about.html">About</a>
     <a href="work.html">Work</a>
-    <a href="projects.html">Projects</a>
+    <a href="projects.html">Curiosities</a>
     <a href="resume.html" class="active">Resume</a>
-    <a href="whatelse.html">What Else</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
   </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
 </nav>
 
 <main class="resume-wrap">
 
-  <!-- HEADER -->
-  <header class="r-header reveal">
+  <div class="r-rail reveal">
+  <header class="r-header">
     <div class="r-name">Anika Badkul</div>
-    <div class="r-subtitle">Product Manager · UX Researcher · UMass Amherst '26</div>
+    <div class="r-subtitle">Product Manager · UX Researcher · Seeking Fall 2026 PM Internships</div>
     <div class="r-contact">
+      Hanover, NH
+      &nbsp;·&nbsp;
       <a href="mailto:anika.badkul@gmail.com">anika.badkul@gmail.com</a>
       &nbsp;·&nbsp;
       <a href="https://linkedin.com/in/anikabadkul" target="_blank" rel="noopener">linkedin.com/in/anikabadkul</a>
     </div>
     <a href="resume.pdf" class="btn-ink" download>Download PDF ↓</a>
   </header>
+  </div>
+
+  <div class="r-main">
 
   <!-- EXPERIENCE -->
   <section class="r-section reveal d1">
@@ -158,39 +50,72 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 
     <div class="exp-entry">
       <div class="exp-top">
-        <span class="exp-role">Product Manager Intern</span>
-        <span class="exp-date">Summer 2024</span>
+        <span class="exp-role">AI Product Manager Intern</span>
+        <span class="exp-date">Jan 2026 – Mar 2026</span>
       </div>
-      <div class="exp-company">[Fintech Startup]</div>
+      <div class="exp-company">FlairX</div>
       <ul class="exp-bullets">
-        <li>Led 12 user interviews and funnel analysis identifying 3 key friction points</li>
-        <li>Wrote PRD and coordinated A/B test, reducing onboarding drop-off by 23%</li>
-        <li>Flow cut from 7 steps to 4; presented findings to product and engineering</li>
+        <li>Audited 100+ test cases in Jira, identifying 8+ critical bugs to strengthen product release readiness by 20%</li>
+        <li>Translated user needs into a Notion PRD with go-to-market requirements to screen 500–1,500 candidates</li>
+        <li>Analyzed 6 AI platforms across 26 criteria, surfacing 3 data-driven gaps that shaped the roadmap</li>
+        <li>Identified 21 UX friction points in Figma, reducing sprint planning time by 30% to unblock feature delivery</li>
       </ul>
     </div>
 
     <div class="exp-entry">
       <div class="exp-top">
-        <span class="exp-role">UX Researcher</span>
-        <span class="exp-date">Spring 2026</span>
+        <span class="exp-role">Product Research &amp; Strategy Intern</span>
+        <span class="exp-date">Jun 2025 – Sep 2025</span>
       </div>
-      <div class="exp-company">UMass COMPSCI 325</div>
+      <div class="exp-company">KOBL</div>
       <ul class="exp-bullets">
-        <li>Ran 30-person survey + 9 user interviews on UMass Schedule Builder</li>
-        <li>Identified top friction points: prerequisite visibility, ARR tracking, conflict detection</li>
-        <li>Delivered paper prototypes → hi-fi Figma prototype; final design adopted by course</li>
+        <li>Drove user research across 3 banking segments, surfacing payout disputes that cut IT intervention by 100%</li>
+        <li>Scoped PRDs for 4 features in Google Docs, aligning cross-functional stakeholder teams on requirements</li>
+        <li>Prototyped 8 Figma wireframes across 4 roles, mapping workflows in Notion to verify product architecture</li>
+        <li>Built a SQL/Python business case projecting 62% fewer disputes and 68% faster payouts across 1,000+ branches</li>
       </ul>
     </div>
 
     <div class="exp-entry">
       <div class="exp-top">
-        <span class="exp-role">Product Analyst Intern</span>
-        <span class="exp-date">Fall 2023</span>
+        <span class="exp-role">Project Manager Intern</span>
+        <span class="exp-date">Jun 2025 – Aug 2025</span>
       </div>
-      <div class="exp-company">[Company]</div>
+      <div class="exp-company">The Global Conservatory</div>
       <ul class="exp-bullets">
-        <li>Competitive research and data analysis for B2C mobile product</li>
-        <li>Built dashboards tracking key retention metrics; insights informed Q1 roadmap</li>
+        <li>Led 8 engineers through agile sprints to launch a B2C Shopify platform, scaling to 65+ faculty globally</li>
+        <li>Executed user research with 15 participants, surfacing 3 key pain points to inform prioritized UX decisions</li>
+        <li>Mapped user journeys in Figma to validate 3 user flows, cutting navigation complexity by 40% for users</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-top">
+        <span class="exp-role">Product Manager · Self-Checkout+</span>
+        <span class="exp-date">Sep 2025 – May 2026</span>
+      </div>
+      <div class="exp-company">Senior Design Project</div>
+      <ul class="exp-bullets">
+        <li>Led agile sprint planning with 5 engineers, aligning the cross-functional team on feature prioritization</li>
+        <li>Facilitated usability testing with 10 participants in Figma, refining checkout UX across 3 core user flows</li>
+        <li>Achieved 99%+ SKU accuracy for 1,071 products under $400 using a barcode-free Python and React system</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="r-section reveal d2">
+    <div class="r-heading">Leadership</div>
+    <div class="exp-entry">
+      <div class="exp-top">
+        <span class="exp-role">Teaching Assistant · ECE Department</span>
+        <span class="exp-date">Sep 2024 – May 2026</span>
+      </div>
+      <div class="exp-company">University of Massachusetts Amherst</div>
+      <ul class="exp-bullets">
+        <li>Created lab content and grading rubrics for Python, MATLAB, and security, adopted across 200+ students</li>
+        <li>Improved comprehension across 4 ECE courses, boosting student confidence by 84% per semester survey</li>
+        <li>Redesigned 3 lab assignments in VS Code and Google Docs, cutting resubmissions by 30% via student feedback</li>
       </ul>
     </div>
   </section>
@@ -198,9 +123,23 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
   <!-- EDUCATION -->
   <section class="r-section reveal d2">
     <div class="r-heading">Education</div>
-    <div class="edu-school">University of Massachusetts Amherst</div>
-    <div class="edu-degree">B.S. Computer Science &nbsp;·&nbsp; Expected May 2026</div>
-    <div class="edu-course">Relevant coursework: Human-Computer Interaction (325), Software Engineering, Data Structures, Statistics</div>
+    <div class="exp-entry">
+      <div class="exp-top">
+        <span class="edu-degree">Master of Engineering Management</span>
+        <span class="exp-date">Graduating Dec 2027</span>
+      </div>
+      <div class="edu-school">Dartmouth College · Hanover, NH</div>
+    </div>
+    <div class="exp-entry">
+      <div class="exp-top">
+        <span class="edu-degree">B.S. Computer Engineering</span>
+        <span class="exp-date">Graduated May 2026</span>
+      </div>
+      <div class="edu-school">University of Massachusetts Amherst</div>
+      <div class="edu-course">Coursework: Product Management, Human-Computer Interaction, Technical Project Management</div>
+      <div class="edu-course">Involvement: Society of Women Engineers, Association for Women in Science, UMass Product</div>
+      <div class="edu-course">Affiliations: Rewriting the Code, Girls Who Code, Women In Product, Mind the Product</div>
+    </div>
   </section>
 
   <!-- SKILLS -->
@@ -208,29 +147,29 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
     <div class="r-heading">Skills</div>
     <div class="skills-grid">
       <div>
-        <div class="skills-col-label">Research &amp; Product</div>
+        <div class="skills-col-label">Languages</div>
         <ul class="skills-list">
-          <li>User interviews</li>
-          <li>Survey design</li>
-          <li>JTBD</li>
-          <li>Journey mapping</li>
-          <li>PRD writing</li>
-          <li>Roadmapping</li>
-          <li>A/B testing</li>
-          <li>Stakeholder management</li>
+          <li>Python · JavaScript · TypeScript</li>
+          <li>SQL · C · R · MATLAB</li>
+          <li>HTML/CSS · React</li>
+          <li>Git · GitHub</li>
         </ul>
       </div>
       <div>
         <div class="skills-col-label">Tools</div>
         <ul class="skills-list">
-          <li>Figma</li>
-          <li>Notion</li>
-          <li>Jira</li>
-          <li>SQL (basic)</li>
-          <li>Python (basic)</li>
-          <li>Git</li>
-          <li>Google Analytics</li>
-          <li>Mixpanel</li>
+          <li>Figma · FigJam</li>
+          <li>Jira · Notion · Confluence</li>
+          <li>Excel · Tableau</li>
+          <li>Google Analytics · Amplitude</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skills-col-label">AI &amp; Vibe Coding</div>
+        <ul class="skills-list">
+          <li>Cursor · Claude Code · Codex</li>
+          <li>Lovable · Base44 · Replit</li>
+          <li>v0 · Gemini · Gamma</li>
         </ul>
       </div>
     </div>
@@ -238,23 +177,25 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
 
   <!-- CTA -->
   <div class="r-cta reveal">
-    <div class="r-cta-label">Want the full PDF?</div>
+    <div class="r-cta-label">Want the full one-pager?</div>
     <a href="resume.pdf" class="btn-ink" download>Download PDF ↓</a>
+  </div>
+
   </div>
 
 </main>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="ft-grid">
     <div class="reveal">
-      <div class="ft-tagline">The best products<br>start with a<br>conversation.</div>
-      <p class="ft-sub">Whether it's about a PM role, a product you're building, or just a chat — I'm always up to talk.</p>
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
     </div>
     <div class="reveal d1">
-      <div class="ft-lbl">Contact me</div>
+      <div class="ft-lbl">Contact</div>
       <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
-      <div class="ft-lbl">Let's connect</div>
+      <div class="ft-lbl">Elsewhere</div>
       <div class="ft-links">
         <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="resume.pdf" class="ft-link" download>Resume PDF <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -262,12 +203,12 @@ nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.93
       </div>
     </div>
   </div>
-  <div class="footer-base">
-    <span class="ft-name">Anika Badkul</span>
-    <span class="ft-copy">© 2025 &nbsp;·&nbsp; built with curiosity · running shoes optional</span>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream.png" alt=""><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="site.js?v=4"></script>
 </body>
 </html>

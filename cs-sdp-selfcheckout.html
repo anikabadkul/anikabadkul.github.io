@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Self Checkout+ — Anika Badkul</title>
+<title>Self Checkout+ · Anika Badkul</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --iv:#FBF8F3;--iv2:#F4EDE3;
   --bl:#E8BFB4;--bld:#C47D6E;--bll:#F7EBE7;--blm:#D49A8E;
   --ink:#1A1512;--ink2:#5A4840;--ink3:#9E8A7E;
-  --serif:"Cormorant Garamond",Georgia,serif;
+  --serif:"Fraunces",Georgia,serif;
   --sans:"Instrument Sans",system-ui,sans-serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
   --max:1100px;
   --pad:max(56px, calc((100vw - var(--max)) / 2 + 56px));
 }
 html{scroll-behavior:smooth;background:var(--iv)}
-body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}*,*::before,*::after{cursor:none!important}
+body{font-family:var(--sans);background:var(--iv);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* NAV */
 nav{height:64px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;
@@ -117,7 +117,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-device{border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.09);
   box-shadow:0 20px 60px rgba(0,0,0,.14),0 4px 20px rgba(0,0,0,.08);
   background:#111827;font-family:var(--sans)}
-.sc-device *{cursor:none!important}
+.sc-device *{}
 
 /* Shared header bar */
 .sc-header{height:48px;display:flex;align-items:center;justify-content:space-between;
@@ -133,7 +133,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-help-btn{font-size:11px;color:#6B7280;font-weight:500;background:#F9FAFB;
   border:1px solid #E5E7EB;border-radius:8px;padding:4px 10px}
 
-/* SCREEN 1 — Splash */
+/* SCREEN 1, Splash */
 .sc-splash{min-height:380px;display:flex;flex-direction:column;justify-content:center;
   align-items:center;text-align:center;padding:48px 40px;position:relative;overflow:hidden;
   background:linear-gradient(155deg,#071c0f 0%,#0e3318 35%,#0a2713 65%,#071408 100%)}
@@ -155,7 +155,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-splash-tap span{display:inline-block;width:28px;height:1px;background:rgba(255,255,255,.15);
   vertical-align:middle;margin:0 10px}
 
-/* SCREEN 2 — Scanning */
+/* SCREEN 2, Scanning */
 .sc-scan-shell{display:grid;grid-template-columns:1.5fr 1fr;min-height:400px}
 .sc-camera-area{background:#0D1117;display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;min-height:400px}
@@ -199,7 +199,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-det-btn-reject{background:rgba(239,68,68,.1);border:1.5px solid rgba(239,68,68,.3);color:#F87171}
 .sc-det-btn-accept{background:#22C55E;border:none;color:#fff}
 
-/* SCREEN 3 — Cart */
+/* SCREEN 3, Cart */
 .sc-cart-shell{display:grid;grid-template-columns:1.4fr 1fr;min-height:420px;background:#F5F7F5}
 .sc-cart-left{padding:24px 20px}
 .sc-cart-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:16px;letter-spacing:-.01em}
@@ -226,7 +226,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-more-btn{width:100%;padding:11px;background:#F3F4F6;border:none;border-radius:12px;
   font-size:12px;font-weight:700;color:#6B7280;letter-spacing:.06em;text-transform:uppercase;font-family:var(--sans)}
 
-/* SCREEN 4 — Payment */
+/* SCREEN 4, Payment */
 .sc-flow-screen{background:#FFFFFF;min-height:400px;display:flex;flex-direction:column}
 .sc-stepper{display:flex;align-items:center;justify-content:center;padding:24px 40px 8px;gap:0}
 .sc-step{display:flex;align-items:center;gap:8px}
@@ -262,7 +262,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-back-btn{font-size:12px;color:#9CA3AF;font-weight:500;padding:8px 16px;
   background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;font-family:var(--sans)}
 
-/* SCREEN 5 — Receipt choice */
+/* SCREEN 5, Receipt choice */
 .sc-receipt-options{display:flex;gap:16px;justify-content:center;width:100%;max-width:520px}
 .sc-receipt-card{flex:1;background:#F9FAFB;border:2px solid #E5E7EB;border-radius:20px;
   padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:120px}
@@ -270,7 +270,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .sc-receipt-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
 .sc-receipt-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#374151;text-align:center}
 
-/* SCREEN 6 — Thank you */
+/* SCREEN 6, Thank you */
 .sc-thankyou{min-height:380px;display:flex;flex-direction:column;justify-content:center;
   align-items:center;text-align:center;padding:48px 40px;position:relative;overflow:hidden;
   background:linear-gradient(155deg,#052E16 0%,#14532D 45%,#15803D 100%)}
@@ -403,7 +403,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 .role-card-title{font-size:16px;font-weight:500;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em}
 .role-card ul{list-style:none;padding:0}
 .role-card li{font-size:13px;color:var(--ink2);line-height:1.65;font-weight:300;padding:3px 0 3px 16px;position:relative}
-.role-card li::before{content:"—";position:absolute;left:0;color:var(--bl);font-size:10px;top:6px}
+.role-card li::before{content:"·";position:absolute;left:0;color:var(--bl);font-size:10px;top:6px}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -416,24 +416,57 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   nav{padding:0 24px !important}
   .nav-r a:not(.nav-badge){display:none}
 }
+
+/* ===== UX FIXES: native cursor, focus visibility, mobile nav, reduced motion ===== */
+a,button,.btn-ink,.btn-o,.cs-cta,.sp-cta,[role="button"]{cursor:pointer}
+:focus-visible{outline:2px solid var(--bld);outline-offset:3px;border-radius:4px}
+.nav-toggle{display:none;width:42px;height:42px;border:1px solid rgba(196,125,110,.3);
+  background:rgba(255,255,255,.55);border-radius:12px;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+.nav-toggle:hover{border-color:var(--bld)}
+.nav-toggle span{display:block;width:18px;height:1.6px;background:var(--ink);border-radius:2px;
+  transition:transform .25s var(--ease),opacity .2s}
+nav.nav-open .nav-toggle span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+nav.nav-open .nav-toggle span:nth-child(2){opacity:0}
+nav.nav-open .nav-toggle span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-toggle{display:flex}
+  .nav-r{position:fixed;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(251,248,243,.98);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(196,125,110,.2);box-shadow:0 16px 40px rgba(26,21,18,.08);
+    padding:6px 24px 18px;transform:translateY(-14px);opacity:0;pointer-events:none;
+    transition:opacity .25s var(--ease),transform .25s var(--ease)}
+  nav.nav-open .nav-r{transform:translateY(0);opacity:1;pointer-events:auto}
+  .nav-r a{display:block !important;width:100%;padding:15px 2px;font-size:16px;
+    border-bottom:1px solid rgba(196,125,110,.12)}
+  .nav-r a:last-child{border-bottom:none}
+  .nav-r .nav-badge{display:inline-block !important;width:fit-content;margin-top:14px;border-bottom:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important}
+  .ticker-inner{animation:none !important}
+  .pulse-dot{animation:none !important}
+}
 </style>
+<link rel="stylesheet" href="site.css?v=4">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
-<div id="bf-cursor" style="position:fixed;pointer-events:none;z-index:99999;width:80px;height:80px;transform:translate(-50%,-50%);display:none;top:0;left:0"><img src="data:image/png;base64,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" style="width:80px;height:80px"></div>
-<canvas id="tc" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100"></canvas>
-
 <nav>
-  <a class="logo" href="index.html">
-    <img src="logo-light.png" alt="AB" style="height:56px;display:block">
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose.png" alt="">
     <span class="logo-name">Anika Badkul</span>
   </a>
-  <div class="nav-r">
+  <div class="nav-r" id="nav-menu">
     <a href="about.html">About</a>
-    <a href="work.html">Work</a>
-    <a href="projects.html">Projects</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="projects.html">Curiosities</a>
     <a href="resume.html">Resume</a>
-    <a href="whatelse.html">What Else</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
   </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
@@ -444,7 +477,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   </a>
   <div class="cs-eyebrow">Product & UI Lead · Senior Design Project · Computer Vision · React</div>
   <h1 class="cs-title">Designing trust into a <em>barcode-free</em> checkout</h1>
-  <p class="cs-subtitle">Self Checkout+ is a computer vision grocery checkout system that identifies items without barcodes. I co-led the product direction and built the entire customer-facing experience — designing an interface that makes shoppers trust a system working invisibly behind the scenes.</p>
+  <p class="cs-subtitle">Self Checkout+ is a computer vision grocery checkout system that identifies items without barcodes. I co-led the product direction and built the entire customer-facing experience, designing an interface that makes shoppers trust a system working invisibly behind the scenes.</p>
   <div class="cs-meta">
     <div class="cs-meta-item">
       <span class="cs-meta-label">Project</span>
@@ -489,8 +522,8 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   <h2 class="section-title reveal">The <em>System</em></h2>
   <div class="two-col">
     <div>
-      <p class="body-p">Traditional self-checkout fails at the same moment every time: when there's no barcode. Loose produce, bulk goods, specialty items — the customer either guesses a code from a printed menu or waves down an attendant. Self Checkout+ eliminates that failure point entirely.</p>
-      <p class="body-p">A camera identifies grocery items visually through a YOLOv8 detection pipeline, matches them against a CLIP-trained embedding database, and adds them to a cart — no scanning required. The computer vision pipeline lives on a Raspberry Pi, connected to a custom ATmega328p MCU that handles hardware signaling.</p>
+      <p class="body-p">Traditional self-checkout fails at the same moment every time: when there's no barcode. Loose produce, bulk goods, specialty items, the customer either guesses a code from a printed menu or waves down an attendant. Self Checkout+ eliminates that failure point entirely.</p>
+      <p class="body-p">A camera identifies grocery items visually through a YOLOv8 detection pipeline, matches them against a CLIP-trained embedding database, and adds them to a cart, no scanning required. The computer vision pipeline lives on a Raspberry Pi, connected to a custom ATmega328p MCU that handles hardware signaling.</p>
       <p class="body-p">The core challenge wasn't the computer vision. The CV pipeline was strong. The challenge was designing an interface that makes shoppers trust a system working entirely out of sight.</p>
     </div>
     <div>
@@ -526,7 +559,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
       <div class="role-card-label">Product Ownership</div>
       <div class="role-card-title">Defining what the system is</div>
       <ul>
-        <li>Co-led product decisions with the team and advisor — from feature scope to architecture tradeoffs</li>
+        <li>Co-led product decisions with the team and advisor, from feature scope to architecture tradeoffs</li>
         <li>Raised and resolved questions like: should we auto-add items or ask first? should we show a live video feed?</li>
         <li>Represented the customer's perspective in technical discussions about CV model design and API structure</li>
         <li>Cut features that added complexity without adding trust or speed</li>
@@ -536,7 +569,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
       <div class="role-card-label">Design & Engineering</div>
       <div class="role-card-title">Building the experience layer</div>
       <ul>
-        <li>Designed and built the complete customer checkout flow in React — all six screens</li>
+        <li>Designed and built the complete customer checkout flow in React, all six screens</li>
         <li>Built the admin dashboard for store operators: inventory, overrides, session monitoring</li>
         <li>Owned the SQLite schema and the integration between the React frontend and FastAPI backend</li>
         <li>Implemented Framer Motion animations and resolved animation-blocking issues during API calls</li>
@@ -553,40 +586,40 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 <section class="cs-section">
   <span class="section-num">03</span>
   <h2 class="section-title reveal">The Customer <em>Experience</em></h2>
-  <p class="body-p reveal">Six screens, one goal: make shoppers trust a system working entirely out of sight. Every design decision was about control — giving customers a visible way to verify, correct, and confirm before money changed hands.</p>
+  <p class="body-p reveal">Six screens, one goal: make shoppers trust a system working entirely out of sight. Every design decision was about control, giving customers a visible way to verify, correct, and confirm before money changed hands.</p>
 
   <div class="sc-grid reveal" style="margin-top:40px">
 
     <!-- 1: Splash -->
     <div class="sc-gallery-item">
       <div class="sc-img-frame">
-        <img src="sdp-screen1.png" alt="SelfCheckout+ splash screen — Touch Anywhere to Start">
+        <img src="sdp-screen1.png" alt="SelfCheckout+ splash screen, Touch Anywhere to Start" loading="lazy" decoding="async">
       </div>
-      <div class="sc-screen-label">01 — Idle / Splash</div>
+      <div class="sc-screen-label">01 · Idle / Splash</div>
     </div>
 
     <!-- 2: Scan + item detected -->
     <div class="sc-gallery-item">
       <div class="sc-img-frame">
-        <img src="sdp-screen2.png" alt="SelfCheckout+ scanning screen — item not recognized error state">
+        <img src="sdp-screen2.png" alt="SelfCheckout+ scanning screen, item not recognized error state" loading="lazy" decoding="async">
       </div>
-      <div class="sc-screen-label">02 — Scan &amp; Detect</div>
+      <div class="sc-screen-label">02 · Scan &amp; Detect</div>
     </div>
 
     <!-- 3: Cart -->
     <div class="sc-gallery-item">
       <div class="sc-img-frame">
-        <img src="sdp-screen3.png" alt="SelfCheckout+ cart review screen">
+        <img src="sdp-screen3.png" alt="SelfCheckout+ cart review screen" loading="lazy" decoding="async">
       </div>
-      <div class="sc-screen-label">03 — Cart Review</div>
+      <div class="sc-screen-label">03 · Cart Review</div>
     </div>
 
     <!-- 4: Payment -->
     <div class="sc-gallery-item">
       <div class="sc-img-frame">
-        <img src="sdp-screen4.png" alt="SelfCheckout+ payment method selection">
+        <img src="sdp-screen4.png" alt="SelfCheckout+ payment method selection" loading="lazy" decoding="async">
       </div>
-      <div class="sc-screen-label">04 — Payment</div>
+      <div class="sc-screen-label">04 · Payment</div>
     </div>
 
     <!-- 5: Receipt -->
@@ -631,7 +664,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
           <div class="sc-flow-footer"><button class="sc-back-btn">← Go Back</button></div>
         </div>
       </div>
-      <div class="sc-screen-label">05 — Receipt Preference</div>
+      <div class="sc-screen-label">05 · Receipt Preference</div>
     </div>
 
     <!-- 6: Thank you -->
@@ -647,7 +680,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
           <div class="sc-ty-detail">Session complete &nbsp;·&nbsp; Touch anywhere to restart</div>
         </div>
       </div>
-      <div class="sc-screen-label">06 — Confirmation</div>
+      <div class="sc-screen-label">06 · Confirmation</div>
     </div>
 
   </div>
@@ -657,13 +690,13 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 <section class="cs-section">
   <span class="section-num">04</span>
   <h2 class="section-title reveal">Key Design <em>Decisions</em></h2>
-  <p class="body-p reveal">The most interesting design work wasn't the visual styling — it was the product thinking that shaped the flow. Each decision below was a deliberate tradeoff I raised and resolved during the build.</p>
+  <p class="body-p reveal">The most interesting design work wasn't the visual styling, it was the product thinking that shaped the flow. Each decision below was a deliberate tradeoff I raised and resolved during the build.</p>
 
   <div class="decision-row reveal">
     <div class="decision-num">01</div>
     <div>
-      <div class="decision-title">Build in a confirmation step — don't auto-add items</div>
-      <div class="decision-desc">When the CV pipeline identifies an item, a shopper sees "Did we get this right?" before it's added to the cart. This was a deliberate choice that trades a bit of speed for shopper trust. A system that silently adds items — even accurately — feels presumptuous. The explicit confirmation gives the customer a moment of control, and a clear path to correct errors without escalating to an attendant. The tradeoff is one extra tap per item; we decided that was worth it at this stage of trust-building with a novel checkout format.</div>
+      <div class="decision-title">Build in a confirmation step, don't auto-add items</div>
+      <div class="decision-desc">When the CV pipeline identifies an item, a shopper sees "Did we get this right?" before it's added to the cart. This was a deliberate choice that trades a bit of speed for shopper trust. A system that silently adds items, even accurately, feels presumptuous. The explicit confirmation gives the customer a moment of control, and a clear path to correct errors without escalating to an attendant. The tradeoff is one extra tap per item; we decided that was worth it at this stage of trust-building with a novel checkout format.</div>
       <span class="decision-tag">UX decision</span>
     </div>
   </div>
@@ -672,7 +705,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
     <div class="decision-num">02</div>
     <div>
       <div class="decision-title">Cut the live video feed entirely</div>
-      <div class="decision-desc">An early version showed a live camera feed in the scanning zone. I cut it. Live video is visually noisy, requires careful permission and privacy handling, and doesn't help the customer complete the transaction any faster. The task is checkout, not watching the camera process food. Removing the stream simplified the UI and shifted customer attention to where it belonged: the item confirmation and the cart. What replaced it was a clean scanning zone with a status indicator — enough to signal the system is active, nothing more.</div>
+      <div class="decision-desc">An early version showed a live camera feed in the scanning zone. I cut it. Live video is visually noisy, requires careful permission and privacy handling, and doesn't help the customer complete the transaction any faster. The task is checkout, not watching the camera process food. Removing the stream simplified the UI and shifted customer attention to where it belonged: the item confirmation and the cart. What replaced it was a clean scanning zone with a status indicator, enough to signal the system is active, nothing more.</div>
       <span class="decision-tag">Product decision</span>
     </div>
   </div>
@@ -681,7 +714,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
     <div class="decision-num">03</div>
     <div>
       <div class="decision-title">FastAPI as the single source of truth for cart totals</div>
-      <div class="decision-desc">Early builds maintained a local React state for the cart and reconciled it with the backend periodically. This created subtle inconsistencies: the UI showed one running total while the backend calculated another. When they differed — even by a few cents — it looked like a bug, and it eroded trust in an interface where every number matters. I redesigned the data flow so the cart lives entirely in the backend and React simply renders what the API returns. One source of truth, no drift, no reconciliation bugs.</div>
+      <div class="decision-desc">Early builds maintained a local React state for the cart and reconciled it with the backend periodically. This created subtle inconsistencies: the UI showed one running total while the backend calculated another. When they differed, even by a few cents, it looked like a bug, and it eroded trust in an interface where every number matters. I redesigned the data flow so the cart lives entirely in the backend and React simply renders what the API returns. One source of truth, no drift, no reconciliation bugs.</div>
       <span class="decision-tag">Engineering decision</span>
     </div>
   </div>
@@ -690,7 +723,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
     <div class="decision-num">04</div>
     <div>
       <div class="decision-title">Async handler pattern to prevent animation freezing</div>
-      <div class="decision-desc">Framer Motion transitions would stutter and freeze when API calls blocked the main thread. The immediate fix was separating animation state from data fetching state: the UI plays the transition independently, and the component updates when the fetch resolves — not when it starts. This made every screen transition feel instant even when the backend was processing. It also made the architecture cleaner: view concerns and data concerns no longer competed on the same thread.</div>
+      <div class="decision-desc">Framer Motion transitions would stutter and freeze when API calls blocked the main thread. The immediate fix was separating animation state from data fetching state: the UI plays the transition independently, and the component updates when the fetch resolves, not when it starts. This made every screen transition feel instant even when the backend was processing. It also made the architecture cleaner: view concerns and data concerns no longer competed on the same thread.</div>
       <span class="decision-tag">Engineering decision</span>
     </div>
   </div>
@@ -702,13 +735,13 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
   <h2 class="section-title reveal">The Integration <em>Challenge</em></h2>
   <div class="two-col">
     <div>
-      <p class="body-p">The hardest problems weren't in any single layer — they were at the seams between layers. The CV pipeline produced detection events. The FastAPI backend processed them into cart items. The React frontend rendered the cart. When all three systems were moving simultaneously, things broke in ways that no single component's tests could catch.</p>
-      <p class="body-p">As the person responsible for the integration layer, I owned the SQLite schema that made the CV pipeline's output queryable by the frontend. I also designed the API contract between FastAPI and React — which fields the frontend could trust, which had to be calculated server-side, and how error states from the CV layer should surface to the customer.</p>
+      <p class="body-p">The hardest problems weren't in any single layer. They were at the seams between layers. The CV pipeline produced detection events. The FastAPI backend processed them into cart items. The React frontend rendered the cart. When all three systems were moving simultaneously, things broke in ways that no single component's tests could catch.</p>
+      <p class="body-p">As the person responsible for the integration layer, I owned the SQLite schema that made the CV pipeline's output queryable by the frontend. I also designed the API contract between FastAPI and React, which fields the frontend could trust, which had to be calculated server-side, and how error states from the CV layer should surface to the customer.</p>
     </div>
     <div>
       <div class="callout" style="margin-top:0">
         <div class="callout-label">The key insight</div>
-        <p class="callout-text">Integration isn't just a technical problem — it's a design problem. The decisions that prevented the most bugs weren't code changes; they were clarity about which layer owned which responsibility.</p>
+        <p class="callout-text">Integration isn't just a technical problem, it's a design problem. The decisions that prevented the most bugs weren't code changes; they were clarity about which layer owned which responsibility.</p>
       </div>
       <div style="margin-top:20px">
         <div class="decision-row" style="padding-top:0;border-top:none">
@@ -727,7 +760,7 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 <section class="cs-section">
   <span class="section-num">06</span>
   <h2 class="section-title reveal">The Admin <em>Interface</em></h2>
-  <p class="body-p reveal">The customer-facing flow was one half of the product. The other half was the operator dashboard — the interface that lets store staff manage inventory, approve manual overrides, and monitor active sessions. I designed and built this separately from the customer UI, with a completely different visual language that signals "internal tool" rather than "customer product."</p>
+  <p class="body-p reveal">The customer-facing flow was one half of the product. The other half was the operator dashboard, the interface that lets store staff manage inventory, approve manual overrides, and monitor active sessions. I designed and built this separately from the customer UI, with a completely different visual language that signals "internal tool" rather than "customer product."</p>
 
   <!-- Admin Dashboard: Inventory Tab -->
   <div class="ad-frame reveal">
@@ -997,33 +1030,59 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
     </div>
   </div>
 
-  <p class="body-p reveal" style="margin-top:24px">The override queue was one of the most important features I designed — not because it was used often, but because it defined the graceful degradation path. When the CV pipeline failed, store staff needed a fast, auditable way to add items manually without disrupting the customer's session. Every override was logged with the reason code, giving us data on where the CV model needed improvement.</p>
+  <p class="body-p reveal" style="margin-top:24px">The override queue was one of the most important features I designed, not because it was used often, but because it defined the graceful degradation path. When the CV pipeline failed, store staff needed a fast, auditable way to add items manually without disrupting the customer's session. Every override was logged with the reason code, giving us data on where the CV model needed improvement.</p>
 </section>
 
-<!-- 07 WHAT I LEARNED -->
+<!-- 07 RESULTS -->
 <section class="cs-section">
   <span class="section-num">07</span>
+  <h2 class="section-title reveal">The <em>Results</em></h2>
+  <p class="body-p reveal">We wrote seven testable specs before building anything, and validated every one. The numbers I cared about most were the ones a shopper actually feels, that the total always matched, that the screen never froze, and that an uncertain item still resolved inside the same six-second window.</p>
+  <div class="stat-grid reveal" style="grid-template-columns:1fr 1fr">
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Top-1 accuracy on the 16-SKU test set, no misclassifications (target was 99 in 100)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">&lt;6s</span>
+      <span class="stat-label">Full checkout, from item placement to emailed receipt, across 50 trials, none over 8s</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12 hrs</span>
+      <span class="stat-label">Continuous operation with zero crashes or disconnections</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">&lt;200ms</span>
+      <span class="stat-label">Admin operations, with no freezes during a live customer checkout</span>
+    </div>
+  </div>
+  <p class="body-p reveal" style="margin-top:24px">Two of those map straight onto the layer I owned. The cart total matched the backend on 50 of 50 transactions, because I'd made the backend the single source of truth instead of reconciling two running totals. And the interface stayed responsive mid-inference because animation and data-fetching ran on separate paths. Speed and accuracy are table stakes; the point was that trust held up under real conditions, including the moments the model wasn't sure.</p>
+</section>
+
+<!-- 08 WHAT I LEARNED -->
+<section class="cs-section">
+  <span class="section-num">08</span>
   <h2 class="section-title reveal">What I <em>Learned</em></h2>
   <div class="lessons-grid">
     <div class="lesson-card reveal">
       <div class="lesson-num">01</div>
       <div class="lesson-title">Trust is a UX problem, not a technical one</div>
-      <div class="lesson-desc">The CV model was genuinely accurate. But accuracy doesn't equal trust. Trust comes from the interface: the confirmation step, the item preview, the clear error path, the ability to delete something. People trust systems that give them visible control — not systems that claim to be right.</div>
+      <div class="lesson-desc">The CV model was genuinely accurate. But accuracy doesn't equal trust. Trust comes from the interface: the confirmation step, the item preview, the clear error path, the ability to delete something. People trust systems that give them visible control, not systems that claim to be right.</div>
     </div>
     <div class="lesson-card reveal d1">
       <div class="lesson-num">02</div>
       <div class="lesson-title">Product decisions live in architecture meetings</div>
-      <div class="lesson-desc">Some of the most consequential product choices happened in technical discussions: whether to cache detection events or query live, how the backend should handle concurrent sessions, what the API contract between FastAPI and React should look like. Being in those conversations — and asking "what does this mean for the customer?" — mattered more than any later feature decision.</div>
+      <div class="lesson-desc">Some of the most consequential product choices happened in technical discussions: whether to cache detection events or query live, how the backend should handle concurrent sessions, what the API contract between FastAPI and React should look like. Being in those conversations, and asking "what does this mean for the customer?", mattered more than any later feature decision.</div>
     </div>
     <div class="lesson-card reveal d2">
       <div class="lesson-num">03</div>
       <div class="lesson-title">Cut to clarify, not to simplify</div>
-      <div class="lesson-desc">Removing the live video feed wasn't about making the UI simpler. It was about making the customer's task clearer. Every element on screen should earn its place by helping the user complete their goal. The camera feed was technically impressive but functionally distracting — and impressive doesn't help someone check out faster.</div>
+      <div class="lesson-desc">Removing the live video feed wasn't about making the UI simpler. It was about making the customer's task clearer. Every element on screen should earn its place by helping the user complete their goal. The camera feed was technically impressive but functionally distracting, and impressive doesn't help someone check out faster.</div>
     </div>
     <div class="lesson-card reveal d3">
       <div class="lesson-num">04</div>
       <div class="lesson-title">Integration is a design problem</div>
-      <div class="lesson-desc">The hardest bugs weren't in any single component — they were at the seams. The animation and API call competing. The cart UI and backend total diverging. Designing clear ownership boundaries between layers would have caught those problems before they became debugging sessions. I'd now treat the API contract as a first-class design artifact, not an afterthought.</div>
+      <div class="lesson-desc">The hardest bugs weren't in any single component. They were at the seams. The animation and API call competing. The cart UI and backend total diverging. Designing clear ownership boundaries between layers would have caught those problems before they became debugging sessions. I'd now treat the API contract as a first-class design artifact, not an afterthought.</div>
     </div>
   </div>
 </section>
@@ -1031,18 +1090,36 @@ footer{background:#3A2E2A;padding:32px var(--pad);display:flex;justify-content:s
 </div><!-- /cs-body -->
 
 <div class="cs-closing">
-  <p class="closing-text">"The system could identify a banana with 99% confidence. My job was designing the 1% — the moment it doesn't, and what happens next."</p>
+  <p class="closing-text">"The system could identify a banana with 99% confidence. My job was designing the 1%, the moment it doesn't, and what happens next."</p>
   <p class="closing-sub">Self Checkout+ taught me that the most interesting design work happens at the edge cases: when the technology fails gracefully, when the customer needs a clear way out, when the operator needs an audit trail. Getting the happy path right is table stakes. Getting the error path right is what defines the product.</p>
   <a href="work.html" class="back-link">
     ← Back to all work
   </a>
 </div>
 
-<footer>
-  <span class="footer-name">Anika Badkul</span>
-  <span class="footer-copy">© 2025 &nbsp;·&nbsp; built with curiosity</span>
+<footer class="footer">
+  <div class="ft-grid">
+    <div class="reveal">
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ft-lbl">Contact</div>
+      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
+      <div class="ft-lbl">Elsewhere</div>
+      <div class="ft-links">
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream.png" alt=""><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
+  </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="site.js?v=4"></script>
 </body>
 </html>
