@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anika Badkul · Product Manager</title>
+<link rel="canonical" href="https://anikabadkul.com/">
+<meta name="theme-color" content="#FBF8F3">
+<meta name="description" content="Anika Badkul, product manager and UX researcher who turns user research into shipped product.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anika Badkul · Product Manager">
+<meta property="og:description" content="Anika Badkul, product manager and UX researcher who turns user research into shipped product.">
+<meta property="og:image" content="https://anikabadkul.com/social-preview.jpg">
+<meta property="og:url" content="https://anikabadkul.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anika Badkul · Product Manager">
+<meta name="twitter:description" content="Anika Badkul, product manager and UX researcher who turns user research into shipped product.">
+<meta name="twitter:image" content="https://anikabadkul.com/social-preview.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=6">
+<style>
+/* ============================================================
+   Homepage-only styles. Everything shared (base, nav, buttons,
+   footer, reveal, breakpoints, type refinements) lives in site.css.
+   ============================================================ */
+
+/* HERO */
+.hero{position:relative;padding:clamp(38px,5.5vh,60px) var(--edge) clamp(40px,6vh,66px);overflow:hidden}
+.hero-mark{position:absolute;top:48%;right:-4%;transform:translateY(-50%);width:min(560px,48vw);opacity:.13;pointer-events:none;z-index:0}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(32px,5vw,72px);align-items:center}
+.avail{display:inline-flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);
+  border-radius:40px;padding:7px 15px 7px 13px;font-size:12.5px;color:var(--ink2);font-weight:500;width:fit-content;margin-bottom:24px}
+.pulse{width:7px;height:7px;border-radius:50%;background:#6aa87a;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(106,168,122,.5)}50%{opacity:.5;transform:scale(.8);box-shadow:0 0 0 5px rgba(106,168,122,0)}}
+.hero-role{margin-bottom:18px}
+.hero-name{font-family:var(--serif);font-size:clamp(40px,4.8vw,64px);font-weight:500;line-height:.95;letter-spacing:-.02em;color:var(--ink);margin-bottom:20px}
+.hero-name em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+.hero-headline{font-family:var(--serif);font-size:clamp(19px,2vw,26px);font-weight:500;line-height:1.28;color:var(--ink);margin-bottom:18px;max-width:20ch}
+.hero-bio{font-size:16px;color:var(--ink2);line-height:1.72;max-width:46ch;margin-bottom:32px}
+.hero-bio strong{font-weight:600;color:var(--ink)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-size:14px;font-weight:500;text-decoration:none;padding:14px 26px;border-radius:30px;display:inline-flex;align-items:center;gap:9px;transition:all .22s var(--ease);cursor:pointer}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--terra-deep);transform:translateY(-2px);box-shadow:0 12px 26px -14px rgba(150,80,63,.55)}
+.btn-primary:active,.btn-ghost:active{transform:translateY(0) scale(.98);box-shadow:none}
+.btn-primary svg{transition:transform .22s var(--ease)}
+.btn-primary:hover svg{transform:translate(3px,-3px)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra-deep)}
+.hero-fig{position:relative;justify-self:end;width:100%;max-width:340px}
+.hero-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 16%;border-radius:10px;
+  border:1px solid var(--line);box-shadow:0 28px 60px -30px rgba(80,45,40,.5)}
+.hero-fig::after{content:"";position:absolute;inset:11px;border:1px solid rgba(196,125,110,.45);border-radius:6px;pointer-events:none}
+.stats{display:flex;gap:clamp(24px,3.4vw,52px);margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.stat .n{font-family:var(--serif);font-size:clamp(28px,2.8vw,38px);font-weight:600;line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.stat .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:8px;font-weight:500;line-height:1.5}
+
+/* SKILLS TICKER */
+.ticker{padding:15px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--paper);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.ticker-inner{display:inline-flex;animation:tick 36s linear infinite;will-change:transform}
+.ticker:hover .ticker-inner{animation-play-state:paused}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink2);padding:0 28px;display:inline-flex;align-items:center;letter-spacing:.01em}
+.td{color:var(--terra);font-size:10px;display:inline-flex;align-items:center}
+@media(prefers-reduced-motion:reduce){.ticker-inner{animation:none}}
+
+/* SECTION SHELL */
+.sec{padding:clamp(40px,5.5vh,64px) var(--edge);position:relative;border-top:1px solid var(--line2)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+.sec-h{font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.01em;line-height:1.02;color:var(--ink);margin-top:12px}
+.sec-h em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+.sec-sub{font-size:15px;color:var(--ink2);max-width:44ch;margin-top:14px;line-height:1.65}
+.sec-link{font-size:13px;font-weight:600;color:var(--terra-deep);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:gap .2s}
+.sec-link:hover{gap:11px}
+
+/* APPROACH */
+.appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.appr{padding:34px 32px 38px;background:var(--panel)}
+.appr-n{font-family:var(--serif);font-size:30px;font-weight:500;font-style:italic;color:var(--terra);line-height:1;margin-bottom:18px}
+.appr-t{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.01em;margin-bottom:11px;line-height:1.15}
+.appr-d{font-size:14.5px;color:var(--ink2);line-height:1.66}
+
+/* Case cards: shared with work.html — moved to site.css */
+
+/* HOMEPAGE BREAKPOINTS (shared nav/footer breakpoints live in site.css) */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-fig{justify-self:center;max-width:300px}
+  .hero-mark{display:none}
+  .appr-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .stats{flex-wrap:wrap;gap:26px}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:stretch}.btn{justify-content:center}
+}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav>
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose-sm.png" width="220" height="136" alt="" loading="eager">
+    <span class="logo-name">Anika Badkul</span>
+  </a>
+  <div class="nav-r" id="nav-menu">
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="projects.html" style="display:none">Curiosities</a>
+    <a href="resume.html">Resume</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+</nav>
+
+<main id="main">
+<section class="hero">
+  <img class="hero-mark" src="logo-mark-rose.png" width="900" height="558" alt="" aria-hidden="true" loading="eager">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="avail reveal"><span class="pulse"></span>Open to PM roles · 2026</div>
+      <div class="eyebrow hero-role reveal d1">Product Manager</div>
+      <h1 class="hero-name reveal d1">Anika <em>Badkul</em></h1>
+      <p class="hero-headline reveal d2">Engineer's brain, product manager's instinct.</p>
+      <p class="hero-bio reveal d2">Some of my best product calls so far have been <strong>knowing when not to build something at all</strong>, and being able to say exactly why.</p>
+      <div class="hero-btns reveal d3">
+        <a href="work.html" class="btn btn-primary">See my work
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="btn btn-ghost">Resume</a>
+      </div>
+      <div class="stats reveal d3">
+        <div class="stat"><div class="n">3</div><div class="l">Internships</div></div>
+        <div class="stat"><div class="n">30+</div><div class="l">Users researched</div></div>
+        <div class="stat"><div class="n">200+</div><div class="l">Students taught</div></div>
+      </div>
+    </div>
+    <figure class="hero-fig reveal d2">
+      <img class="hero-photo" src="photo.jpg" alt="Anika Badkul" width="900" height="1125" decoding="async" fetchpriority="high" loading="eager">
+    </figure>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ti">User Research</span><span class="td">✦</span><span class="ti">Product Strategy</span><span class="td">✦</span><span class="ti">A/B Testing</span><span class="td">✦</span><span class="ti">PRD Writing</span><span class="td">✦</span><span class="ti">Roadmapping</span><span class="td">✦</span><span class="ti">Data Analysis</span><span class="td">✦</span><span class="ti">Stakeholder Mgmt</span><span class="td">✦</span><span class="ti">JTBD Framework</span><span class="td">✦</span><span class="ti">Figma</span><span class="td">✦</span><span class="ti">User Research</span><span class="td">✦</span><span class="ti">Product Strategy</span><span class="td">✦</span><span class="ti">A/B Testing</span><span class="td">✦</span><span class="ti">PRD Writing</span><span class="td">✦</span><span class="ti">Roadmapping</span><span class="td">✦</span><span class="ti">Data Analysis</span><span class="td">✦</span><span class="ti">Stakeholder Mgmt</span><span class="td">✦</span><span class="ti">JTBD Framework</span><span class="td">✦</span><span class="ti">Figma</span><span class="td">✦</span>
+  </div>
+</div>
+
+<section id="about" class="sec approach">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow reveal">How I work</div>
+      <h2 class="sec-h reveal d1">What I believe about <em>building product</em></h2>
+    </div>
+  </div>
+  <div class="appr-grid reveal d1">
+    <div class="appr">
+      <div class="appr-n">01</div>
+      <span class="li-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.8 12.8L17 17"/></svg></span>
+      <div class="appr-t">Research before assumptions</div>
+      <div class="appr-d">The best signal isn't what people say they want. It's what they actually do, and that's where I start.</div>
+    </div>
+    <div class="appr">
+      <div class="appr-n">02</div>
+      <span class="li-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5v-6M10 16.5v-11M15.5 16.5v-8.5"/><path d="M3 16.5h14" opacity=".45"/></svg></span>
+      <div class="appr-t">Is it worth building?</div>
+      <div class="appr-d">Not every problem deserves a solution. Research and data decide what makes the cut, not instinct.</div>
+    </div>
+    <div class="appr">
+      <div class="appr-n">03</div>
+      <span class="li-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="3.2"/><path d="M10 2.5v2.6M10 14.9v2.6M2.5 10h2.6M14.9 10h2.6M4.7 4.7l1.8 1.8M13.5 13.5l1.8 1.8M15.3 4.7l-1.8 1.8M6.5 13.5l-1.8 1.8"/></svg></span>
+      <div class="appr-t">Think in systems</div>
+      <div class="appr-d">My engineering background means I look at how the whole thing fits together, which helps me catch what a decision affects before it ships, not after.</div>
+    </div>
+    <div class="appr">
+      <div class="appr-n">04</div>
+      <span class="li-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z"/></svg></span>
+      <div class="appr-t">Useful beats impressive</div>
+      <div class="appr-d">A product can be clever and good-looking and still miss the one thing that counts: does it actually help the person using it? That's the test I keep coming back to.</div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="sec">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow reveal">Selected work</div>
+      <h2 class="sec-h reveal d1">Case <em>studies</em></h2>
+      <p class="sec-sub reveal d1">Research-driven projects from internships, coursework, and self-initiated builds.</p>
+    </div>
+    <a href="work.html" class="sec-link reveal d1">All work
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+
+  <div class="cases">
+    <a href="cs-kobl-incentives.html" class="case case-link reveal">
+      <div class="case-head has-shot">
+        <img class="case-shot" src="cs-kobl-incentive-mgmt.webp" width="1280" height="995" alt="KOBL incentive management preview" loading="lazy">
+        <span class="case-cat">PM Internship · KOBL</span>
+        <span class="case-year">2025</span>
+      </div>
+      <div class="case-body">
+        <h3 class="case-t">Dynamic Incentive Management CRM</h3>
+        <p class="case-d">Stakeholder research and end-to-end systems mapping for a rule-driven CRM that computes every incentive automatically and transparently, the system behind a ~60% drop in disputes.</p>
+        <div class="case-foot">
+          <div class="impact"><span>Impact</span>~60% fewer disputes</div>
+          <span class="case-go">View project
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+<a href="cs-mealplan.html" class="case case-link reveal d1">
+      <div class="case-head has-shot">
+        <img class="case-shot" src="cs-mp-home.webp" width="1800" height="1804" alt="MealPlan honest meal planner preview" loading="lazy">
+        <span class="case-cat">Product &amp; PRD · Hackathon</span>
+        <span class="case-year">2026</span>
+      </div>
+      <div class="case-body">
+        <h3 class="case-t">MealPlan, an honest meal planner</h3>
+        <p class="case-d">A SNAP budget becomes an honest 7-day plan that names the shortfall instead of faking it. I led the PRD, research, and vibe-coded build in a six-day sprint with a team of four.</p>
+        <div class="case-foot">
+          <div class="impact"><span>Shipped live</span>6 days · team of 4</div>
+          <span class="case-go">View project
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+<a href="cs-sdp-selfcheckout.html" class="case case-link reveal d1">
+      <div class="case-head has-shot">
+        <img class="case-shot" src="sdp-screen1.webp" width="1600" height="1048" alt="Self Checkout+ touchscreen interface preview" loading="lazy">
+        <span class="case-cat">Product &amp; UI Lead · Senior Design</span>
+        <span class="case-year">2025–2026</span>
+      </div>
+      <div class="case-body">
+        <h3 class="case-t">Designing trust into a barcode-free checkout</h3>
+        <p class="case-d">A computer-vision grocery checkout with no barcodes. I owned the customer-facing experience and the integration layer, the full software stack above the CV model.</p>
+        <div class="case-foot">
+          <div class="impact"><span>Result</span>&lt;6s &middot; 0 barcodes</div>
+          <span class="case-go">View project
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+<a href="cs-schedule-builder.html" class="case case-link reveal d2">
+      <div class="case-head has-shot">
+        <img class="case-shot" src="cs-sb-final-arr.webp" width="1280" height="979" alt="Schedule Builder redesign preview" loading="lazy">
+        <span class="case-cat">UX Research &amp; Design · CompSci 325 (HCI)</span>
+        <span class="case-year">2026</span>
+      </div>
+      <div class="case-body">
+        <h3 class="case-t">Rebuilding the campus Schedule Builder</h3>
+        <p class="case-d">A 30-person survey plus 9 interviews surfaced three friction points. Paper prototypes led to a hi-fi flow that unified prerequisites, ARR tracking, and conflict detection.</p>
+        <div class="case-foot">
+          <div class="impact"><span>Impact</span>7 screens → 1 flow</div>
+          <span class="case-go">View project
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="ft-grid">
+    <div class="reveal">
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ft-lbl">Contact</div>
+      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
+      <div class="ft-lbl">Elsewhere</div>
+      <div class="ft-links">
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream-sm.png" width="220" height="133" alt="" loading="lazy"><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
+  </div>
+</footer>
+
+<button class="to-top" aria-label="Back to top"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3m0 0L3.5 7.5M8 3l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script src="site.js?v=6"></script>
+</body>
+</html>

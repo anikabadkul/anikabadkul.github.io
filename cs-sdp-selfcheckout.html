@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self Checkout+ · Anika Badkul</title>
+<link rel="canonical" href="https://anikabadkul.com/cs-sdp-selfcheckout.html">
+<meta name="theme-color" content="#FBF8F3">
+<meta name="description" content="Designing trust into a barcode-free, computer-vision grocery checkout — under 6 seconds, zero barcodes.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Self Checkout+ · Anika Badkul">
+<meta property="og:description" content="Designing trust into a barcode-free, computer-vision grocery checkout — under 6 seconds, zero barcodes.">
+<meta property="og:image" content="https://anikabadkul.com/social-preview.jpg">
+<meta property="og:url" content="https://anikabadkul.com/cs-sdp-selfcheckout.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Self Checkout+ · Anika Badkul">
+<meta name="twitter:description" content="Designing trust into a barcode-free, computer-vision grocery checkout — under 6 seconds, zero barcodes.">
+<meta name="twitter:image" content="https://anikabadkul.com/social-preview.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=6">
+<style>
+/* Page-specific styles only. Shared chrome (nav, case-study hero/meta/sections,
+   callouts, stats, lessons, footer, reveal, breakpoints) comes from site.css,
+   which is now loaded FIRST so these local rules override it deliberately
+   rather than colliding by accident. */
+:root{
+  --iv:var(--paper);--iv2:var(--paper2);
+  --bl:#E8BFB4;--bld:var(--terra-deep); /* text labels: was var(--terra), 2.76:1 on paper2 */ --bll:#F7EBE7;--blm:#D49A8E;
+  --max:1100px;
+  --pad:max(56px, calc((100vw - var(--max)) / 2 + 56px));
+}
+/* base html/body, nav, nav::before, .logo-name, .nav-r, .nav-r a, .nav-toggle,
+   :focus-visible are all provided identically by shared site.css — removed the
+   duplicate copies that used to live here to avoid future drift */
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo img{display:block}
+.nav-badge{font-size:11px;font-weight:500;color:var(--bld);background:var(--bll);
+  border:1px solid var(--bl);padding:5px 14px;border-radius:20px;letter-spacing:.04em}
+
+/* HERO */
+.cs-meta-item{display:flex;flex-direction:column;gap:5px}
+.cs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+
+
+/* DECISION BLOCKS */
+.decision-row{display:grid;grid-template-columns:56px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid rgba(196,125,110,.1)}
+.decision-row:last-child{border-bottom:none}
+.decision-num{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--terra);line-height:1;padding-top:2px}
+.decision-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.decision-desc{font-size:14px;color:var(--ink2);line-height:1.75}
+.decision-tag{display:inline-block;font-size:10px;color:var(--bld);background:var(--bll);border:1px solid var(--bl);padding:3px 10px;border-radius:10px;font-weight:500;margin-top:8px;letter-spacing:.04em}
+
+
+/* CLOSING */
+.sdp-closing{padding:clamp(38px,5vh,56px) var(--pad);background:var(--ink);text-align:center}
+.closing-text{font-family:var(--serif);font-size:clamp(22px,2.6vw,32px);font-weight:500;font-style:italic;color:var(--iv);line-height:1.28;max-width:26ch;margin:0 auto 24px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--terra);text-decoration:none;border:1px solid rgba(196,125,110,.4);padding:11px 22px;border-radius:30px;transition:all .2s}
+.back-link:hover{background:var(--bld);color:#fff}
+.sdp-closing-sub{font-size:14px;color:rgba(251,248,243,.45);line-height:1.8;max-width:560px}
+
+/* FOOTER: fully handled by the shared .ft-* system in site.css.
+   (Removed a stale element-level `footer{display:flex;...}` rule left over from the old
+   footer design — it forced the new footer's two blocks side-by-side and pushed the
+   logo caption past the viewport on phones.) */
+
+/* SCROLL ANIMATIONS */
+/* .reveal / .d1-d4 handled by shared site.css — removed duplicate keyframe system that was fighting it */
+
+/* Section dividers (preserved from the page's original look) */
+.cs-body .cs-section{border-bottom:1px solid rgba(196,125,110,.1)}
+.cs-body .cs-section:last-child{border-bottom:none}
+/* Pills sit below the meta row in this hero */
+.cs-hero .cs-pills{margin-top:32px}
+/* Meta items stack label over value (not in shared chrome) */
+.cs-meta-item{display:flex;flex-direction:column;gap:5px}
+/* Closing quote is on a dark panel, needs light text */
+.sdp-closing .closing-text{color:var(--iv)}
+
+/* ─── SELF CHECKOUT+ UI MOCKUPS ─── */
+
+/* Device frame */
+.sc-device{border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.09);
+  box-shadow:0 20px 60px rgba(0,0,0,.14),0 4px 20px rgba(0,0,0,.08);
+  background:#111827;font-family:var(--sans)}
+.sc-device *{}
+
+/* Shared header bar */
+.sc-header{height:48px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;background:rgba(255,255,255,.97);border-bottom:1px solid rgba(0,0,0,.06);
+  backdrop-filter:blur(8px)}
+.sc-brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+  color:#111827;letter-spacing:-.01em}
+.sc-brand-mark{width:8px;height:8px;background:#22C55E;border-radius:50%}
+.sc-header-right{display:flex;align-items:center;gap:12px}
+.sc-cart-pill{display:flex;align-items:center;gap:6px;background:#F3F4F6;border-radius:20px;
+  padding:5px 12px;font-size:11px;font-weight:600;color:#374151}
+.sc-cart-pill-dot{width:6px;height:6px;background:#22C55E;border-radius:50%}
+.sc-help-btn{font-size:11px;color:#6B7280;font-weight:500;background:#F9FAFB;
+  border:1px solid #E5E7EB;border-radius:8px;padding:4px 10px}
+
+/* SCREEN 1, Splash */
+.sc-splash{min-height:380px;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:48px 40px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,#071c0f 0%,#0e3318 35%,#0a2713 65%,#071408 100%)}
+.sc-splash-texture{position:absolute;inset:0;opacity:.06;
+  background-image:radial-gradient(circle at 30% 40%, rgba(34,197,94,.6) 0%, transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(34,197,94,.4) 0%, transparent 45%)}
+.sc-splash-glow{position:absolute;width:400px;height:300px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(34,197,94,.08) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%)}
+.sc-splash-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(34,197,94,.7);margin-bottom:24px;position:relative;z-index:1;font-weight:500}
+.sc-splash-title{font-size:clamp(28px,5vw,52px);font-weight:800;color:#FFFFFF;
+  line-height:1.05;letter-spacing:-.03em;position:relative;z-index:1;margin-bottom:16px;
+  text-shadow:0 2px 40px rgba(0,0,0,.4)}
+.sc-splash-sub{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.12em;
+  text-transform:uppercase;position:relative;z-index:1;font-weight:400}
+.sc-splash-tap{font-size:11px;color:rgba(255,255,255,.25);margin-top:40px;
+  position:relative;z-index:1;letter-spacing:.1em;text-transform:uppercase}
+.sc-splash-tap span{display:inline-block;width:28px;height:1px;background:rgba(255,255,255,.15);
+  vertical-align:middle;margin:0 10px}
+
+/* SCREEN 2, Scanning */
+.sc-scan-shell{display:grid;grid-template-columns:1.5fr 1fr;min-height:400px}
+.sc-camera-area{background:#0D1117;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;min-height:400px}
+.sc-camera-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(34,197,94,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(34,197,94,.06) 1px,transparent 1px);
+  background-size:40px 40px}
+.sc-scan-anim{position:absolute;left:10%;right:10%;height:1.5px;top:45%;
+  background:linear-gradient(90deg,transparent 0%,rgba(34,197,94,.3) 15%,#22C55E 50%,rgba(34,197,94,.3) 85%,transparent 100%);
+  box-shadow:0 0 16px rgba(34,197,94,.5)}
+.sc-scan-box{width:140px;height:140px;border-radius:12px;position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center}
+.sc-scan-box::before,.sc-scan-box::after{content:"";position:absolute;width:28px;height:28px;border-color:#22C55E;border-style:solid}
+.sc-scan-box::before{top:0;left:0;border-width:2.5px 0 0 2.5px;border-radius:3px 0 0 0}
+.sc-scan-box::after{bottom:0;right:0;border-width:0 2.5px 2.5px 0;border-radius:0 0 3px 0}
+.sc-scan-corner-tr{position:absolute;top:0;right:0;width:28px;height:28px;border-color:#22C55E;border-style:solid;border-width:2.5px 2.5px 0 0;border-radius:0 3px 0 0}
+.sc-scan-corner-bl{position:absolute;bottom:0;left:0;width:28px;height:28px;border-color:#22C55E;border-style:solid;border-width:0 0 2.5px 2.5px;border-radius:0 0 0 3px}
+.sc-cam-status{position:absolute;bottom:16px;left:16px;display:flex;align-items:center;
+  gap:8px;font-size:11px;color:rgba(255,255,255,.45);font-weight:400;letter-spacing:.04em}
+.sc-cam-dot{width:7px;height:7px;border-radius:50%;background:#22C55E;
+  box-shadow:0 0 6px rgba(34,197,94,.6)}
+
+/* Detection panel */
+.sc-det-panel{background:#161D2B;padding:24px;display:flex;flex-direction:column;
+  border-left:1px solid rgba(255,255,255,.05)}
+.sc-det-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:16px;font-weight:500}
+.sc-det-item-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:16px;margin-bottom:12px}
+.sc-det-item-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sc-det-check{width:28px;height:28px;border-radius:50%;background:rgba(34,197,94,.15);
+  border:1.5px solid #22C55E;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sc-det-name{font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:-.01em}
+.sc-det-price{font-size:12px;color:rgba(255,255,255,.45);margin-top:1px}
+.sc-det-img{width:100%;height:120px;border-radius:8px;background:linear-gradient(135deg,#2d4a2d,#1a3a1a);
+  display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:12px;
+  border:1px solid rgba(255,255,255,.06)}
+.sc-det-actions{display:flex;gap:8px}
+.sc-det-btn{flex:1;padding:9px;border-radius:10px;font-size:12px;font-weight:700;
+  letter-spacing:.04em;text-align:center;font-family:var(--sans)}
+.sc-det-btn-reject{background:rgba(239,68,68,.1);border:1.5px solid rgba(239,68,68,.3);color:#F87171}
+.sc-det-btn-accept{background:#22C55E;border:none;color:#fff}
+
+/* SCREEN 3, Cart */
+.sc-cart-shell{display:grid;grid-template-columns:1.4fr 1fr;min-height:420px;background:#F5F7F5}
+.sc-cart-left{padding:24px 20px}
+.sc-cart-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:16px;letter-spacing:-.01em}
+.sc-item-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;
+  background:#fff;margin-bottom:7px;border:1px solid #F3F4F6;
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.sc-item-thumb{width:40px;height:40px;border-radius:8px;flex-shrink:0;border:1px solid rgba(0,0,0,.06)}
+.sc-item-name{flex:1;font-size:13px;font-weight:500;color:#111827;letter-spacing:-.01em}
+.sc-item-price{font-size:13px;font-weight:600;color:#374151;margin-right:4px}
+.sc-item-del{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;color:#EF4444;opacity:.6;flex-shrink:0}
+
+.sc-cart-right{background:#FFFFFF;padding:24px;border-left:1px solid #E5E7EB;
+  display:flex;flex-direction:column;justify-content:space-between}
+.sc-summary-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.sc-summary-label{font-size:13px;color:#6B7280;font-weight:400}
+.sc-summary-val{font-size:13px;color:#374151;font-weight:500}
+.sc-summary-divider{height:1px;background:#E5E7EB;margin:14px 0}
+.sc-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+.sc-total-label{font-size:15px;font-weight:700;color:#111827}
+.sc-total-val{font-size:28px;font-weight:800;color:#111827;letter-spacing:-.03em}
+.sc-checkout-btn{width:100%;padding:16px;background:#22C55E;border:none;border-radius:14px;
+  font-size:14px;font-weight:800;color:#fff;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;font-family:var(--sans)}
+.sc-more-btn{width:100%;padding:11px;background:#F3F4F6;border:none;border-radius:12px;
+  font-size:12px;font-weight:700;color:#6B7280;letter-spacing:.06em;text-transform:uppercase;font-family:var(--sans)}
+
+/* SCREEN 4, Payment */
+.sc-flow-screen{background:#FFFFFF;min-height:400px;display:flex;flex-direction:column}
+.sc-stepper{display:flex;align-items:center;justify-content:center;padding:24px 40px 8px;gap:0}
+.sc-step{display:flex;align-items:center;gap:8px}
+.sc-step-bubble{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.sc-step-bubble.done{background:#22C55E;color:#fff}
+.sc-step-bubble.active{background:#111827;color:#fff;box-shadow:0 0 0 4px rgba(17,24,39,.12)}
+.sc-step-bubble.todo{background:#F3F4F6;color:#9CA3AF}
+.sc-step-text{font-size:11px;font-weight:600;white-space:nowrap}
+.sc-step-text.active{color:#111827}
+.sc-step-text.done{color:#22C55E}
+.sc-step-text.todo{color:#D1D5DB}
+.sc-step-line{width:52px;height:2px;margin:0 6px;flex-shrink:0}
+.sc-step-line.done{background:#22C55E}
+.sc-step-line.todo{background:#F3F4F6}
+
+.sc-flow-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 60px 32px}
+.sc-flow-q{font-size:24px;font-weight:800;color:#111827;text-align:center;
+  margin-bottom:36px;letter-spacing:-.02em;line-height:1.2}
+.sc-options-row{display:flex;gap:20px;justify-content:center;width:100%;max-width:480px}
+.sc-option-card{flex:1;background:#F9FAFB;border:2px solid #E5E7EB;border-radius:20px;
+  padding:32px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;
+  transition:all .2s}
+.sc-option-card.sel{background:#F0FAF4;border-color:#22C55E;
+  box-shadow:0 0 0 4px rgba(34,197,94,.1)}
+.sc-option-icon{width:56px;height:56px;border-radius:16px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:24px}
+.sc-option-label{font-size:11px;font-weight:800;color:#374151;letter-spacing:.1em;
+  text-transform:uppercase;text-align:center}
+
+.sc-flow-footer{display:flex;align-items:center;justify-content:flex-start;padding:0 20px 20px}
+.sc-back-btn{font-size:12px;color:#9CA3AF;font-weight:500;padding:8px 16px;
+  background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;font-family:var(--sans)}
+
+/* SCREEN 5, Receipt choice */
+.sc-receipt-options{display:flex;gap:16px;justify-content:center;width:100%;max-width:520px}
+.sc-receipt-card{flex:1;background:#F9FAFB;border:2px solid #E5E7EB;border-radius:20px;
+  padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:120px}
+.sc-receipt-card.sel{background:#F0FAF4;border-color:#22C55E}
+.sc-receipt-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+.sc-receipt-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#374151;text-align:center}
+
+/* SCREEN 6, Thank you */
+.sc-thankyou{min-height:380px;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:48px 40px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,#052E16 0%,#14532D 45%,#15803D 100%)}
+.sc-ty-glow{position:absolute;width:500px;height:350px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(34,197,94,.12) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%)}
+.sc-ty-check{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,.2);
+  border:2px solid rgba(34,197,94,.4);display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;position:relative;z-index:1}
+.sc-ty-title{font-size:40px;font-weight:800;color:#FFFFFF;letter-spacing:-.03em;
+  position:relative;z-index:1;margin-bottom:12px;line-height:1}
+.sc-ty-sub{font-size:14px;color:rgba(255,255,255,.5);position:relative;z-index:1;
+  font-weight:400;line-height:1.6;max-width:280px;margin:0 auto}
+.sc-ty-detail{font-size:11px;color:rgba(255,255,255,.25);position:relative;z-index:1;
+  margin-top:24px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Error modal overlay */
+.sc-overlay-wrap{position:relative}
+.sc-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;z-index:10;border-radius:16px}
+.sc-modal-card{background:#fff;border-radius:20px;padding:28px 24px;width:320px;
+  text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.25)}
+.sc-modal-icon{width:52px;height:52px;border-radius:50%;background:#FEF2F2;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px}
+.sc-modal-icon.ok{background:#F0FAF4}
+.sc-modal-title{font-size:17px;font-weight:700;color:#111827;margin-bottom:8px;letter-spacing:-.01em}
+.sc-modal-body{font-size:12px;color:#6B7280;line-height:1.65;margin-bottom:20px}
+.sc-modal-btn{width:100%;padding:12px;border-radius:12px;font-size:13px;font-weight:700;
+  font-family:var(--sans);letter-spacing:.02em;margin-bottom:8px}
+.sc-modal-btn:last-child{margin-bottom:0}
+.sc-modal-btn-primary{background:#22C55E;color:#fff;border:none}
+.sc-modal-btn-outline{background:transparent;color:#374151;border:1.5px solid #E5E7EB}
+.sc-modal-btn-ghost{background:#FEF2F2;color:#EF4444;border:none}
+
+/* Screen gallery layouts */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+.sc-gallery-item{display:flex;flex-direction:column;gap:10px}
+.sc-screen-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);
+  font-weight:500;text-align:center}
+.sc-img-frame{border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 12px 40px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06)}
+.sc-img-frame img{display:block;width:100%;height:auto}
+
+/* ─── ADMIN DASHBOARD MOCKUP ─── */
+.ad-frame{border-radius:14px;overflow:hidden;border:1px solid rgba(196,125,110,.18);
+  background:#F8FAFC;box-shadow:0 8px 40px rgba(26,21,18,.07);margin:32px 0;font-family:var(--sans)}
+.ad-shell{display:grid;grid-template-columns:220px 1fr;min-height:420px}
+.ad-sidebar{background:#111827;padding:0;display:flex;flex-direction:column}
+.ad-sidebar-header{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.ad-sidebar-brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#fff}
+.ad-sidebar-dot{width:8px;height:8px;background:#22C55E;border-radius:50%}
+.ad-sidebar-sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
+.ad-sidebar-nav{padding:12px 0;flex:1}
+.ad-nav-section{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);
+  padding:0 16px;margin-bottom:6px;margin-top:16px;font-weight:600}
+.ad-nav-section:first-child{margin-top:4px}
+.ad-nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:12px;
+  color:rgba(255,255,255,.45);font-weight:400;border-right:2px solid transparent}
+.ad-nav-item.active{background:rgba(34,197,94,.08);color:#FFFFFF;border-right-color:#22C55E}
+.ad-nav-item svg{width:14px;height:14px;flex-shrink:0}
+.ad-sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,.06)}
+.ad-operator{display:flex;align-items:center;gap:10px}
+.ad-op-avatar{width:30px;height:30px;border-radius:50%;background:rgba(34,197,94,.15);
+  border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#22C55E;flex-shrink:0}
+.ad-op-name{font-size:12px;color:rgba(255,255,255,.6);font-weight:500}
+.ad-op-role{font-size:10px;color:rgba(255,255,255,.25)}
+
+.ad-main{padding:0;display:flex;flex-direction:column;background:#F9FAFB}
+.ad-topbar{height:52px;background:#fff;border-bottom:1px solid #E5E7EB;display:flex;
+  align-items:center;justify-content:space-between;padding:0 24px}
+.ad-page-title{font-size:15px;font-weight:700;color:#111827;letter-spacing:-.01em}
+.ad-topbar-right{display:flex;align-items:center;gap:10px}
+.ad-btn{font-size:12px;font-weight:600;padding:7px 16px;border-radius:8px;font-family:var(--sans)}
+.ad-btn-green{background:#22C55E;color:#fff;border:none}
+.ad-btn-outline{background:#fff;border:1.5px solid #E5E7EB;color:#374151}
+
+.ad-content{padding:20px 24px;flex:1;overflow:hidden}
+.ad-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.ad-stat{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:14px 16px}
+.ad-stat-label{font-size:10px;color:#9CA3AF;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.ad-stat-val{font-size:22px;font-weight:800;color:#111827;letter-spacing:-.02em;line-height:1}
+.ad-stat-sub{font-size:10px;color:#6B7280;margin-top:3px}
+.ad-stat-val.green{color:#16A34A}
+
+.ad-table-wrap{background:#fff;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden}
+.ad-table-head{display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border-bottom:1px solid #F3F4F6}
+.ad-table-title{font-size:13px;font-weight:700;color:#111827}
+.ad-search{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:7px;
+  padding:6px 12px;font-size:11px;color:#9CA3AF;width:180px}
+.ad-table{width:100%;border-collapse:collapse;font-size:11px}
+.ad-table th{text-align:left;padding:8px 14px;color:#9CA3AF;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;font-size:10px;border-bottom:1px solid #F3F4F6;background:#FAFAFA}
+.ad-table td{padding:10px 14px;color:#374151;border-bottom:1px solid #F9FAFB}
+.ad-table tr:last-child td{border-bottom:none}
+.ad-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;
+  padding:3px 8px;border-radius:6px;letter-spacing:.02em}
+.ad-badge.active{background:#DCFCE7;color:#166534}
+.ad-badge.pending{background:#FEF3C7;color:#92400E}
+.ad-badge.inactive{background:#F3F4F6;color:#6B7280}
+.ad-confidence{display:flex;align-items:center;gap:6px}
+.ad-conf-bar{height:4px;border-radius:2px;background:#E5E7EB;flex:1;overflow:hidden}
+.ad-conf-fill{height:100%;border-radius:2px}
+.ad-conf-fill.high{background:#22C55E}
+.ad-conf-fill.med{background:#F59E0B}
+.ad-edit-btn{font-size:10px;color:#2563EB;font-weight:600;background:none;border:none;font-family:var(--sans)}
+
+/* Override queue styling */
+.ad-override-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #F9FAFB}
+.ad-override-row:last-child{border-bottom:none}
+.ad-ov-img{width:36px;height:36px;border-radius:8px;background:#F0FAF4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ad-ov-info{flex:1}
+.ad-ov-name{font-size:12px;font-weight:600;color:#111827}
+.ad-ov-meta{font-size:10px;color:#9CA3AF;margin-top:1px}
+.ad-ov-actions{display:flex;gap:6px}
+.ad-ov-btn{font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px;font-family:var(--sans)}
+.ad-ov-btn-approve{background:#DCFCE7;color:#166534;border:1px solid rgba(22,163,74,.2)}
+.ad-ov-btn-reject{background:#FEF2F2;color:#991B1B;border:1px solid rgba(239,68,68,.2)}
+
+/* Tabs */
+.ad-tabs{display:flex;border-bottom:1px solid #E5E7EB;padding:0 24px;background:#fff}
+.ad-tab{font-size:12px;padding:10px 16px;color:#9CA3AF;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500}
+.ad-tab.active{color:#111827;border-bottom-color:#22C55E;font-weight:700}
+
+/* ROLE CARD */
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.role-card{background:var(--iv2);border:1px solid rgba(196,125,110,.15);border-radius:14px;padding:24px}
+.role-card-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bld);font-weight:500;margin-bottom:12px}
+.role-card-title{font-size:16px;font-weight:500;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em}
+.role-card ul{list-style:none;padding:0}
+.role-card li{font-size:13px;color:var(--ink2);line-height:1.65;padding:3px 0 3px 16px;position:relative}
+.role-card li::before{content:"·";position:absolute;left:0;color:var(--bl);font-size:10px;top:6px}
+
+/* MOBILE */
+@media(max-width:768px){
+  :root{--pad:24px}
+  .two-col,.two-col-3,.lessons-grid,.role-grid,.sc-grid,.ad-stat-row{grid-template-columns:1fr}
+  .sc-scan-shell,.sc-cart-shell,.ad-shell{grid-template-columns:1fr}
+  .sc-det-panel,.ad-sidebar{display:none}
+  /* Fix: the admin topbar's min-content width (title + two buttons) was wider than the
+     viewport and made the whole page scroll sideways. The dashboard is a desktop tool,
+     so let it scroll inside its own frame instead of stretching the page. */
+  .ad-frame{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .ad-frame .ad-shell{min-width:520px}
+  .sc-stepper,.sc-options-row,.sc-receipt-options{flex-direction:column;align-items:center}
+  .sc-step-line{display:none}
+}
+
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"></div>
+<nav>
+  <a class="logo" href="index.html" aria-label="Anika Badkul home">
+    <img src="logo-mark-rose-sm.png" width="220" height="136" alt="" loading="eager">
+    <span class="logo-name">Anika Badkul</span>
+  </a>
+  <div class="nav-r" id="nav-menu">
+    <a href="about.html">About</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="projects.html" style="display:none">Curiosities</a>
+    <a href="resume.html">Resume</a>
+    <a href="mailto:anika.badkul@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="cs-hero">
+  <a href="work.html" class="cs-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to work
+  </a>
+  <div class="cs-eyebrow">Product & UI Lead · Senior Design Project · Computer Vision · React</div>
+  <h1 class="cs-title">Designing trust into a <em>barcode-free</em> checkout</h1>
+  <p class="cs-subtitle">Self Checkout+ is a computer vision grocery checkout system that identifies items without barcodes. I led the product direction and built the entire customer-facing experience, designing an interface that makes shoppers trust a system working invisibly behind the scenes.</p>
+  <div class="cs-meta">
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Project</span>
+      <span class="cs-meta-value">Self Checkout+</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">My Role</span>
+      <span class="cs-meta-value">Product & UI Lead</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Context</span>
+      <span class="cs-meta-value">Senior Design Capstone</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Frontend</span>
+      <span class="cs-meta-value">React · Framer Motion</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Backend</span>
+      <span class="cs-meta-value">FastAPI · SQLite</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Hardware</span>
+      <span class="cs-meta-value">Raspberry Pi · ATmega328p</span>
+    </div>
+  </div>
+  <div class="cs-pills">
+    <span class="cs-pill">UX Design</span>
+    <span class="cs-pill">React</span>
+    <span class="cs-pill">Computer Vision</span>
+    <span class="cs-pill">Product Ownership</span>
+    <span class="cs-pill">Framer Motion</span>
+    <span class="cs-pill">Hardware + Software</span>
+  </div>
+</section>
+
+<div class="cs-body">
+
+<!-- 01 THE SYSTEM -->
+<section class="cs-section">
+  <span class="section-num">01</span>
+  <h2 class="section-title reveal">The <em>System</em></h2>
+  <div class="two-col">
+    <div>
+      <p class="body-p">Traditional self-checkout fails at the same moment every time: when there's no barcode. Loose produce, bulk goods, specialty items, the customer either guesses a code from a printed menu or waves down an attendant. Self Checkout+ eliminates that failure point entirely.</p>
+      <p class="body-p">A camera identifies grocery items visually through a YOLOv8 detection pipeline, matches them against a CLIP-trained embedding database, and adds them to a cart, no scanning required. The computer vision pipeline lives on a Raspberry Pi, connected to a custom ATmega328p MCU that handles hardware signaling.</p>
+      <p class="body-p">The core challenge wasn't the computer vision. The CV pipeline was strong. The challenge was designing an interface that makes shoppers trust a system working entirely out of sight.</p>
+    </div>
+    <div>
+      <div class="stat-grid" style="grid-template-columns:1fr 1fr">
+        <div class="stat-item">
+          <span class="stat-num">6</span>
+          <span class="stat-label">distinct customer screens in the checkout flow</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">2</span>
+          <span class="stat-label">user types: customer interface and admin dashboard</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">barcodes scanned in the entire checkout flow</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4</span>
+          <span class="stat-label">person team across hardware, CV, and software</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 MY ROLE -->
+<section class="cs-section">
+  <span class="section-num">02</span>
+  <h2 class="section-title reveal">My <em>Role</em></h2>
+  <p class="body-p">As Product & UI Lead, I owned two things that rarely travel together: every pixel of the customer experience, and every major decision about what the product should actually do.</p>
+  <div class="role-grid">
+    <div class="role-card reveal">
+      <div class="role-card-label">Product Ownership</div>
+      <div class="role-card-title">Defining what the system is</div>
+      <ul>
+        <li>Led product decisions with the team and advisor, from feature scope to architecture tradeoffs</li>
+        <li>Raised and resolved questions like: should we auto-add items or ask first? should we show a live video feed?</li>
+        <li>Contributed to the systems thinking and architecture for the computer vision model, not just the customer's side of it</li>
+        <li>Cut features that added complexity without adding trust or speed</li>
+      </ul>
+    </div>
+    <div class="role-card reveal d1">
+      <div class="role-card-label">Design & Engineering</div>
+      <div class="role-card-title">Building the experience layer</div>
+      <ul>
+        <li>Designed and built the complete customer checkout flow in React, all six screens</li>
+        <li>Built the admin dashboard for store operators: inventory, overrides, session monitoring</li>
+        <li>Integrated the Raspberry Pi cameras myself, wiring the hardware capture into the CV module</li>
+        <li>Owned the SQLite schema and the integration between the React frontend and FastAPI backend</li>
+        <li>Implemented Framer Motion animations and resolved animation-blocking issues during API calls</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout reveal">
+    <div class="callout-label">The stack</div>
+    <p class="callout-text" style="font-size:15px;font-style:normal;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:1.85">Customer UI and admin dashboard in <strong style="color:var(--ink);font-weight:500">React with Framer Motion</strong>. Backend in <strong style="color:var(--ink);font-weight:500">FastAPI with SQLite</strong>. CV pipeline using <strong style="color:var(--ink);font-weight:500">YOLOv8 + CLIP + FAISS + OCR</strong> running on a Raspberry Pi. Hardware signaling over an ATmega328p MCU. My domain was mainly the software layer above the CV model, plus the camera integration and input on the CV architecture.</p>
+  </div>
+</section>
+
+<!-- 03 THE CUSTOMER EXPERIENCE -->
+<section class="cs-section">
+  <span class="section-num">03</span>
+  <h2 class="section-title reveal">The Customer <em>Experience</em></h2>
+  <p class="body-p reveal">Six screens, one goal: make shoppers trust a system working entirely out of sight. Every design decision was about control, giving customers a visible way to verify, correct, and confirm before money changed hands.</p>
+
+  <div class="sc-grid reveal" style="margin-top:40px">
+
+    <!-- 1: Splash -->
+    <div class="sc-gallery-item">
+      <div class="sc-img-frame">
+        <img src="sdp-screen1.webp" width="1600" height="1048" alt="SelfCheckout+ splash screen, Touch Anywhere to Start" loading="lazy" decoding="async">
+      </div>
+      <div class="sc-screen-label">01 · Idle / Splash</div>
+    </div>
+
+    <!-- 2: Scan + item detected -->
+    <div class="sc-gallery-item">
+      <div class="sc-img-frame">
+        <img src="sdp-screen2.webp" width="1600" height="1077" alt="SelfCheckout+ scanning screen, item not recognized error state" loading="lazy" decoding="async">
+      </div>
+      <div class="sc-screen-label">02 · Scan &amp; Detect</div>
+    </div>
+
+    <!-- 3: Cart -->
+    <div class="sc-gallery-item">
+      <div class="sc-img-frame">
+        <img src="sdp-screen3.webp" width="1600" height="1077" alt="SelfCheckout+ cart review screen" loading="lazy" decoding="async">
+      </div>
+      <div class="sc-screen-label">03 · Cart Review</div>
+    </div>
+
+    <!-- 4: Payment -->
+    <div class="sc-gallery-item">
+      <div class="sc-img-frame">
+        <img src="sdp-screen4.webp" width="1600" height="1077" alt="SelfCheckout+ payment method selection" loading="lazy" decoding="async">
+      </div>
+      <div class="sc-screen-label">04 · Payment</div>
+    </div>
+
+    <!-- 5: Receipt -->
+    <div class="sc-gallery-item">
+      <p class="sr-only">Mockup: receipt preference screen — a four-step progress bar with Scan, Review, and Payment complete, asking “How would you like your receipt?” with Email selected, plus Print and Skip options.</p>
+      <div class="sc-device" aria-hidden="true" inert>
+        <div class="sc-header">
+          <div class="sc-brand"><span class="sc-brand-mark"></span>SelfCheckout+</div>
+        </div>
+        <div class="sc-flow-screen">
+          <div class="sc-stepper">
+            <div class="sc-step"><div class="sc-step-bubble done">✓</div><div class="sc-step-text done">Scan</div></div>
+            <div class="sc-step-line done"></div>
+            <div class="sc-step"><div class="sc-step-bubble done">✓</div><div class="sc-step-text done">Review</div></div>
+            <div class="sc-step-line done"></div>
+            <div class="sc-step"><div class="sc-step-bubble done">✓</div><div class="sc-step-text done">Payment</div></div>
+            <div class="sc-step-line done"></div>
+            <div class="sc-step"><div class="sc-step-bubble active">4</div><div class="sc-step-text active">Receipt</div></div>
+          </div>
+          <div class="sc-flow-body">
+            <div class="sc-flow-q">How would you like your receipt?</div>
+            <div class="sc-options-row">
+              <div class="sc-option-card sel">
+                <div class="sc-option-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="13" rx="2" stroke="#16A34A" stroke-width="1.7"/><path d="M6 9h10M6 13h6" stroke="#16A34A" stroke-width="1.7" stroke-linecap="round"/></svg>
+                </div>
+                <div class="sc-option-label">Email</div>
+              </div>
+              <div class="sc-option-card">
+                <div class="sc-option-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="8" width="16" height="10" rx="1.5" stroke="#374151" stroke-width="1.7"/><path d="M6 8V5a1 1 0 011-1h8a1 1 0 011 1v3M6 15h10" stroke="#374151" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="12" r="1" fill="#374151"/></svg>
+                </div>
+                <div class="sc-option-label">Print</div>
+              </div>
+              <div class="sc-option-card">
+                <div class="sc-option-icon" style="opacity:.4">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 4l14 14M18 4L4 18" stroke="#374151" stroke-width="1.7" stroke-linecap="round"/></svg>
+                </div>
+                <div class="sc-option-label" style="color:#9CA3AF">Skip</div>
+              </div>
+            </div>
+          </div>
+          <div class="sc-flow-footer"><button class="sc-back-btn">← Go Back</button></div>
+        </div>
+      </div>
+      <div class="sc-screen-label">05 · Receipt Preference</div>
+    </div>
+
+    <!-- 6: Thank you -->
+    <div class="sc-gallery-item">
+      <p class="sr-only">Mockup: confirmation screen — “Thank You! Your receipt has been emailed,” with a prompt to touch anywhere to restart.</p>
+      <div class="sc-device" aria-hidden="true" inert>
+        <div class="sc-thankyou">
+          <div class="sc-ty-glow"></div>
+          <div class="sc-ty-check">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 14.5l5 5 9-9" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="sc-ty-title">Thank You!</div>
+          <div class="sc-ty-sub">Your receipt has been emailed. Have a great day.</div>
+          <div class="sc-ty-detail">Session complete &nbsp;·&nbsp; Touch anywhere to restart</div>
+        </div>
+      </div>
+      <div class="sc-screen-label">06 · Confirmation</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 04 KEY DESIGN DECISIONS -->
+<section class="cs-section">
+  <span class="section-num">04</span>
+  <h2 class="section-title reveal">Key Design <em>Decisions</em></h2>
+  <p class="body-p reveal">The most interesting design work wasn't the visual styling, it was the product thinking that shaped the flow. Each decision below was a deliberate tradeoff I raised and resolved during the build.</p>
+
+  <div class="decision-row reveal">
+    <div class="decision-num">01</div>
+    <div>
+      <div class="decision-title">Build in a confirmation step, don't auto-add items</div>
+      <div class="decision-desc">When the CV pipeline identifies an item, the shopper sees "Did we get this right?" before it's added to the cart. That trades a little speed for trust: a system that silently adds items, even accurately, feels like it's deciding for you. The confirmation gives the customer a moment of control and an easy way to fix a wrong call without flagging down an attendant. It costs one extra tap per item, and for a brand-new checkout format where trust isn't a given yet, that was worth it.</div>
+      <span class="decision-tag">UX decision</span>
+    </div>
+  </div>
+
+  <div class="decision-row reveal">
+    <div class="decision-num">02</div>
+    <div>
+      <div class="decision-title">Cut the live video feed entirely</div>
+      <div class="decision-desc">An early version showed a live camera feed in the scanning zone. I cut it. Live video is visually noisy, raises real privacy questions, and doesn't help the customer finish any faster. The task is checkout, not watching the camera process food. Removing the feed simplified the UI and put attention where it belonged, on the item confirmation and the cart. What replaced it was a clean scanning zone with a simple status indicator, enough to show the system is working, nothing more.</div>
+      <span class="decision-tag">Product decision</span>
+    </div>
+  </div>
+
+  <div class="decision-row reveal">
+    <div class="decision-num">03</div>
+    <div>
+      <div class="decision-title">Let the backend own the cart total</div>
+      <div class="decision-desc">Early builds kept the cart total in React and synced it with the backend now and then, which caused subtle mismatches, the UI showing one running total while the backend calculated another. Even a few cents off looked like a bug, and in an interface where every number matters, that quietly eroded trust. I moved the cart entirely to the backend and had React simply render whatever the API returned. One source of truth, no drift, no reconciliation bugs.</div>
+      <span class="decision-tag">Engineering decision</span>
+    </div>
+  </div>
+
+  <div class="decision-row reveal">
+    <div class="decision-num">04</div>
+    <div>
+      <div class="decision-title">Keep animations off the data-fetching thread</div>
+      <div class="decision-desc">Framer Motion transitions would stutter and freeze whenever an API call blocked the main thread. The fix was to separate the animation from the data fetch: the UI plays the transition on its own, and the component updates when the fetch resolves, not when it starts. Every screen transition felt instant even while the backend was still working, and the architecture got cleaner too, since the animation and the data fetching stopped competing for the same thread.</div>
+      <span class="decision-tag">Engineering decision</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE INTEGRATION CHALLENGE -->
+<section class="cs-section">
+  <span class="section-num">05</span>
+  <h2 class="section-title reveal">The Integration <em>Challenge</em></h2>
+  <div class="two-col">
+    <div>
+      <p class="body-p">The hardest problems weren't in any single layer. They were at the seams between layers. The CV pipeline produced detection events. The FastAPI backend processed them into cart items. The React frontend rendered the cart. When all three systems were moving at once, things broke in ways no single component's tests could catch.</p>
+      <p class="body-p">As the person responsible for the integration layer, I owned the SQLite schema that made the CV pipeline's output usable by the frontend. I also designed the API contract between FastAPI and React: which fields the frontend could trust, which had to be calculated server-side, and how errors from the CV layer should surface to the customer.</p>
+    </div>
+    <div>
+      <div class="callout" style="margin-top:0">
+        <div class="callout-label">The key insight</div>
+        <p class="callout-text">The hardest integration problems weren't really about code. They came down to being clear about which layer owned what. Once each layer had one job, most of the bugs had nowhere to hide.</p>
+      </div>
+      <div style="margin-top:20px">
+        <div class="decision-row" style="padding-top:0;border-top:none">
+          <div class="decision-num" style="font-size:18px">→</div>
+          <div>
+            <div class="decision-title">CV pipeline → SQLite → FastAPI → React</div>
+            <div class="decision-desc" style="font-size:13px">Each layer had a defined contract. The CV pipeline wrote detection events, SQLite stored item metadata, FastAPI computed totals, and React rendered state. Keeping those responsibilities separate is what made the system easy to debug.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ADMIN INTERFACE -->
+<section class="cs-section">
+  <span class="section-num">06</span>
+  <h2 class="section-title reveal">The Admin <em>Interface</em></h2>
+  <p class="body-p reveal">The customer-facing flow was one half of the product. The other half was the operator dashboard, the interface that lets store staff manage inventory, approve manual overrides, and monitor active sessions. I designed and built this separately from the customer UI, giving it a simpler, more utilitarian look that reads as an internal tool rather than a customer product.</p>
+
+  <!-- Admin Dashboard: Inventory Tab -->
+  <p class="sr-only">Mockup: the admin inventory dashboard — a sidebar with store operations, a product database table showing item, category, price, CV detection confidence, and status, with summary stats for total items, active items, average confidence, and pending reviews.</p>
+  <div class="ad-frame reveal" aria-hidden="true" inert>
+    <div class="ad-shell">
+      <div class="ad-sidebar">
+        <div class="ad-sidebar-header">
+          <div class="ad-sidebar-brand">
+            <div class="ad-sidebar-dot"></div>
+            SelfCheckout+
+          </div>
+          <div class="ad-sidebar-sub">Admin Portal</div>
+        </div>
+        <div class="ad-sidebar-nav">
+          <div class="ad-nav-section">Store Operations</div>
+          <div class="ad-nav-item active">
+            <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+            Inventory
+          </div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Override Queue
+          </div>
+          <div class="ad-nav-section">Monitoring</div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Live Sessions
+          </div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 10 L5 6 L8 8 L11 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Diagnostics
+          </div>
+          <div class="ad-nav-section">Reports</div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M5 6h4M5 9h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Transaction Log
+          </div>
+        </div>
+        <div class="ad-sidebar-footer">
+          <div class="ad-operator">
+            <div class="ad-op-avatar">M</div>
+            <div>
+              <div class="ad-op-name">Manager on Duty</div>
+              <div class="ad-op-role">Store #4 · Admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-main">
+        <div class="ad-topbar">
+          <div class="ad-page-title">Inventory Management</div>
+          <div class="ad-topbar-right">
+            <button class="ad-btn ad-btn-outline">Export CSV</button>
+            <button class="ad-btn ad-btn-green">+ Add Item</button>
+          </div>
+        </div>
+        <div class="ad-content">
+          <div class="ad-stat-row">
+            <div class="ad-stat">
+              <div class="ad-stat-label">Total Items</div>
+              <div class="ad-stat-val">247</div>
+              <div class="ad-stat-sub">in product database</div>
+            </div>
+            <div class="ad-stat">
+              <div class="ad-stat-label">Active</div>
+              <div class="ad-stat-val green">231</div>
+              <div class="ad-stat-sub">detectable by CV</div>
+            </div>
+            <div class="ad-stat">
+              <div class="ad-stat-label">Avg. Confidence</div>
+              <div class="ad-stat-val">94.2%</div>
+              <div class="ad-stat-sub">detection accuracy</div>
+            </div>
+            <div class="ad-stat">
+              <div class="ad-stat-label">Pending Review</div>
+              <div class="ad-stat-val" style="color:#D97706">3</div>
+              <div class="ad-stat-sub">items needing update</div>
+            </div>
+          </div>
+          <div class="ad-table-wrap">
+            <div class="ad-table-head">
+              <div class="ad-table-title">Product Database</div>
+              <input class="ad-search" placeholder="Search items…" readonly>
+            </div>
+            <table class="ad-table">
+              <thead>
+                <tr>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Confidence</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Organic Blueberries</strong></td>
+                  <td>Produce</td>
+                  <td>$4.99</td>
+                  <td>
+                    <div class="ad-confidence">
+                      <div class="ad-conf-bar"><div class="ad-conf-fill high" style="width:97%"></div></div>
+                      <span style="font-size:10px;color:#6B7280;white-space:nowrap">97%</span>
+                    </div>
+                  </td>
+                  <td><span class="ad-badge active">● Active</span></td>
+                  <td><button class="ad-edit-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Whole Wheat Bread</strong></td>
+                  <td>Bakery</td>
+                  <td>$3.49</td>
+                  <td>
+                    <div class="ad-confidence">
+                      <div class="ad-conf-bar"><div class="ad-conf-fill high" style="width:91%"></div></div>
+                      <span style="font-size:10px;color:#6B7280;white-space:nowrap">91%</span>
+                    </div>
+                  </td>
+                  <td><span class="ad-badge active">● Active</span></td>
+                  <td><button class="ad-edit-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Almond Milk (1L)</strong></td>
+                  <td>Dairy Alt.</td>
+                  <td>$2.99</td>
+                  <td>
+                    <div class="ad-confidence">
+                      <div class="ad-conf-bar"><div class="ad-conf-fill med" style="width:78%"></div></div>
+                      <span style="font-size:10px;color:#6B7280;white-space:nowrap">78%</span>
+                    </div>
+                  </td>
+                  <td><span class="ad-badge pending">⚠ Review</span></td>
+                  <td><button class="ad-edit-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Avocado (each)</strong></td>
+                  <td>Produce</td>
+                  <td>$1.99</td>
+                  <td>
+                    <div class="ad-confidence">
+                      <div class="ad-conf-bar"><div class="ad-conf-fill high" style="width:96%"></div></div>
+                      <span style="font-size:10px;color:#6B7280;white-space:nowrap">96%</span>
+                    </div>
+                  </td>
+                  <td><span class="ad-badge active">● Active</span></td>
+                  <td><button class="ad-edit-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Organic Bananas</strong></td>
+                  <td>Produce</td>
+                  <td>$1.29</td>
+                  <td>
+                    <div class="ad-confidence">
+                      <div class="ad-conf-bar"><div class="ad-conf-fill high" style="width:99%"></div></div>
+                      <span style="font-size:10px;color:#6B7280;white-space:nowrap">99%</span>
+                    </div>
+                  </td>
+                  <td><span class="ad-badge active">● Active</span></td>
+                  <td><button class="ad-edit-btn">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard: Override Queue -->
+  <p class="sr-only">Mockup: the override queue — three pending items the CV model could not identify, each with the lane, session, reason code, price, and Approve/Reject actions for store staff.</p>
+  <div class="ad-frame reveal" aria-hidden="true" inert>
+    <div class="ad-shell">
+      <div class="ad-sidebar">
+        <div class="ad-sidebar-header">
+          <div class="ad-sidebar-brand"><div class="ad-sidebar-dot"></div>SelfCheckout+</div>
+          <div class="ad-sidebar-sub">Admin Portal</div>
+        </div>
+        <div class="ad-sidebar-nav">
+          <div class="ad-nav-section">Store Operations</div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+            Inventory
+          </div>
+          <div class="ad-nav-item active">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Override Queue
+          </div>
+          <div class="ad-nav-section">Monitoring</div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Live Sessions
+          </div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 10 L5 6 L8 8 L11 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Diagnostics
+          </div>
+          <div class="ad-nav-section">Reports</div>
+          <div class="ad-nav-item">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M5 6h4M5 9h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Transaction Log
+          </div>
+        </div>
+        <div class="ad-sidebar-footer">
+          <div class="ad-operator">
+            <div class="ad-op-avatar">M</div>
+            <div>
+              <div class="ad-op-name">Manager on Duty</div>
+              <div class="ad-op-role">Store #4 · Admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-main">
+        <div class="ad-topbar">
+          <div class="ad-page-title">Override Queue <span style="font-size:12px;font-weight:400;color:#9CA3AF;margin-left:8px">3 pending</span></div>
+          <div class="ad-topbar-right">
+            <button class="ad-btn ad-btn-outline">View History</button>
+          </div>
+        </div>
+        <div class="ad-tabs">
+          <div class="ad-tab active">Pending (3)</div>
+          <div class="ad-tab">Approved Today (12)</div>
+          <div class="ad-tab">Rejected (2)</div>
+        </div>
+        <div class="ad-content" style="padding:0">
+          <div class="ad-table-wrap" style="border:none;border-radius:0">
+            <div class="ad-override-row" style="background:#FFFBEB;border-left:3px solid #F59E0B">
+              <div class="ad-ov-img">🥩</div>
+              <div class="ad-ov-info">
+                <div class="ad-ov-name">Ground Beef (1 lb)</div>
+                <div class="ad-ov-meta">Lane 2 · Session #4821 · 2 min ago · Customer request</div>
+              </div>
+              <div class="ad-ov-actions">
+                <div style="font-size:11px;color:#374151;margin-right:4px;font-weight:500">$6.99</div>
+                <button class="ad-ov-btn ad-ov-btn-approve">Approve</button>
+                <button class="ad-ov-btn ad-ov-btn-reject">Reject</button>
+              </div>
+            </div>
+            <div class="ad-override-row" style="background:#FFFBEB;border-left:3px solid #F59E0B">
+              <div class="ad-ov-img">🧀</div>
+              <div class="ad-ov-info">
+                <div class="ad-ov-name">Sharp Cheddar Block</div>
+                <div class="ad-ov-meta">Lane 1 · Session #4819 · 5 min ago · CV failed 3×</div>
+              </div>
+              <div class="ad-ov-actions">
+                <div style="font-size:11px;color:#374151;margin-right:4px;font-weight:500">$5.49</div>
+                <button class="ad-ov-btn ad-ov-btn-approve">Approve</button>
+                <button class="ad-ov-btn ad-ov-btn-reject">Reject</button>
+              </div>
+            </div>
+            <div class="ad-override-row" style="background:#FFFBEB;border-left:3px solid #F59E0B">
+              <div class="ad-ov-img">🍓</div>
+              <div class="ad-ov-info">
+                <div class="ad-ov-name">Strawberries (1 pint)</div>
+                <div class="ad-ov-meta">Lane 1 · Session #4818 · 8 min ago · Not in database</div>
+              </div>
+              <div class="ad-ov-actions">
+                <div style="font-size:11px;color:#374151;margin-right:4px;font-weight:500">$3.99</div>
+                <button class="ad-ov-btn ad-ov-btn-approve">Approve</button>
+                <button class="ad-ov-btn ad-ov-btn-reject">Reject</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="body-p reveal" style="margin-top:24px">The override queue was one of the most important features I designed, not because it gets used often, but because it's the plan for when things go wrong. When the CV pipeline can't identify an item, store staff need a fast way to add it manually without interrupting the customer's checkout. Every override is logged with a reason code, which also gave us data on exactly where the CV model needed to improve.</p>
+</section>
+
+<!-- CLOSING PULL-QUOTE -->
+<section class="cs-section" style="padding-top:0">
+  <p class="body-p reveal" style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink)">"The system could identify a banana with 99% confidence. My job was designing the 1%, the moment it doesn't, and what happens next."</p>
+</section>
+
+<!-- 07 RESULTS -->
+<section class="cs-section">
+  <span class="section-num">07</span>
+  <h2 class="section-title reveal">The <em>Results</em></h2>
+  <p class="body-p reveal">We wrote seven testable specs before building anything, and validated every one. The numbers I cared about most were the ones a shopper actually feels, that the total always matched, that the screen never froze, and that an uncertain item still resolved inside the same six-second window.</p>
+  <div class="stat-grid reveal" style="grid-template-columns:1fr 1fr">
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Top-1 accuracy on the 16-SKU test set, no misclassifications (target was 99 in 100)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">&lt;6s</span>
+      <span class="stat-label">Full checkout, from item placement to emailed receipt, across 50 trials, none over 8s</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12 hrs</span>
+      <span class="stat-label">Continuous operation with zero crashes or disconnections</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">&lt;200ms</span>
+      <span class="stat-label">Admin operations, with no freezes during a live customer checkout</span>
+    </div>
+  </div>
+  <p class="body-p reveal" style="margin-top:24px">Two of those tie straight back to the layer I owned. The cart total matched the backend on all 50 transactions, because I'd made the backend the one place the total lived instead of syncing two running counts. And the interface stayed responsive mid-scan because the animation and the data-fetching ran on separate paths. Speed and accuracy were the baseline. What I really wanted to prove was that the trust held up under real conditions, including the moments the model wasn't sure.</p>
+</section>
+
+<!-- 08 WHAT I LEARNED -->
+<section class="cs-section">
+  <span class="section-num">08</span>
+  <h2 class="section-title reveal">What I <em>Learned</em></h2>
+  <div class="lessons-grid">
+    <div class="lesson-card reveal">
+      <div class="lesson-num">01</div>
+      <div class="lesson-title">Accuracy wasn't enough to earn trust</div>
+      <div class="lesson-desc">The CV model was genuinely accurate. But accuracy doesn't equal trust. Trust comes from the interface: the confirmation step, the item preview, the clear error path, the ability to delete something. People trust a system when it gives them visible control and an easy way to fix it.</div>
+    </div>
+    <div class="lesson-card reveal d1">
+      <div class="lesson-num">02</div>
+      <div class="lesson-title">Product decisions live in architecture meetings</div>
+      <div class="lesson-desc">Some of the biggest product choices happened in technical discussions: whether to cache detection events or query live, how the backend should handle concurrent sessions, what the API contract between FastAPI and React should look like. Being in those conversations, and asking "what does this mean for the customer?", mattered more than any later feature decision.</div>
+    </div>
+    <div class="lesson-card reveal d2">
+      <div class="lesson-num">03</div>
+      <div class="lesson-title">Less on screen made the process smoother for the customer</div>
+      <div class="lesson-desc">Removing the live video feed wasn't about making the UI simpler. It was about making the customer's task clearer. Every element on screen should earn its place by helping the user finish. The camera feed was technically impressive but distracting, and impressive doesn't help someone check out faster.</div>
+    </div>
+    <div class="lesson-card reveal d3">
+      <div class="lesson-num">04</div>
+      <div class="lesson-title">Integration is a design problem</div>
+      <div class="lesson-desc">The hardest bugs weren't in any single component. They were at the seams: the animation and API call competing, the cart UI and backend total diverging. Designing clear ownership boundaries between layers would have caught those problems before they became debugging sessions. I'd now treat the API contract as something to design carefully up front, not patch in later.</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /cs-body -->
+</main>
+
+<div class="sdp-closing">
+  <p class="closing-text">"Anyone can build a system that works when everything goes right. I spent my time on the moments it doesn't, because that's where a shopper decides whether to trust it."</p>
+  <a href="work.html" class="back-link">
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to all work
+  </a>
+</div>
+
+<footer class="footer">
+  <div class="ft-grid">
+    <div class="reveal">
+      <div class="ft-tagline">Let's build something <em>worth building</em></div>
+      <p class="ft-sub">I'm looking for PM internships for the 2026–2027 cycle. If you're hiring, or you just want to talk product, I'd love to connect.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ft-lbl">Contact</div>
+      <a href="mailto:anika.badkul@gmail.com" class="ft-email">anika.badkul@gmail.com</a>
+      <div class="ft-lbl">Elsewhere</div>
+      <div class="ft-links">
+        <a href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" class="ft-link">LinkedIn <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="resume.html" class="ft-link">Resume <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="work.html" class="ft-link">Work <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-base">
+    <div class="ft-logo"><img src="logo-mark-cream-sm.png" width="220" height="133" alt="" loading="lazy"><span>Anika Badkul</span></div>
+    <span class="ft-copy">© 2026 · built with curiosity · running shoes optional</span>
+  </div>
+</footer>
+
+<button class="to-top" aria-label="Back to top"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3m0 0L3.5 7.5M8 3l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script src="site.js?v=6"></script>
+</body>
+</html>

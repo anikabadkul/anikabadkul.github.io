@@ -1,0 +1,350 @@
+/* ============================================================
+   Anika Badkul — shared design system
+   One source of truth for every page.
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#FBF8F3;--paper2:#F4ECE2;--panel:#FFFFFF;
+  --ink:#241C18;--ink2:#5A4A42;--ink3:#736257; /* was #816F63 — failed AA (4.09:1) on paper2 captions */
+  --terra:#C47D6E;--terra-deep:#96503F; /* was #A0584A — failed WCAG AA (4.17:1) on blush */--blush:#F1E2DB;--blush2:#EAD7CD;
+  --line:rgba(60,40,32,.14);--line2:rgba(60,40,32,.08);
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --edge:max(28px,calc((100vw - 1060px)/2 + 28px)); /* content max 1004px — was 1104, which filled 86% of a 13-inch screen */
+}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;font-optical-sizing:auto;font-size:16px;line-height:1.6}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+::selection{background:var(--terra);color:#fff}
+:focus-visible{outline:2px solid var(--terra-deep);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;left:-9999px;top:12px;z-index:300;background:var(--ink);color:var(--paper);
+  padding:10px 18px;border-radius:30px;font-size:13px;font-weight:600;text-decoration:none}
+.skip-link:focus{left:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Line-icon chip: replaces OS emoji so icons render identically on every platform
+   and match the site's existing 1.5px-stroke SVG language. */
+.li-ic{width:40px;height:40px;border-radius:12px;background:var(--blush);color:var(--terra-deep);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.li-ic svg{display:block}
+/* WCAG 2.5.8: vertical padding enlarges the hit area of standalone text links without moving layout */
+.csb-back,.cs-back,.watch,.r-contact a,.csb-closing a{padding-block:6px}
+.appr .li-ic{margin-bottom:16px}
+.out-card .li-ic{margin-bottom:12px}
+.csb-card .li-ic{margin-bottom:14px}
+
+/* ---- shared type helpers ---- */
+.eyebrow,.ey,.cs-ey,.cs-eyebrow,.section-num,
+.r-heading,.skills-col-label,.proj-img-label,.cs-feat-lbl,.cs-meta-label,
+.skill-card-label{
+  font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-deep);font-weight:600}
+.sh,.section-title{font-family:var(--serif);font-size:clamp(30px,4vw,50px);
+  font-weight:600;letter-spacing:-.01em;line-height:1.04;color:var(--ink);margin-top:12px}
+.sh em,.section-title em,.about-hero-heading em,.cs-title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+
+/* ---- buttons ---- */
+/* .r-cta removed from this group: it's a layout section on resume.html, not a button —
+   including it here painted the whole block dark and made its label invisible.
+   .proto-btn-primary/.k-btn-primary removed: used on no page. */
+.btn-ink,.cta-btn-light{
+  display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper)!important;
+  font-size:14px;font-weight:500;text-decoration:none;padding:13px 26px;border-radius:30px;
+  transition:all .22s var(--ease);cursor:pointer;border:none}
+.btn-ink:hover,.cta-btn-light:hover{background:var(--terra-deep);transform:translateY(-2px);
+  box-shadow:0 12px 26px -14px rgba(150,80,63,.55)}
+.btn-ink:active,.cta-btn-light:active{transform:translateY(0) scale(.98);box-shadow:none}
+.btn-o,.cta-btn-outline{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);
+  color:var(--ink);font-size:14px;font-weight:500;text-decoration:none;padding:12px 26px;border-radius:30px;transition:all .22s var(--ease)}
+.btn-o:hover,.cta-btn-outline:hover{border-color:var(--terra);color:var(--terra-deep)}
+
+/* ============================================================ 2026 POLISH */
+/* Smooth cross-fade between pages (progressive enhancement, Chrome/Safari) */
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation-duration:.16s}
+  ::view-transition-new(root){animation-duration:.24s}
+}
+/* Reading progress on case studies (element present only on those pages) */
+.read-progress{position:fixed;top:0;left:0;right:0;height:2.5px;background:var(--terra);
+  transform:scaleX(0);transform-origin:0 50%;z-index:300;pointer-events:none}
+/* Back to top */
+.to-top{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:250;
+  background:rgba(251,248,243,.92);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--ink);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,border-color .2s,color .2s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{border-color:var(--terra);color:var(--terra-deep);transform:translateY(-2px)}
+/* Anchor targets clear the sticky nav */
+#main{scroll-margin-top:84px}
+
+/* ============================================================ NAV */
+nav{height:70px;padding:0 var(--edge);display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;border-bottom:1px solid var(--line2)}
+nav::before{content:"";position:absolute;inset:0;background:rgba(251,248,243,.88);backdrop-filter:blur(14px);z-index:-1}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo img{height:30px!important;width:auto!important;display:block}
+.logo-name{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.01em;color:var(--ink)}
+.nav-r{display:flex;align-items:center;gap:30px}
+.nav-r a{font-size:14px;color:var(--ink2);text-decoration:none;transition:color .18s;font-weight:500}
+.nav-r a:not(.nav-cta){position:relative}
+.nav-r a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;
+  background:var(--terra-deep);transform:scaleX(0);transform-origin:0 50%;transition:transform .25s var(--ease)}
+.nav-r a:not(.nav-cta):hover::after,.nav-r a.active:not(.nav-cta)::after{transform:scaleX(1)}
+.nav-r a:hover,.nav-r a.active{color:var(--ink)}
+.nav-r a.nav-cta,.nav-badge{font-size:13px;color:#fff!important;background:var(--ink);padding:9px 18px;
+  border-radius:30px;transition:background .2s;font-weight:500;border:none;letter-spacing:0;text-transform:none}
+.nav-r a.nav-cta:hover{background:var(--terra-deep)}
+.nav-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);background:rgba(255,255,255,.6);
+  border-radius:12px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+.nav-toggle span{display:block;width:18px;height:1.7px;background:var(--ink);border-radius:2px;transition:transform .25s var(--ease),opacity .2s}
+nav.nav-open .nav-toggle span:nth-child(1){transform:translateY(6.7px) rotate(45deg)}
+nav.nav-open .nav-toggle span:nth-child(2){opacity:0}
+nav.nav-open .nav-toggle span:nth-child(3){transform:translateY(-6.7px) rotate(-45deg)}
+
+/* ============================================================ PAGE HEADER */
+.page-header{padding:clamp(36px,5vh,56px) var(--edge) clamp(22px,3vh,32px)}
+.page-header .sh,.ph-heading{font-family:var(--serif);font-size:clamp(40px,5vw,64px);
+  font-weight:600;line-height:.98;letter-spacing:-.01em;color:var(--ink);margin-top:14px}
+.ph-heading em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+.page-subtitle,.ph-sub{font-size:17px;color:var(--ink2);max-width:54ch;margin-top:18px;line-height:1.65}
+
+/* ============================================================ SECTION SHELL */
+.exp-section,.skills-section,.projects-section,.cs-section{
+  padding:clamp(38px,5.5vh,60px) var(--edge);position:relative}
+.exp-section,.skills-section{border-top:1px solid var(--line2)}
+
+/* ============================================================ ABOUT PAGE */
+.about-hero{padding:clamp(36px,5vh,54px) var(--edge) clamp(26px,4vh,42px)}
+.about-hero-heading{font-family:var(--serif);font-size:clamp(40px,6vw,80px);font-weight:600;line-height:1.0;
+  letter-spacing:-.01em;color:var(--ink);margin:16px 0 0}
+.about-hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,5vw,64px);align-items:start;margin-top:36px}
+.about-bio p{font-size:16px;color:var(--ink2);line-height:1.75;margin-bottom:16px;max-width:50ch}
+.about-bio>div{margin-top:24px}
+.about-photo{width:100%;height:auto;max-width:340px;aspect-ratio:4/5;object-fit:cover;object-position:center 16%;
+  border-radius:10px;border:1px solid var(--line);box-shadow:0 24px 56px -30px rgba(80,45,40,.5)}
+.exp-row{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+.exp-year{font-family:var(--serif);font-size:18px;color:var(--terra-deep);font-style:italic;font-weight:500}
+.exp-role{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);line-height:1.2}
+.exp-company{font-size:13px;color:var(--ink3);font-weight:500;margin:2px 0 8px;letter-spacing:.02em}
+.exp-desc{font-size:14.5px;color:var(--ink2);line-height:1.65;max-width:60ch}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:36px}
+/* About "What I bring": 4 → 2 → 1 columns. Replaces an inline repeat(4,1fr) override
+   that forced four columns on phones and made the whole page scroll sideways. */
+.bring-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.skill-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+.skill-card-title{font-family:var(--serif);font-size:21px;font-weight:600;margin:10px 0 14px}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.skill-item{font-size:14px;color:var(--ink2);padding-left:18px;position:relative}
+.skill-item::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--terra)}
+.cta-footer{padding:clamp(56px,8vh,88px) var(--edge);text-align:center;background:var(--paper2);border-top:1px solid var(--line2)}
+.cta-quote{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:500;font-style:italic;
+  line-height:1.12;color:var(--ink);max-width:20ch;margin:0 auto 28px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================ CASE CARDS (index + work) */
+/* CASE CARDS */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.case{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 2px rgba(60,40,32,.05);
+  overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.case-link:hover{transform:translateY(-6px);box-shadow:0 28px 56px -30px rgba(80,45,40,.45);border-color:var(--terra)}
+.case-head{position:relative;height:184px;overflow:hidden;border-bottom:1px solid var(--line);
+  background:linear-gradient(135deg,var(--blush),var(--blush2));display:flex;align-items:center;justify-content:flex-end}
+.case-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s var(--ease)}
+.case-link:hover .case-shot{transform:scale(1.03)}
+.case-head.has-shot{background:#fff}
+.case-head.has-shot::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(251,248,243,.92),rgba(251,248,243,0) 30%,rgba(251,248,243,0) 60%,rgba(251,248,243,.82))}
+.has-shot .case-cat,.has-shot .case-year{z-index:2}
+.case-cat{position:absolute;left:16px;top:15px;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;background:rgba(251,248,243,.95);backdrop-filter:blur(8px);padding:6px 12px;border-radius:30px;border:1px solid var(--line2);box-shadow:0 4px 14px -7px rgba(80,45,40,.35)}
+.case-year{position:absolute;left:16px;bottom:14px;font-size:10.5px;letter-spacing:.04em;color:var(--ink2);font-weight:600;background:rgba(251,248,243,.95);backdrop-filter:blur(8px);padding:5px 11px;border-radius:30px;border:1px solid var(--line2)}
+.case-body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
+.case-t{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.1;letter-spacing:-.01em;margin-bottom:12px;transition:color .2s}
+.case-link:hover .case-t{color:var(--terra-deep)}
+.case-d{font-size:14.5px;color:var(--ink2);line-height:1.6;margin-bottom:20px}
+.case-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;gap:12px;padding-top:16px;border-top:1px solid var(--line2)}
+.impact{font-size:13px;color:var(--ink);font-weight:600}
+.impact span{color:var(--ink3);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:1px}
+.case-go{font-size:12.5px;font-weight:600;color:var(--terra-deep);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;white-space:nowrap}
+.case-link:hover .case-go{gap:10px}
+.case-soon{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+@media(max-width:900px){.cases{grid-template-columns:1fr}}
+
+/* ============================================================ WORK PAGE (case cards) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cs-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.cs-pill{font-size:11px;color:var(--terra-deep);background:var(--blush);border:1px solid rgba(196,125,110,.3);
+  padding:5px 12px;border-radius:30px;font-weight:500;white-space:nowrap}
+
+
+
+.cs-cta-wip{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-top:auto}
+
+/* ============================================================ PROJECTS PAGE */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.proj-card:hover{transform:translateY(-5px);border-color:var(--terra);box-shadow:0 20px 40px -26px rgba(80,45,40,.4)}
+.proj-img{height:130px!important;background:linear-gradient(135deg,var(--blush),var(--blush2))!important;
+  display:flex;align-items:flex-end;padding:16px 18px;border-bottom:1px solid var(--line)}
+.proj-img-label{color:var(--terra-deep)}
+.proj-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.proj-tags{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.proj-tag{font-size:11px;color:var(--terra-deep);background:var(--blush);border:1px solid rgba(196,125,110,.3);padding:4px 11px;border-radius:30px;font-weight:500}
+.proj-title{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.15;margin-bottom:9px}
+.proj-card:hover .proj-title{color:var(--terra-deep)}
+.proj-desc{font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:18px}
+.proj-cta{font-size:12.5px;font-weight:600;color:var(--terra-deep);text-decoration:none;margin-top:auto;
+  display:inline-flex;align-items:center;gap:7px;transition:gap .2s;width:fit-content}
+.proj-cta:hover{gap:11px}
+.more-banner{margin:8px var(--edge) clamp(56px,8vh,80px);background:var(--paper2);border:1px solid var(--line);
+  border-radius:18px;padding:36px 32px;text-align:center}
+.more-text{font-family:var(--serif);font-size:clamp(20px,2.4vw,28px);font-weight:500;font-style:italic;color:var(--ink)}
+
+/* ============================================================ RESUME PAGE */
+.resume-wrap{padding:clamp(44px,7vh,72px) var(--edge) 80px;display:grid;grid-template-columns:300px 1fr;gap:clamp(40px,5vw,76px);align-items:start}
+.r-rail{position:sticky;top:90px}
+.r-main{min-width:0}
+.r-header{text-align:left}
+.r-name{font-family:var(--serif);font-size:clamp(38px,4.2vw,52px);font-weight:600;letter-spacing:-.01em;line-height:1.02;margin:0}
+.r-subtitle{font-size:14px;color:var(--ink2);margin:16px 0 16px;letter-spacing:.02em;line-height:1.55}
+.r-contact{font-size:13.5px;margin-bottom:24px;line-height:2}
+.r-contact a{color:var(--terra-deep);text-decoration:none;font-weight:500}
+.r-contact a:hover{text-decoration:underline}
+.r-section{margin-bottom:40px}
+.r-heading{margin:0 0 20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.exp-entry{margin-bottom:24px}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.exp-top .exp-role{font-family:var(--serif);font-size:20px;font-weight:600;margin:0}
+.exp-date{font-size:13px;color:var(--ink3);font-weight:500;white-space:nowrap}
+.exp-entry .exp-company{font-size:14px;color:var(--terra-deep);font-weight:500;margin:2px 0 10px}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:7px}
+.exp-bullets li{font-size:14.5px;color:var(--ink2);line-height:1.55;padding-left:18px;position:relative}
+.exp-bullets li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--terra)}
+.edu-degree{font-family:var(--serif);font-size:20px;font-weight:600;margin:0}
+.edu-school{font-size:14px;color:var(--terra-deep);font-weight:500;margin:2px 0 6px}
+.edu-course{font-size:14px;color:var(--ink2);line-height:1.6}
+.skills-col-label{margin-bottom:10px;display:block}
+.skills-list{font-size:14px;color:var(--ink2);line-height:1.8}
+.r-cta{margin-top:8px;text-align:left;padding-top:34px;border-top:1px solid var(--line)}
+.r-cta-label{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--ink);margin-bottom:16px}
+.exp-sublist{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.exp-sublist li{font-size:12.5px;color:var(--terra-deep);background:var(--blush);border:1px solid rgba(196,125,110,.28);padding:4px 12px;border-radius:30px}
+
+/* ============================================================ WHAT ELSE PAGE */
+.interest-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+
+/* ============================================================ CASE STUDY (shared chrome) */
+.cs-hero{padding:clamp(38px,5.5vh,60px) var(--edge) clamp(26px,4vh,40px)}
+.cs-back,.back-link{font-size:13px;color:var(--terra-deep);text-decoration:none;font-weight:500;
+  display:inline-flex;align-items:center;gap:7px;margin-bottom:26px;transition:gap .2s}
+.cs-back:hover,.back-link:hover{gap:11px}
+.cs-title{font-family:var(--serif);font-size:clamp(40px,6vw,76px);font-weight:600;line-height:1.0;
+  letter-spacing:-.01em;margin:14px 0 0}
+.cs-subtitle{font-size:18px;color:var(--ink2);line-height:1.6;margin-top:20px;max-width:60ch}
+.cs-meta{display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,44px);margin-top:32px;padding-top:26px;border-top:1px solid var(--line)}
+.cs-meta-label{display:block;margin-bottom:5px}
+.cs-meta-value{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}
+.cs-body{padding:clamp(26px,3.5vh,40px) var(--edge)}
+.cs-body .cs-section{padding:0;max-width:none;margin-bottom:clamp(26px,3.5vh,40px)}
+.section-num{display:block;margin-bottom:10px}
+.section-title{font-size:clamp(26px,3.4vw,40px);margin:0 0 20px}
+.body-p{font-size:16.5px;color:var(--ink2);line-height:1.8;margin-bottom:18px;max-width:760px}
+.body-p strong{color:var(--ink);font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.two-col-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.callout{background:var(--paper2);border-left:3px solid var(--terra);border-radius:0 12px 12px 0;padding:22px 26px;margin:8px 0 24px}
+.callout-label{display:block;margin-bottom:8px}
+.callout-text{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--ink);line-height:1.4}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin:8px 0 24px}
+.stat-item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.stat-num{font-family:var(--serif);font-size:clamp(32px,4vw,46px);font-weight:600;color:var(--terra-deep);line-height:1;letter-spacing:-.02em}
+.stat-label{font-size:12px;color:var(--ink3);margin-top:8px;line-height:1.45}
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:8px}
+.lesson-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.lesson-num{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--terra);display:block;margin-bottom:12px}
+.lesson-title{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:8px;line-height:1.2}
+.lesson-desc{font-size:14px;color:var(--ink2);line-height:1.6}
+.cs-closing{background:var(--paper2);border-top:1px solid var(--line2);padding:clamp(38px,5vh,60px) var(--edge);text-align:center}
+.closing-text{font-family:var(--serif);font-size:clamp(26px,3.6vw,42px);font-weight:500;font-style:italic;line-height:1.14;max-width:24ch;margin:0 auto 14px}
+.closing-sub{font-size:15px;color:var(--ink2);max-width:48ch;margin:0 auto;line-height:1.65}
+
+/* ============================================================ FOOTER (new) */
+.footer{background:#241C18;color:var(--paper);padding:clamp(34px,5vh,50px) var(--edge) 0}
+.ft-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;padding-bottom:58px;border-bottom:1px solid rgba(251,248,243,.13)}
+.ft-tagline{font-family:var(--serif);font-size:clamp(28px,3.4vw,42px);font-weight:500;font-style:italic;line-height:1.05;letter-spacing:-.01em;margin-bottom:20px}
+.ft-tagline em{font-style:normal;color:var(--terra)}
+.ft-sub{font-size:15px;color:rgba(251,248,243,.55);line-height:1.7;max-width:40ch}
+.ft-lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:14px;font-weight:600}
+.ft-email{font-family:var(--serif);font-size:21px;font-style:italic;color:rgba(251,248,243,.9);text-decoration:none;display:block;margin-bottom:32px;transition:color .2s}
+.ft-email:hover{color:var(--terra)}
+.ft-links{display:flex;flex-direction:column}
+.ft-link{font-size:16px;color:rgba(251,248,243,.62);text-decoration:none;padding:13px 0;border-bottom:1px solid rgba(251,248,243,.1);
+  display:flex;justify-content:space-between;align-items:center;transition:color .2s;font-weight:500}
+.ft-link:last-child{border-bottom:none}
+.ft-link:hover{color:#fff}
+.ft-link svg{opacity:.5;transition:transform .2s,opacity .2s}
+.ft-link:hover svg{opacity:1;transform:translate(2px,-2px)}
+.ft-base{display:flex;justify-content:space-between;align-items:center;padding:24px 0;flex-wrap:wrap;gap:12px}
+.ft-logo{display:flex;align-items:center;gap:11px}
+.ft-logo img{height:26px;width:auto}
+.ft-logo span{font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(251,248,243,.5)}
+.ft-copy{font-size:11.5px;color:rgba(251,248,243,.5);letter-spacing:.03em}
+
+/* ============================================================ REVEAL / MOTION */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.2s}.d4{transition-delay:.27s}
+
+/* ============================================================ RESPONSIVE */
+@media(max-width:900px){
+  .about-hero-grid{grid-template-columns:1fr;gap:32px}
+  .about-photo{max-width:300px}
+  .projects-grid,.item-grid,.two-col,.two-col-3{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr;gap:36px}
+    .resume-wrap{grid-template-columns:1fr;gap:32px}
+  .r-rail{position:static}
+  .r-header{text-align:center}
+}
+@media(max-width:768px){
+  .nav-toggle{display:flex}
+  .nav-r{position:fixed;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(251,248,243,.98);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);
+    box-shadow:0 18px 40px -20px rgba(70,40,40,.4);padding:8px 28px 20px;
+    transform:translateY(-14px);opacity:0;pointer-events:none;visibility:hidden;
+    transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s}
+  nav.nav-open .nav-r{transform:none;opacity:1;pointer-events:auto;visibility:visible}
+  .nav-r a:not(.nav-cta)::after{display:none}
+  .nav-r a{padding:15px 2px;font-size:16px;border-bottom:1px solid var(--line2)}
+  .nav-r a:last-child{border-bottom:none}
+  .nav-r a.nav-cta,.nav-badge{width:fit-content;margin-top:12px}
+  .exp-row{grid-template-columns:1fr;gap:6px}
+}
+@media print{nav,.footer,.cs-back,.back-link{display:none!important}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+
+/* ===== TYPOGRAPHY SYSTEM REFINEMENTS (Fraunces) ===== */
+.hero-name,.sh,.section-title,.cs-title,.ph-heading,.about-hero-heading,
+.ft-tagline,.cta-quote,.closing-text,.callout-text,.meta-h,.sec-h,.hero-headline{
+  text-wrap:balance;font-optical-sizing:auto}
+.hero-name{font-weight:500;letter-spacing:-.02em}
+.hero-name em,.sh em,.section-title em,.cs-title em,.ph-heading em,.about-hero-heading em{font-weight:500}
+.stat .n,.stat-num,.exp-year,.lesson-num,.r-name{font-variant-numeric:lining-nums}
+.impact,.exp-date,.cs-meta-value,.metric,.case-year{font-variant-numeric:tabular-nums lining-nums}
