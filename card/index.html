@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anika Badkul · Product Manager</title>
+<link rel="canonical" href="https://anikabadkul.com/card">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F7F2EA">
+<meta name="description" content="Anika Badkul, Product Manager — save contact, résumé, work, and LinkedIn.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/card.css">
+</head>
+<body>
+<div class="card">
+  <div class="pill reveal"><span class="dot"></span>Open to PM roles · 2026</div>
+  <div class="eyebrow reveal">Product Manager</div>
+  <h1 class="name reveal">Anika <em>Badkul</em></h1>
+  <p class="tagline reveal">Engineer's brain, product manager's instinct.</p>
+
+  <div class="btns">
+    <a class="btn btn-fill reveal" href="/contact.vcf" id="btn-contact">Save my contact</a>
+    <a class="btn btn-outline reveal" href="/resume.pdf" target="_blank" rel="noopener" id="btn-resume">View my résumé</a>
+    <a class="btn btn-outline reveal" href="/work.html" id="btn-work">See my work</a>
+    <a class="btn btn-outline reveal" href="https://www.linkedin.com/in/anikabadkul" target="_blank" rel="noopener" id="btn-linkedin">Connect on LinkedIn</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  function track(name){
+    if (window.va) { window.va('event', { name: name }); }
+  }
+  var map = {
+    'btn-contact': 'card_tap_save_contact',
+    'btn-resume': 'card_tap_resume',
+    'btn-work': 'card_tap_work',
+    'btn-linkedin': 'card_tap_linkedin'
+  };
+  Object.keys(map).forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('click', function(){ track(map[id]); });
+  });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
