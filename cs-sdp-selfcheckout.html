@@ -456,15 +456,14 @@
 
 <div class="cs-body">
 
-<!-- 01 THE SYSTEM -->
+<!-- 01 THE PROBLEM -->
 <section class="cs-section">
   <span class="section-num">01</span>
-  <h2 class="section-title reveal">The <em>System</em></h2>
+  <h2 class="section-title reveal">The <em>Problem</em></h2>
   <div class="two-col">
     <div>
-      <p class="body-p">Traditional self-checkout fails at the same moment every time: when there's no barcode. Loose produce, bulk goods, specialty items, the customer either guesses a code from a printed menu or waves down an attendant. Self Checkout+ eliminates that failure point entirely.</p>
-      <p class="body-p">A camera identifies grocery items visually through a YOLOv8 detection pipeline, matches them against a CLIP-trained embedding database, and adds them to a cart, no scanning required. The computer vision pipeline lives on a Raspberry Pi, connected to a custom ATmega328p MCU that handles hardware signaling.</p>
-      <p class="body-p">The core challenge wasn't the computer vision. The CV pipeline was strong. The challenge was designing an interface that makes shoppers trust a system working entirely out of sight.</p>
+      <p class="body-p">Traditional self-checkout fails at the same moment every time: when there's no barcode. Loose produce, bulk goods, specialty items, the customer either guesses a code from a printed menu or waves down an attendant. That's the failure point we set out to eliminate with computer vision instead of a scanner.</p>
+      <p class="body-p">But removing the barcode doesn't remove the two people who have to trust the result. <strong>Shoppers</strong> need to believe a system working invisibly behind the scenes got their total right before they'll pay it. <strong>Store staff</strong> need a fast way to step in the moment it doesn't, without holding up the line. Design for the first group and ignore the second, and one CV miss turns into a stuck checkout lane. The CV pipeline itself, YOLOv8 detection matched against a CLIP-trained embedding database, was strong from early on. The open problem was everything around it: an interface that earns trust for a system nobody can see working.</p>
     </div>
     <div>
       <div class="stat-grid" style="grid-template-columns:1fr 1fr">
@@ -474,7 +473,7 @@
         </div>
         <div class="stat-item">
           <span class="stat-num">2</span>
-          <span class="stat-label">user types: customer interface and admin dashboard</span>
+          <span class="stat-label">user segments: shoppers and store staff</span>
         </div>
         <div class="stat-item">
           <span class="stat-num">0</span>
@@ -633,13 +632,13 @@
 <section class="cs-section">
   <span class="section-num">04</span>
   <h2 class="section-title reveal">Key Design <em>Decisions</em></h2>
-  <p class="body-p reveal">The most interesting design work wasn't the visual styling, it was the product thinking that shaped the flow. Each decision below was a deliberate tradeoff I raised and resolved during the build.</p>
+  <p class="body-p reveal">The most interesting design work wasn't the visual styling, it was the product thinking that shaped the flow. Each one below started from a pain point a shopper or a store operator would actually hit, and the tradeoff I made to fix it.</p>
 
   <div class="decision-row reveal">
     <div class="decision-num">01</div>
     <div>
       <div class="decision-title">Build in a confirmation step, don't auto-add items</div>
-      <div class="decision-desc">When the CV pipeline identifies an item, the shopper sees "Did we get this right?" before it's added to the cart. That trades a little speed for trust: a system that silently adds items, even accurately, feels like it's deciding for you. The confirmation gives the customer a moment of control and an easy way to fix a wrong call without flagging down an attendant. It costs one extra tap per item, and for a brand-new checkout format where trust isn't a given yet, that was worth it.</div>
+      <div class="decision-desc"><strong>Pain point:</strong> a system that silently adds items, even accurately, feels like it's deciding for you. When the CV pipeline identifies an item, the shopper sees "Did we get this right?" before it's added to the cart. That trades a little speed for trust: it gives the customer a moment of control and an easy way to fix a wrong call without flagging down an attendant. It costs one extra tap per item, and for a brand-new checkout format where trust isn't a given yet, that was worth it.</div>
       <span class="decision-tag">UX decision</span>
     </div>
   </div>
@@ -648,7 +647,7 @@
     <div class="decision-num">02</div>
     <div>
       <div class="decision-title">Cut the live video feed entirely</div>
-      <div class="decision-desc">An early version showed a live camera feed in the scanning zone. I cut it. Live video is visually noisy, raises real privacy questions, and doesn't help the customer finish any faster. The task is checkout, not watching the camera process food. Removing the feed simplified the UI and put attention where it belonged, on the item confirmation and the cart. What replaced it was a clean scanning zone with a simple status indicator, enough to show the system is working, nothing more.</div>
+      <div class="decision-desc"><strong>Pain point:</strong> watching yourself get scanned is unsettling, not reassuring. An early version showed a live camera feed in the scanning zone. I cut it. Live video is visually noisy, raises real privacy questions, and doesn't help the customer finish any faster, the task is checkout, not watching the camera process food. What replaced it was a clean scanning zone with a simple status indicator, enough to show the system is working, nothing more.</div>
       <span class="decision-tag">Product decision</span>
     </div>
   </div>
@@ -657,7 +656,7 @@
     <div class="decision-num">03</div>
     <div>
       <div class="decision-title">Let the backend own the cart total</div>
-      <div class="decision-desc">Early builds kept the cart total in React and synced it with the backend now and then, which caused subtle mismatches, the UI showing one running total while the backend calculated another. Even a few cents off looked like a bug, and in an interface where every number matters, that quietly eroded trust. I moved the cart entirely to the backend and had React simply render whatever the API returned. One source of truth, no drift, no reconciliation bugs.</div>
+      <div class="decision-desc"><strong>Pain point:</strong> even a few cents of drift between what the screen shows and what you actually get charged reads as a bug, and in a system nobody can see working, one visible bug undoes a lot of trust. Early builds kept the cart total in React and synced it with the backend now and then, which caused subtle mismatches. I moved the cart entirely to the backend and had React simply render whatever the API returned. One source of truth, no drift, no reconciliation bugs.</div>
       <span class="decision-tag">Engineering decision</span>
     </div>
   </div>
@@ -666,7 +665,7 @@
     <div class="decision-num">04</div>
     <div>
       <div class="decision-title">Keep animations off the data-fetching thread</div>
-      <div class="decision-desc">Framer Motion transitions would stutter and freeze whenever an API call blocked the main thread. The fix was to separate the animation from the data fetch: the UI plays the transition on its own, and the component updates when the fetch resolves, not when it starts. Every screen transition felt instant even while the backend was still working, and the architecture got cleaner too, since the animation and the data fetching stopped competing for the same thread.</div>
+      <div class="decision-desc"><strong>Pain point:</strong> a screen that stutters or freezes mid-checkout feels broken, even when the backend is working fine. Framer Motion transitions would stutter whenever an API call blocked the main thread. The fix was separating the animation from the data fetch: the UI plays the transition on its own, and the component updates when the fetch resolves, not when it starts. Every screen transition felt instant even while the backend was still working.</div>
       <span class="decision-tag">Engineering decision</span>
     </div>
   </div>
@@ -1007,6 +1006,10 @@
     </div>
   </div>
   <p class="body-p reveal" style="margin-top:24px">Two of those tie straight back to the layer I owned. The cart total matched the backend on all 50 transactions, because I'd made the backend the one place the total lived instead of syncing two running counts. And the interface stayed responsive mid-scan because the animation and the data-fetching ran on separate paths. Speed and accuracy were the baseline. What I really wanted to prove was that the trust held up under real conditions, including the moments the model wasn't sure.</p>
+  <div class="callout reveal" style="margin-top:24px">
+    <div class="callout-label">North Star metric</div>
+    <p class="callout-text">If this ran in a real store, the main thing I'd watch is override rate, how often a shopper's cart needs a manual fix. Accuracy tells you the model is good; override rate tells you whether shoppers trust it enough to not double-check every item themselves.</p>
+  </div>
 </section>
 
 <!-- 08 WHAT I LEARNED -->

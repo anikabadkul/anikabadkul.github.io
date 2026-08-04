@@ -30,12 +30,7 @@
 .csb-title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
 .csb-lede{font-size:clamp(17px,1.7vw,20px);color:var(--ink2);line-height:1.6;margin-top:22px;max-width:60ch}
 .csb-heroshot{margin:clamp(20px,3vh,32px) var(--edge) 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--blush),var(--blush2));padding:clamp(16px,2.5vw,30px)}
-.csb-heroshot img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);max-height:460px;object-fit:cover;object-position:top center}
-/* Fade the max-height clip so it reads as a composed crop, not an accident */
-.csb-heroshot{position:relative}
-.csb-heroshot::after{content:"";position:absolute;left:clamp(16px,2.5vw,30px);right:clamp(16px,2.5vw,30px);
-  bottom:clamp(16px,2.5vw,30px);height:72px;pointer-events:none;
-  background:linear-gradient(180deg,transparent,#FCFCFC);border-radius:0 0 8px 8px}
+.csb-heroshot img{width:100%;display:block;border-radius:8px;border:1px solid var(--line)}
 .csb-hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .csb-hero-grid img{background:#fff}
 .csb-cap{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-top:12px}
@@ -129,9 +124,7 @@
 <style>
 /* KOBL-specific additions */
 .csb-fig{margin:24px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2);padding:clamp(12px,2vw,22px)}
-.csb-fig.crop{max-height:400px;overflow:hidden;position:relative}
-.csb-fig.crop img{border-radius:8px 8px 0 0;object-fit:cover;object-position:top center}
-.csb-fig img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#fff;max-height:460px;object-fit:cover;object-position:top center}
+.csb-fig img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#fff}
 .csb-fig.diagram{background:#fff;max-width:560px;margin-left:auto;margin-right:auto}
 .csb-fig.diagram img{border:none;max-height:none;object-fit:fill}
 .csb-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
@@ -210,17 +203,35 @@
       <h2 class="csb-statement wide">Every branch had different incentive rules, and the math was done by <em>hand.</em></h2>
       <p class="csb-p">Incentive structures at a bank vary by branch, region, and product, and they change constantly as new schemes launch, regulations shift, and seasonal offers come and go. Most CRMs lock their commission logic into fixed rules, so every one of those changes has to go through central IT to update. That backlog is why branches ended up calculating incentives by hand.</p>
       <p class="csb-p"><strong>Manual math at that scale produces errors, late payouts, and, above all, disputes.</strong> A rep who can't see how a number was reached has no reason to trust it, and that mistrust chips away at the exact motivation the incentives are supposed to create.</p>
+      <div class="csb-subhead">Who felt it, and where</div>
+      <div class="csb-cards">
+        <div class="csb-card"><div class="csb-card-t">Sales reps</div><p>Closed the deal, then had to take the payout on faith. No way to see which rule produced their number, so a low number read as a mistake, not a calculation.</p></div>
+        <div class="csb-card"><div class="csb-card-t">Branch &amp; regional managers</div><p>Owned incentive structures they couldn't change without an IT ticket, and fielded the disputes that manual math produced in the meantime.</p></div>
+        <div class="csb-card"><div class="csb-card-t">Compliance &amp; finance</div><p>Needed every payout traceable back to a rule and a version, and had no reliable way to audit numbers that were calculated by hand, differently, in every branch.</p></div>
+      </div>
       <div class="csb-brief">
         <span class="csb-meta-label">The Real Goal</span>
         <p>One system where each branch can define its own rules, every payout is calculated automatically, and the math is clear enough that reps and managers stop arguing about it.</p>
       </div>
     </section>
 
-    <!-- 02 SYSTEM MAPPED -->
+    <!-- 02 WHAT THEY ACTUALLY WANTED -->
     <section class="csb-sec reveal">
-      <div class="csb-label">02 · <b>The System I Mapped</b></div>
+      <div class="csb-label">02 · <b>What They Actually Wanted</b></div>
+      <h2 class="csb-statement wide">Not a friendlier calculator. <em>Visibility.</em></h2>
+      <p class="csb-p">I joined after the initial discovery work, so I wasn't in the room for the earliest interviews. But the ask that carried through nearly every conversation I had afterward, with reps closing deals and with the managers approving their payouts, was the same one: let us see how the system flows and how a payout actually happens. Not a faster number. A traceable one.</p>
+      <div class="csb-brief">
+        <span class="csb-meta-label">The insight everything else rests on</span>
+        <p>Reps and managers didn't want the math done differently. They wanted to watch it happen.</p>
+      </div>
+      <p class="csb-p">That reframed the brief. The job wasn't building a better calculator, it was building one that shows its work at every step, to the people whose trust depends on it.</p>
+    </section>
+
+    <!-- 03 SYSTEM MAPPED -->
+    <section class="csb-sec reveal">
+      <div class="csb-label">03 · <b>The System I Mapped</b></div>
       <h2 class="csb-statement wide">I mapped every path a payout could <em>take.</em></h2>
-      <p class="csb-p">The answer was a rule-driven engine that calculates incentives in real time and keeps a full audit trail. Before any interface existed, I mapped the whole logic end to end: how a payout moves from the rules and the person's role, through the calculation and a compliance check, to clawbacks and the final amount. Every rule change gets logged along the way, so the whole thing stays auditable.</p>
+      <p class="csb-p">Before any interface existed, I mapped the logic end to end: how a payout moves from the rules and the person's role, through the calculation and a compliance check, to clawbacks and the final amount. That map is what "traceable" had to mean in practice, every step a rep or manager might ask about had to be a step the system could actually show.</p>
       <figure class="csb-fig diagram">
         <img src="/images/case-studies/kobl/cs-kobl-diagram.webp" width="1500" height="2497" alt="The mapped payout flow across iterations" loading="lazy">
         <figcaption class="csb-cap">The payout flow, mapped across three passes. Each pass tightened how a payout moves from the rules through compliance to the final amount.</figcaption>
@@ -228,11 +239,18 @@
       <p class="csb-p"><strong>Iterating on the flow was the real work.</strong> Later passes added version logs so every rule change is traceable for compliance, added ESOP eligibility, and made failure explicit: if a payout fails a compliance check, it now routes back to be fixed instead of quietly breaking.</p>
     </section>
 
-    <!-- 03 RULE ENGINE -->
+    <!-- 04 INSIDE THE ENGINE -->
     <section class="csb-sec reveal">
-      <div class="csb-label">03 · <b>Inside the Rule Engine</b></div>
-      <h2 class="csb-statement wide">Built so the business never has to wait on <em>IT.</em></h2>
-      <p class="csb-p">The core of the system is a rule engine that branch admins set up themselves, without writing any code. Because the rules are read fresh each time a payout is calculated, a branch can adjust its own incentives the moment a scheme or regulation changes, instead of waiting on IT.</p>
+      <div class="csb-label">04 · <b>Inside the Engine</b></div>
+      <h2 class="csb-statement wide">From a closed deal to a logged, auditable <em>payout.</em></h2>
+      <p class="csb-p">This is the walkthrough I'd give someone in a room: a branch admin sets the rules once, in plain fields, no code required. From there, every deal runs through the same four steps.</p>
+      <div class="csb-steps">
+        <div class="csb-step"><div class="csb-step-n">01</div><div class="csb-step-t">A deal closes</div><p>A rep closes a high-value loan. Nothing gets calculated until there's a real deal behind it.</p></div>
+        <div class="csb-step"><div class="csb-step-n">02</div><div class="csb-step-t">The engine evaluates</div><p>It pulls every rule that applies to that product, region, and designation, including any active campaign or hierarchy override.</p></div>
+        <div class="csb-step"><div class="csb-step-n">03</div><div class="csb-step-t">Incentive is calculated</div><p>Computed instantly against those rules, and recalculated automatically if the deal's status changes or a rule gets updated retroactively.</p></div>
+        <div class="csb-step"><div class="csb-step-n">04</div><div class="csb-step-t">Logged for audit &amp; payout</div><p>The exact rule, version, and inputs behind that number get recorded per employee, ready for payout and for anyone who wants to check the math.</p></div>
+      </div>
+      <p class="csb-p" style="margin-top:24px">Because the rules are read fresh every time, a branch can adjust its own incentives the moment a scheme or regulation changes, instead of filing a ticket and waiting on IT. Four levers cover most of what a branch needs to define on its own:</p>
       <div class="csb-cards four">
         <div class="csb-card"><div class="csb-card-t">Product-wise slabs &amp; caps</div><p>Different incentive bands per product, with thresholds and a maximum cap.</p></div>
         <div class="csb-card"><div class="csb-card-t">Designation multipliers</div><p>The same sale rewards a Senior RM and a Branch Head differently.</p></div>
@@ -243,35 +261,16 @@
         <img src="/images/case-studies/kobl/cs-kobl-rule.webp" width="1280" height="839" alt="Create New Rule screen" loading="lazy">
         <figcaption class="csb-cap">Create new rule - a manager sets the incentive logic directly, instead of filing an IT ticket.</figcaption>
       </figure>
-    </section>
-
-    <!-- 04 HOW IT COMPUTES -->
-    <section class="csb-sec reveal">
-      <div class="csb-label">04 · <b>How a Payout Gets Computed</b></div>
-      <h2 class="csb-statement wide">From a closed deal to a logged, auditable <em>payout.</em></h2>
-      <div class="csb-steps">
-        <div class="csb-step"><div class="csb-step-n">01</div><div class="csb-step-t">A deal closes</div><p>A rep closes a high-value loan.</p></div>
-        <div class="csb-step"><div class="csb-step-n">02</div><div class="csb-step-t">The engine evaluates</div><p>It checks every rule that applies to that product, region, and designation.</p></div>
-        <div class="csb-step"><div class="csb-step-n">03</div><div class="csb-step-t">Incentive is calculated</div><p>Computed instantly, and recalculated on status updates or retroactive rule changes.</p></div>
-        <div class="csb-step"><div class="csb-step-n">04</div><div class="csb-step-t">Logged for audit &amp; payout</div><p>The full trail is recorded per employee, ready for payout and compliance review.</p></div>
-      </div>
-    </section>
-
-    <!-- 05 TRANSPARENCY -->
-    <section class="csb-sec reveal">
-      <div class="csb-label">05 · <b>Transparency &amp; Audit</b></div>
-      <h2 class="csb-statement wide">Every payout, <em>traceable.</em></h2>
-      <p class="csb-p">Disputes fall when reps and managers see the same numbers and the trail behind them. The system keeps a complete incentive history for every employee and logs each rule change for compliance. The audit trail was one of my two areas, so I prototyped the interface in Figma to show how all that mapped logic turns into something a manager can actually sit down and use.</p>
-      <figure class="csb-fig crop">
+      <p class="csb-p">Step 04 is where the transparency ask actually gets answered. The system keeps a complete incentive history for every employee and logs each rule change for compliance, so a manager can open the dashboard and show a rep exactly which rule produced their number. The dashboard was one of my two areas, so I prototyped it myself in Figma.</p>
+      <figure class="csb-fig">
         <img src="/images/case-studies/kobl/cs-kobl-dashboard.webp" width="1100" height="1643" alt="Dashboard screen, a shared filterable view of every rep's numbers and final payout, exportable to Excel and an audit-format PDF" loading="lazy">
         <figcaption class="csb-cap">Dashboard — one shared, filterable view of every rep's numbers and final payout, the clear record the manual process never had. Exports to Excel and an audit-format PDF.</figcaption>
       </figure>
-      <p class="csb-p">The <strong>Incentive Management</strong> view (shown at the top) breaks down base payout, quality adjustments, zone bonus, clawbacks, and points per rep, and it surfaces compliance issues at the top instead of burying them.</p>
     </section>
 
-    <!-- 06 IMPACT -->
+    <!-- 05 IMPACT -->
     <section class="csb-sec reveal">
-      <div class="csb-label">06 · <b>Impact</b></div>
+      <div class="csb-label">05 · <b>Impact</b></div>
       <h2 class="csb-statement wide">60% fewer disputes, 70% faster <em>computation.</em></h2>
       <div class="csb-stats">
         <div class="csb-stat"><div class="csb-stat-n">~60%</div><div class="csb-stat-l">Fewer incentive disputes once calculation became automatic and transparent</div></div>
@@ -279,12 +278,15 @@
         <div class="csb-stat"><div class="csb-stat-n">0</div><div class="csb-stat-l">IT tickets needed for branches to change their own rules</div></div>
         <div class="csb-stat"><div class="csb-stat-n">1000+</div><div class="csb-stat-l">Branches the rule-driven architecture is built to scale across</div></div>
       </div>
-      <p class="csb-p" style="margin-top:24px">It all comes back to one idea: when the math is automatic and every step is visible, disputes have far less to start from.</p>
+      <div class="csb-brief" style="margin-top:24px">
+        <span class="csb-meta-label">North Star metric</span>
+        <p class="note" style="font-family:var(--sans);font-size:16px;font-style:normal;color:var(--ink2);line-height:1.7">If this stayed live, the main thing I'd watch is time-to-resolution on a disputed payout, how long it takes a rep to see exactly which rule produced their number. Dispute volume tells you trust is low; resolution time tells you whether transparency is actually working.</p>
+      </div>
     </section>
 
-    <!-- 07 MY ROLE -->
+    <!-- 06 MY ROLE -->
     <section class="csb-sec reveal">
-      <div class="csb-label">07 · <b>My Role</b></div>
+      <div class="csb-label">06 · <b>My Role</b></div>
       <h2 class="csb-statement wide">Two features came out of my <em>research.</em></h2>
       <p class="csb-p">My research mapped how banks actually structure sales incentives, benchmarked that against fintech models, and surfaced where the existing approach fell short. Two features came out of it, and both started as a gap in the research, not a line in the brief.</p>
       <div class="csb-role">
@@ -299,12 +301,12 @@
       </div>
     </section>
 
-    <!-- 08 LEARNED -->
+    <!-- 07 LEARNED -->
     <section class="csb-sec reveal">
-      <div class="csb-label">08 · <b>What I Learned</b></div>
+      <div class="csb-label">07 · <b>What I Learned</b></div>
       <h2 class="csb-statement wide">Disputes were really about <em>transparency.</em></h2>
       <div class="csb-lessons">
-        <div class="csb-lesson"><span class="csb-lesson-n">01</span><div class="csb-lesson-t">Visibility is what built the trust</div><p>People don't trust numbers they can't trace. Most of the value here came from making the calculation visible, not from changing the math.</p></div>
+        <div class="csb-lesson"><span class="csb-lesson-n">01</span><div class="csb-lesson-t">Visibility is what built the trust</div><p>People don't trust numbers they can't trace. Most of the value here came from making the calculation visible, not from changing the math, the same pain point every user segment named, whether they said it in those words or not.</p></div>
         <div class="csb-lesson"><span class="csb-lesson-n">02</span><div class="csb-lesson-t">The real design work was mapping the system</div><p>Building the flow diagram surfaced every edge case early, failed compliance checks, clawbacks, retroactive rule changes, before a single screen existed.</p></div>
       </div>
       <div class="csb-takeaway">

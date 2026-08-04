@@ -108,13 +108,6 @@
 
 .csb-fig{margin:24px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2);padding:clamp(12px,2vw,22px)}
 .csb-fig img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#fff}
-.csb-fig.crop{max-height:400px;overflow:hidden;position:relative}
-.csb-fig.crop img{border-radius:8px 8px 0 0}
-/* Fade the hard clip on tall screenshots so the crop reads as intentional editing.
-   --fade is sampled from each screenshot's color at the clip line. */
-.csb-fig.crop::after{content:"";position:absolute;left:clamp(12px,2vw,22px);right:clamp(12px,2vw,22px);
-  bottom:clamp(12px,2vw,22px);height:64px;pointer-events:none;
-  background:linear-gradient(180deg,transparent,var(--fade,#FBFAF8))}
 
 .csb-vid{margin:24px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000}
 .csb-vid video{width:100%;display:block}
@@ -305,7 +298,7 @@
     <section class="csb-sec reveal">
       <div class="csb-label">02 · <b>Research &amp; Who It's For</b></div>
       <h2 class="csb-statement wide">Two households with the same dead end, for very different <em>reasons.</em></h2>
-      <p class="csb-p">I wrote the survey and sent it before we built anything, then grounded the product in two composite households at opposite ends of the problem: a single adult on a tight budget, and a family balancing kids' needs against the same shortfall. Reviewing the personas under a critical PM lens is what told us a single persona wasn't enough: a student and a SNAP family behave differently, which is why the household input ended up by age and gender, not a headcount.</p>
+      <p class="csb-p">I wrote the survey and sent it before we built anything, then grounded the product in two composite households at opposite ends of the problem: a single adult on a tight budget, and a family balancing kids' needs against the same shortfall. Splitting the problem into these two user segments is what told us a single persona wasn't enough: a student and a SNAP family hit different pain points, which is why the household input ended up by age and gender, not a headcount.</p>
       <div class="csb-personas">
         <div class="csb-persona">
           <div class="csb-persona-top"><div class="csb-persona-badge">M</div><div><h3 class="csb-persona-name">Maya</h3><div class="csb-persona-meta">24 · 1 person · about $41.50 / week</div></div></div>
@@ -361,6 +354,10 @@
         <div class="csb-card"><div class="csb-card-t">Out of v1</div><ul><li>User accounts</li><li>Food-swap tool</li><li>Plan sharing</li><li>Barcode scanning &amp; health scores</li></ul></div>
         <div class="csb-card"><div class="csb-card-t">So v1 nails the basics</div><ul><li>Budget → 7-day plan</li><li>Cost + nutrition per meal</li><li>Honest shortfall warning</li><li>Six dietary filters · shopping list · regenerate</li></ul></div>
       </div>
+      <div class="csb-brief" style="margin-top:20px">
+        <span class="csb-meta-label">North Star metric</span>
+        <p class="note" style="font-family:var(--sans);font-size:16px;font-style:normal;color:var(--ink2);line-height:1.7">If I kept building this past the hackathon, the main thing I'd watch is completion rate, the share of people who go from setting a budget all the way to a checked-off shopping list. The honest-budget promise only means something if people stay through the plan instead of bouncing at the first shortfall warning.</p>
+      </div>
     </section>
 
     <!-- 04 PRODUCT -->
@@ -374,21 +371,21 @@
         <div class="csb-feature-n">Screen 01</div>
         <h3 class="csb-feature-t">Set up your plan</h3>
         <p class="csb-feature-d">A monthly budget, who's eating (adults by gender, plus children), and any of six dietary needs, multi-select. Nutrition targets are calculated individually by age and gender using USDA/WHO guidelines, so the plan fits the actual table, not an average.</p>
-        <figure class="csb-fig crop"><img src="/images/case-studies/mealplan/cs-mp-setup.webp" width="1800" height="1506" alt="Set up your plan screen, budget, household counts, and six dietary filters" loading="lazy"><figcaption class="csb-cap">Setup · budget, household, and six dietary filters</figcaption></figure>
+        <figure class="csb-fig"><img src="/images/case-studies/mealplan/cs-mp-setup.webp" width="1800" height="1506" alt="Set up your plan screen, budget, household counts, and six dietary filters" loading="lazy"><figcaption class="csb-cap">Setup · budget, household, and six dietary filters</figcaption></figure>
       </div>
 
       <div class="csb-feature">
         <div class="csb-feature-n">Screen 02</div>
         <h3 class="csb-feature-t">Your 7-day plan, honest, day by day</h3>
         <p class="csb-feature-d">Every meal shows cost and full nutrition; every day gets a pass/fail flag and the header summarizes week total versus budget and calories per person. When the budget can't reach a full nutritious week, a banner names the gap and cites the USDA minimum, the shortfall is never hidden behind a plan that only looks complete.</p>
-        <figure class="csb-fig crop" style="--fade:#EBE8E6"><img src="/images/case-studies/mealplan/cs-mp-plan.webp" width="1800" height="2026" alt="7-day plan, week total, calories per person, days meeting nutrition, and expandable days with per-meal cost and nutrition" loading="lazy"><figcaption class="csb-cap">The plan · per-meal cost and nutrition, with a daily pass/fail flag</figcaption></figure>
+        <figure class="csb-fig"><img src="/images/case-studies/mealplan/cs-mp-plan.webp" width="1800" height="2026" alt="7-day plan, week total, calories per person, days meeting nutrition, and expandable days with per-meal cost and nutrition" loading="lazy"><figcaption class="csb-cap">The plan · per-meal cost and nutrition, with a daily pass/fail flag</figcaption></figure>
       </div>
 
       <div class="csb-feature">
         <div class="csb-feature-n">Screen 03</div>
         <h3 class="csb-feature-t">Shop once</h3>
         <p class="csb-feature-d">Check the meals you want and the plan becomes one consolidated list, grouped by aisle with per-person quantities, built to take to the store. Tap to check items off as you shop, and save, copy, or download the list to your phone.</p>
-        <figure class="csb-fig crop"><img src="/images/case-studies/mealplan/cs-mp-shopping.webp" width="1800" height="2342" alt="Shopping list grouped by aisle with per-person quantities and tap-to-check-off" loading="lazy"><figcaption class="csb-cap">Shopping list · grouped by aisle, per-person quantities, tap to check off</figcaption></figure>
+        <figure class="csb-fig"><img src="/images/case-studies/mealplan/cs-mp-shopping.webp" width="1800" height="2342" alt="Shopping list grouped by aisle with per-person quantities and tap-to-check-off" loading="lazy"><figcaption class="csb-cap">Shopping list · grouped by aisle, per-person quantities, tap to check off</figcaption></figure>
       </div>
     </div><!-- /csb-features -->
 </section>
